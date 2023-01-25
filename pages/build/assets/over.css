@@ -28,21 +28,24 @@ a:hover { text-decoration: underline; }
 body
 {
     font-size: 16px;
-    font-family: "Roboto", sans-serif;
-    /*
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-     */
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    cursor: default;
 }
 pre,code{
     font-size: 14px;
     font-family: "Roboto Mono", monospace;
 }
 hr {
-    margin: 2rem 0;
+    margin: 1rem 0;
     border: none;
-    border-bottom: #ccc solid 1px;
+    border-bottom: #ddd solid 1px;
     padding: 0;
 }
+
+.subtext{font-size:90%;color:#999}
+.subtext-2{font-size:85%;color:#999}
+.subtext-3{font-size:80%;color:#999}
+
 /* --- localNotifier --- */
 .localNotifier {
     position: absolute;
@@ -59,6 +62,7 @@ hr {
     border: 1px solid #ddd;
     border-radius: 3px;
     box-shadow: 0 0 0 3px rgb(0 0 0 / 1%);
+    overflow: hidden;
 }
 .box .header {
     display: flex;
@@ -90,21 +94,34 @@ hr {
     border-top: 1px solid #eee;
 }
 
+.box.box-success{
+    border: 1px solid #aCa;
+}
+.box.box-success .header {
+    background: #f6faf6;
+    border-bottom: 1px solid #cec;
+}
+.box.box-info{
+    border: 1px solid #bbd;
+}
+.box.box-info .header {
+    background: #f4f4fa;
+    border-bottom: 1px solid #dde;
+}
 
 /* --- link-list --- */
-.link-list div {
+.link-list > div {
     border-bottom: 1px solid #eee;
     display: flex;
 }
-.link-list div:hover {
+.link-list > div:hover {
     background: rgb(0 0 0 / 1%);
 }
-.link-list div .main {
+.link-list .main {
     flex-grow: 1;
 }
-.link-list div a {
+.link-list > div a {
     display: block;
-    padding: 1rem;
 }
 
 
@@ -113,6 +130,7 @@ hr {
     padding: 8px 16px;
 }
 a.button, button {
+    cursor: pointer;
     background: #f6f8fa;
     border-radius: 3px;
     padding: 8px 16px;
@@ -124,24 +142,44 @@ a.button:hover, button:hover {
     background: #f0f2f6;
 }
 a.button.success, button.success {
+    color: #efe;
     background: #696;
-    color: white;
     border-color: #696;
 }
+a.button.success:hover, button.success:hover {
+    color: white;
+    background: #585;
+    border-color: #585;
+}
 a.button.warning, button.warning {
-    background: #fd9;
+    background: rgb(255 248 197);
     color: #963;
     border-color: #fd9;
+}
+a.button.warning:hover, button.warning:hover {
+    color: #852;
+    background: rgb(245 238 187);
+    border-color: #ec8;
 }
 a.button.danger, button.danger {
     background: #930;
     color: white;
     border-color: #930;
 }
+a.button.danger:hover, button.danger:hover {
+    color: white;
+    background: #a20;
+    border-color: #a20;
+}
 a.button.info, button.info {
     background: #08b;
     color: white;
     border-color: #08b;
+}
+a.button.info:hover, button.info:hover {
+    color: white;
+    background: #07a;
+    border-color: #07a;
 }
 
 
@@ -155,26 +193,48 @@ a.button.sm, button.sm {
     margin: 1rem 0;
 }
 input,
-textarea {
+textarea,
+select {
     width: 100%;
     padding: .2rem .5rem;
     border: 1px solid #ccc;
     border-radius: 3px;
+    background: #fff;
+    color: #666;
+}
+input[type=radio],input[type=checkbox] {
+    width: auto;
 }
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus
+{
     outline:none;
     border-color: #08c;
     box-shadow: 0 0 0 3px rgba(0,0,255,.1);
+    color: #333;
 }
+
 .container-lg { max-width: 1024px; margin-left: auto; margin-right: auto;}
 
 .hidden{display:none!important;}
 .no-background{background:none!important;}
 .op-05{opacity: .5;}
+.d-flex{display: flex}
 .flex-grow{flex-grow: 1}
+.flex-wrap{flex-wrap: wrap}
 .flex-align{align-items: center}
-
+.max-w-100{max-width:100%;}
+.max-w-50{max-width:50%;}
+.max-w-75{max-width:75%;}
+.max-w-25{max-width:25%;}
+.w-100{width:100%;}
+.w-75{width:75%;}
+.w-50{width:50%;}
+.w-25{width:25%;}
+.fs-80{font-size: 80%}
+.fs-90{font-size: 90%}
+/* -- */
 .m-0{margin:0}
 .m-1{margin:.25rem}
 .m-2{margin:.5rem}
@@ -211,7 +271,6 @@ textarea:focus {
 .my-3{margin-top:1rem;margin-bottom:1rem;}
 .my-4{margin-top:2rem;margin-bottom:2rem;}
 /*---*/
-
 .p-0{padding:0}
 .p-1{padding:.25rem}
 .p-2{padding:.5rem}
@@ -247,3 +306,4 @@ textarea:focus {
 .py-2{padding-top:.5rem;padding-bottom:.5rem;}
 .py-3{padding-top:1rem;padding-bottom:1rem;}
 .py-4{padding-top:2rem;padding-bottom:2rem;}
+/*---*/

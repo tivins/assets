@@ -37,12 +37,112 @@
 
   <div class="box mb-3">
     <div class="header">
+      <a href="#" class="header-item" title="Back"><i class="fa fa-fw fa-chevron-left" aria-hidden="true" title="Search"></i></a>
+      <a href="#" class="header-item" title="Permalink">#</a>
+      <span class="title header-item">Box Statuses</span>
+      <a href="#" class="header-item" title="Search"><i class="fa fa-fw fa-search" aria-hidden="true"></i></span></a>
+      <a href="#" class="header-item" title="Help"><i class="fa fa-fw fa-question" aria-hidden="true"></i></a>
+      <a href="#" class="header-item" title="More"><i class="fa fa-fw fa-ellipsis-h" aria-hidden="true"></i></a>
+    </div>
+    <div class="body">
+      <div class="d-flex flex-wrap p-2">
+        <div class="flex-grow p-3 max-w-50">
+          <div class="box box-success">
+            <div class="header">
+              <div class="header-item title">Success</div>
+              <a href="#" class="header-item b-left" title="Help"><i class="fa fa-fw fa-question" aria-hidden="true"></i></a>
+            </div>
+            <div class="body p-3">
+              This box is a <b>Success Box</b>!
+              <hr>
+              <div class="subtext-3">
+                When you push to GitHub, we’ll check the most recent commit. If the author email on that commit is a private email on your GitHub account, we will block the push and warn you about exposing your private email.
+              </div>
+              <hr>
+              <div class="d-flex">
+                <div class="flex-grow"></div>
+                <button class="button success sm">Accept</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-grow p-3">
+          <div class="box box-info">
+            <div class="header">
+              <div class="header-item title">Info</div>
+            </div>
+            <div class="body p-3">
+              Informational message for you.
+              <form class="form">
+                <div class="field">
+                  <label>Select
+                    <select>
+                      <option>Value1</option>
+                      <option>Value2</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="field">
+                  <label>Checkbox
+                    <input type="checkbox">
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="flex-grow p-3">
+          <div class="box box-warning">
+            <div class="header">
+              <div class="header-item title">Warning</div>
+            </div>
+            <div class="body p-3">Conversion error: Jekyll::Converters::Scss encountered an error while converting 'assets/css/style.scss':
+              No such file or directory @ dir_chdir - /github/workspace/docs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      footer
+    </div>
+  </div>
+
+  <div class="box mb-3">
+    <div class="header">
       <div class="header-item title">to</div>
     </div>
     <div class="body">
       <div class="link-list">
-        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
-        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+        <div>
+          <div class="main p-3">
+            <a href="#" class="">abc</a>
+            <div class="subtext">another information</div>
+          </div>
+          <a href="#edit" class="b-left  p-3">edit</a>
+        </div>
+        <div>
+          <a href="#" class="p-3"><i class="fa-regular fa-plus-square"></i></a>
+          <a href="#" class="main p-3">abc</a>
+          <a href="#edit" class="b-left p-3"><i class="fa fa-fw fa-pencil"></i></a>
+        </div>
+        <div>
+          <a href="#" class="p-3"><i class="fa-regular fa-minus-square"></i></a>
+          <div class="main p-3">
+            <div class="subtext-2">tivins/assets - pages build and deployment #1</div>
+            <a href="#" class="">Deploy Jekyll with GitHub Pages dependencies preinstalled</a>
+            <div class="pt-3"><div class="subtext"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Loading&hellip;</div></div>
+          </div>
+          <a href="#edit" class="b-left p-3"><i class="fa fa-fw fa-pencil"></i></a>
+        </div>
+        <div>
+          <a href="#" class="p-3"><i class="fa-regular fa-minus-square"></i></a>
+          <div class="main p-3">
+            <a href="#" class="">abc</a>
+            <div class="subtext">another information</div>
+            <div class="pt-3">MORE CONTENT</div>
+          </div>
+          <a href="#edit" class="b-left p-3"><i class="fa fa-fw fa-pencil"></i></a>
+        </div>
         <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
         <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
         <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
