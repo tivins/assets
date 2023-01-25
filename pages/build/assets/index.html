@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>{{ title }}</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--  <link type="text/css" rel="stylesheet" href="/assets/normalize.css">-->
+  <link type="text/css" rel="stylesheet" href="/assets/over.css">
+  <link href="/assets/fontawesome6/css/all.min.css" rel="stylesheet" />
+  <script type="module" src="/assets/ma.js"></script>
+  <script type="module" src="/assets/main.js"></script>
+</head>
+<body class="theme-dark">
+
+<div class="container-lg px-3 my-5">
+<!-- TEST -->
+  <h3>box</h3>
+
+  <div class="box mb-3">
+    <div class="header">
+      <a href="#" class="header-item"><i class="fa fa-fw fa-chevron-left" aria-hidden="true" title="Search"></i></a>
+      <a href="#" class="header-item">#</a>
+      <span class="title header-item">header</span>
+      <a href="#" class="header-item"><i class="fa fa-fw fa-search" aria-hidden="true" title="Search"></i></span>
+      </a>
+      <a href="#" class="header-item">2</a>
+      <a href="#" class="header-item"><i class="fa fa-fw fa-ellipsis-h" aria-hidden="true" title="Search"></i></a>
+    </div>
+    <div class="body">
+      <div class="p-2">body</div>
+    </div>
+    <div class="footer">
+      footer
+    </div>
+  </div>
+
+  <div class="box mb-3">
+    <div class="header">
+      <div class="header-item title">to</div>
+    </div>
+    <div class="body">
+      <div class="link-list">
+        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>
+
+  <div class="box mb-3">
+    <div class="header">
+      <a href="#" class="header-item b-right">back</a>
+      <span class="header-item b-right">#<a href="/go" class="copy" data-target="href" data-text="URL copied!">4022</a></span>
+      <span class="title header-item">header</span>
+      <span class="header-item">text..<a href="#" class="copy" data-target="myself" data-text="Commit hash copied"><code>a5f1c87</code></a></span>
+      <a href="#" class="header-item b-left">1</a>
+      <a href="#" class="header-item b-left">2</a>
+      <a href="#" class="header-item b-left">...</a>
+    </div>
+    <div class="body">
+      <div class="p-4">body : <a href="#" class="button">button</a></div>
+      <hr>
+      <div class="box m-3">
+        <div class="p-4">yp
+          <hr>
+          <button class="button success">Subscribe</button>
+          <button class="button warning">Are you sure?</button>
+          <button class="button danger"><i class="fa fa-fw fa-warning mr-2"></i>You need to think about this!</button>
+          <button class="button info">I understand</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer no-background p-2 op-05 flex-align">
+      <span class="flex-grow p-btn">footer</span><button class="sm">GO</button>
+    </div>
+  </div>
+
+  <h3>Copy to clipboard</h3>
+    <form class="form">
+      <div class="field">
+        <label>
+          <span class="form-label">Label</span>
+          <input type="text">
+        </label>
+      </div>
+    </form>
+<fieldset><legend>Copy to clipboard</legend>
+<label>Sandbox<textarea placeholder="paste text here to test"></textarea></label>
+<hr>
+<textarea id="textarea">Some text to copy...</textarea>
+  <button class="copy" data-target="#textarea">COPY Textarea</button>
+  <hr>
+<div id="div">lorem <b>ipsum</b> dolor sit amet</div>
+  <button class="copy" data-target="#div">COPY Div text</button>
+</fieldset>
+<!-- /TEST -->
+</div>
+
+</body>
+</html>
