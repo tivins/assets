@@ -1,0 +1,19 @@
+{
+  "name": "tivins/assets",
+  "description": "description",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "tivins"
+    }
+  ],
+  "require": {
+    "tivins/php-common": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tivins\\": "src/Tivins"
+    }
+  }
+}

@@ -106,6 +106,12 @@ export class LocalNotifier {
         localNotifier.prepend(MA.createElement('i',{className:"mr-2 fa fa-fw "+icon},{}));
         localNotifier.style.top = (off.top - localNotifier.offsetHeight - 8) + 'px';
         localNotifier.style.left = (off.left - localNotifier.offsetWidth/2 + target.offsetWidth/2) + 'px';
+        if (localNotifier.offsetTop < 0)
+        {
+        localNotifier.style.top = (off.top + target.offsetHeight + 7) + 'px';
+
+        }
+
         localNotifier.style.opacity = 1;
         if (expireInMillis) {
             const time = new Date().getTime();

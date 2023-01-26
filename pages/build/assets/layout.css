@@ -1,0 +1,27 @@
+.container::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+.container::before {
+    display: table;
+    content: "";
+}
+@media (min-width: 768px) {
+    .d-flex-md{display:flex;}
+
+    .col-9 {width:75%;}
+    .col-8 {width:66.666666%;}
+    .col-6 {width:50%;}
+    .col-4 {width:33.333333%;}
+    .col-3 {width:25%;}
+
+    .gutter-sm {
+        /*margin-right:-2rem;*/
+        /*margin-left:-2rem*/
+    }
+    .gutter-sm>[class*="col-"] {
+        padding-right:1rem !important;
+        padding-left:1rem !important
+    }
+}
