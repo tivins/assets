@@ -169,7 +169,88 @@ function buildPageUserSettings2(): void {
     File::save('pages/build/assets/user-settings2.html', $tpl);
 
 }
+function buildPageModalLogin(): void {
+
+    $content = '
+    <form class="form p-3">
+    <div class="field">
+      <label>
+        <span class="form-label">Username or email address</span>
+        <input type="text" name="username">
+      </label>
+    </div>
+    <div class="field">
+      <div class="d-flex">
+      <label for="password" class="flex-grow"><span class="form-label">Password</span></label>
+      <a href="#" class="fs-80 p-1">forgot password?</a> 
+      </div>
+      <input type="password" name="password" id="password">
+    </div>
+    <div class="field">
+      <label class="form-label">
+        <input type="checkbox" name="remember">
+        <span>Remember me</span>
+      </label>
+    </div>
+    <div class="field">
+    <button type="submit" class="button success w-100">Sign in</button>
+    </div>
+    </form>';
+
+
+    $boxError = new Box();
+    $boxError->setTitle('Incorrect username or password.')
+    ->setBoxClasses('box-success mb-3')
+        ->setHeaderClasses('no-borders')
+//        ->setBodyClasses('p-3')
+//        ->setFooter('
+//
+//            <a href="#" class="flex-grow p-2 text-center">Forgot your password?</a>
+//      ')
+//    ->addHTML('')
+    ;
+
+    $box1 = new Box();
+    $box1->setTitle('Authentication form')
+        ->setBackURL('/assets')
+        ->setBoxClasses('flex-grow')
+        ->setFooter('<div class="flex-grow">
+            <a href="#" class="p-3 d-block text-center w-100 simi-link">
+                New here? <span class="simi-react">Create an account</span>.
+            </a>
+            </div>
+          ')
+        ->addHeaderOption('<a href="#" class="header-item">...</a>')
+        ->addHTML($content)
+    ;
+    //New to GitHub? Create an account.
+
+    $content = Template::container(
+        '<div class="" style="max-width: 350px;margin-left:auto;margin-right:auto">
+          
+    <div class="text-center">
+      <i class="fa fa-globe-europe fs-250 p-4 op-05"></i>
+      <h2 class="mt-0 mb-4 fw-normal">Sign in to website</h2>
+    </div>
+    <div class="pb-4">
+    '.$boxError->render().'
+    '.$box1->render().'
+    <div class="py-4 d-flex fs-80">
+      <a href="/assets/" class="flex-grow text-center p-2"><i class="fa fa-globe-europe mr-2"></i>WebSite</a>
+      <a href="#" class="flex-grow text-center p-2">about</a>
+      <a href="assets/legal.html" class="flex-grow text-center p-2">terms &amp; privacy</a>
+    </div>
+    </div>
+        </div>'
+        , 'lg'
+    );
+
+    $tpl     = Template::tpl('Template', $content, true);
+    File::save('pages/build/assets/modal-user-login.html', $tpl);
+
+}
 
 buildPageTemplate();
 buildPageUserSettings();
 buildPageUserSettings2();
+buildPageModalLogin();
