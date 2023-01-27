@@ -130,6 +130,7 @@ export class LocalNotifier {
 export class Clipboard {
     static copyToClipboard(text, callback) {
         navigator.permissions.query({name: "clipboard-write"}).then(result => {
+            console.log("Result.state", result.state);
             navigator.clipboard.writeText(text).then(
                 () => callback ? callback(null) : null,
                 (err) => callback ? callback(err) : null
