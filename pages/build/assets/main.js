@@ -1,9 +1,13 @@
-import {Clipboard, LocalNotifier, MA, MagiCron} from "/assets/ma.js";
+import {
+    Clipboard, LocalNotifier, MA, MagiCron, parseCloseButtons, parsePopupButtons
+} from "/assets/ma.js";
 
 console.debug(MA.version());
 
 MagiCron.setInterval(100).run();
 Clipboard.parseCopiable();
+parseCloseButtons();
+parsePopupButtons();
 
 export function getLoader()
 {

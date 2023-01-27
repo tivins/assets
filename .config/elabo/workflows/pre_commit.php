@@ -3,6 +3,7 @@
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\HTMLStr;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\Template;
@@ -72,7 +73,7 @@ function buildPageUserSettings(): void {
         <div class="field">
           <label>
             <span class="form-label">Preference email</span>
-            <input type="email" name="email-primary" value="john.doe@example.com">
+            <input type="email" name="email-primary" value="john.doe@example.com" readonly>
           </label>
           <div class="subtext">Vous pouvez configurer la préférence de vos adresses de
            communications dans la <a href="#">section emails</a>.</div>
@@ -175,8 +176,8 @@ function buildPageModalLogin(): void {
     <form class="form p-3">
     <div class="field">
       <label>
-        <span class="form-label">Username or email address</span>
-        <input type="text" name="username">
+        <span class="form-label">Email</span>
+        <input type="text" name="username" required>
       </label>
     </div>
     <div class="field">
@@ -184,13 +185,7 @@ function buildPageModalLogin(): void {
       <label for="password" class="flex-grow"><span class="form-label">Password</span></label>
       <a href="#" class="fs-80 p-1">forgot password?</a> 
       </div>
-      <input type="password" name="password" id="password">
-    </div>
-    <div class="field">
-      <label class="form-label">
-        <input type="checkbox" name="remember">
-        <span>Remember me</span>
-      </label>
+      <input type="password" name="password" id="password" required>
     </div>
     <div class="field">
     <button type="submit" class="button success w-100">Sign in</button>
@@ -198,46 +193,41 @@ function buildPageModalLogin(): void {
     </form>';
 
 
-    $boxError = new Box();
-    $boxError->setTitle('Incorrect username or password.')
-    ->setBoxClasses('box-success mb-3')
+    $boxError = (new Box())
+        ->setTitle('Incorrect username or password.')
+        ->setBoxClasses('box-warning mb-3')
         ->setHeaderClasses('no-borders')
-//        ->setBodyClasses('p-3')
-//        ->setFooter('
-//
-//            <a href="#" class="flex-grow p-2 text-center">Forgot your password?</a>
-//      ')
-//    ->addHTML('')
-    ;
+        ->addHeaderOption(Components::getCloseLink());
 
-    $box1 = new Box();
-    $box1->setTitle('Authentication form')
+    $box1 = (new Box())
+        ->setTitle('')
+        ->setIcon('fa fa-lock')
         ->setBackURL('/assets')
+        ->setHeaderClasses('text-center')
         ->setBoxClasses('flex-grow')
         ->setFooter('<div class="flex-grow">
-            <a href="#" class="p-3 d-block text-center w-100 simi-link">
+            <a href="/assets/modal-user-register.html" class="p-3 d-block text-center w-100 simi-link">
                 New here? <span class="simi-react">Create an account</span>.
             </a>
             </div>
           ')
-        ->addHeaderOption('<a href="#" class="header-item">...</a>')
-        ->addHTML($content)
-    ;
-    //New to GitHub? Create an account.
+        ->addHeaderOption(Components::getMoreLink('Connect with...','fa fa-plus',
+            new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
+            new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
+        ))
+        ->addHTML($content);
 
     $content = Template::container(
         '<div class="" style="max-width: 350px;margin-left:auto;margin-right:auto">
-          
     <div class="text-center">
-      <i class="fa fa-globe-europe fs-250 p-4 op-05"></i>
-      <h2 class="mt-0 mb-4 fw-normal">Sign in to website</h2>
+      <i class="fa fa-globe-europe fs-250 p-4 op-05" title="WebSite Logo"></i>
+      <h2 class="mt-0 mb-4 fw-light">Sign in to WebSite</h2>
     </div>
     <div class="pb-4">
     '.$boxError->render().'
     '.$box1->render().'
     <div class="py-4 d-flex fs-80">
       <a href="/assets/" class="flex-grow text-center p-2"><i class="fa fa-globe-europe mr-2"></i>WebSite</a>
-      <a href="#" class="flex-grow text-center p-2">about</a>
       <a href="assets/legal.html" class="flex-grow text-center p-2">terms &amp; privacy</a>
     </div>
     </div>
@@ -249,8 +239,89 @@ function buildPageModalLogin(): void {
     File::save('pages/build/assets/modal-user-login.html', $tpl);
 
 }
+function buildPageModalRegister(): void {
+
+    $content = '
+    <form class="form p-3">
+    <div class="field">
+      <label>
+        <span class="form-label">User name</span>
+        <input type="text" name="username" required>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <span class="form-label">Email</span>
+        <input type="email" name="email" required>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <span class="form-label">Password</span>
+        <input type="password" name="password" required>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <span class="form-label">Password confirm</span>
+        <input type="password" name="password-confirm" required>
+      </label>
+    </div>
+    <div class="field">
+    <button type="submit" class="button success w-100">Sign up</button>
+    </div>
+    </form>';
+
+
+    $boxError = (new Box())
+        ->setTitleHTML('<ul><li>Invalid email</li><li>password too weak</li><li>username already used</li></ul>')
+        ->setBoxClasses('box-warning mb-3')
+        ->setHeaderClasses('no-borders')
+        ->addHeaderOption(Components::getCloseLink());
+
+    $box1 = (new Box())
+        ->setTitle('')
+        ->setIcon('fa fa-lock')
+        ->setBackURL('/assets')
+        ->setHeaderClasses('text-center')
+        ->setBoxClasses('flex-grow')
+        ->setFooter('<div class="flex-grow">
+            <a href="/assets/modal-user-login.html" class="p-3 d-block text-center w-100 simi-link">
+                Already registered? <span class="simi-react">Sign in</span>!
+            </a>
+            </div>
+          ')
+        ->addHeaderOption(Components::getMoreLink('Connect with...','fa fa-plus',
+            new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
+            new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
+        ))
+        ->addHTML($content);
+
+    $content = Template::container(
+        '<div class="" style="max-width: 350px;margin-left:auto;margin-right:auto">
+    <div class="text-center">
+      <i class="fa fa-globe-europe fs-250 p-4 op-05" title="WebSite Logo"></i>
+      <h2 class="mt-0 mb-4 fw-light">Sign in to WebSite</h2>
+    </div>
+    <div class="pb-4">
+    '.$boxError->render().'
+    '.$box1->render().'
+    <div class="py-4 d-flex fs-80">
+      <a href="/assets/" class="flex-grow text-center p-2"><i class="fa fa-globe-europe mr-2"></i>WebSite</a>
+      <a href="assets/legal.html" class="flex-grow text-center p-2">terms &amp; privacy</a>
+    </div>
+    </div>
+        </div>'
+        , 'lg'
+    );
+
+    $tpl     = Template::tpl('Template', $content, true);
+    File::save('pages/build/assets/modal-user-register.html', $tpl);
+
+}
 
 buildPageTemplate();
 buildPageUserSettings();
 buildPageUserSettings2();
 buildPageModalLogin();
+buildPageModalRegister();

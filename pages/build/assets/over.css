@@ -1,18 +1,8 @@
 
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
-/* @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300;400&display=swap');
 
-/* --- Normalize --- */
-button,td,th,input,textarea,select,option{
-    font-size: inherit;
-    font-family: inherit;
-}
-pre,code{
-    font-size: inherit;
-}
 a { text-decoration: none; color: #08c; }
-a:hover { text-decoration: underline; }
+a:hover,a:focus { text-decoration: underline; }
 /* --- */
 
 
@@ -24,6 +14,7 @@ a:hover { text-decoration: underline; }
 }
 
 * { box-sizing: border-box; }
+*:focus { outline: none; }
 
 body
 {
@@ -50,6 +41,7 @@ img {max-width: 100%;}
 
 a.simi-link{color:inherit;text-decoration: none;}
 .simi-react{color:#08c;}
+.simi-link:focus .simi-react,
 .simi-link:hover .simi-react{text-decoration:underline}
 /* --- Borders --- */
 
@@ -74,14 +66,17 @@ a.simi-link{color:inherit;text-decoration: none;}
 }
 
 /* --- localNotifier --- */
-.localNotifier {
+
+.pop-over {
     position: absolute;
     background: white;
     color: #666;
     border-radius: 3px;
-    box-shadow: 0 5px 10px rgb(0 0 0 / 10%) ;
-    padding: 4px 12px;
-    transition: opacity 10ms linear;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+}
+
+
+.localNotifier {
 }
 
 /* --- Box --- */
@@ -90,7 +85,15 @@ a.simi-link{color:inherit;text-decoration: none;}
     border-radius: 3px;
     box-shadow: 0 0 0 3px rgb(0 0 0 / 1%);
     overflow: hidden;
+    transition: all .5s ease;
 }
+.box-closed {
+    height: 0!important;
+    margin: 0!important;
+    opacity: 0!important;
+    border: none!important;
+}
+
 .box .header {
     display: flex;
     background: #f6f8fa;
@@ -102,6 +105,7 @@ a.simi-link{color:inherit;text-decoration: none;}
 .box .header a.header-item {
     color: #666;
 }
+.box .header a.header-item:focus,
 .box .header a.header-item:hover {
     text-decoration: none;
     background: rgb(0 0 0 / 5%);
@@ -128,6 +132,13 @@ a.simi-link{color:inherit;text-decoration: none;}
 .box.box-info .header {
     background: #f4f4fa;
     border-bottom: 1px solid #dde;
+}
+.box.box-warning{
+    border: 1px solid rgb(235 228 177);
+}
+.box.box-warning .header {
+    background: rgb(255 248 197);
+    border-bottom: 1px solid rgb(235 228 177);
 }
 
 /* --- link-list --- */
@@ -296,6 +307,7 @@ select:focus
 .fs-250{font-size: 250%}
 .fs-300{font-size: 300%}
 .fw-normal{font-weight: normal}
+.fw-light{font-weight: 300}
 /* -- */
 .m-0{margin:0}
 .m-1{margin:.25rem}

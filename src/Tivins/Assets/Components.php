@@ -36,4 +36,21 @@ class Components
             . StrUtil::html($text)
             . '</a>';
     }
+    public static function getCloseLink(string $tooltip = 'Close'): string
+    {
+        return '<a href="#" class="header-item close-box-btn" title="'.StrUtil::html($tooltip).'"><i class="fa fa-fw fa-times"></i></a>';
+    }
+    public static function getMoreLink(
+        string $tooltip = 'More',
+        string $icon = 'fa fa-ellipsis-h',
+        ListItemBase ...$items
+    ): string
+    {
+        return '<a href="#" class="header-item pop-trigger"'
+            . ' data-data="[1,2,3]"'
+            . ' title="'.StrUtil::html($tooltip).'"'
+            . '>'
+            . '<i class="fa-fw '.$icon.'"></i>'
+            . '</a>';
+    }
 }

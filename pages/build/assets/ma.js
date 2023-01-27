@@ -1,3 +1,5 @@
+import {PopOver} from "./baz.js";
+
 export class MA {
     static version() {
         return {
@@ -6,7 +8,7 @@ export class MA {
     }
 
     /**
-     * @param elm {element}
+     * @param elm {HTMLElement}
      * @returns {{top: number, left: number}}
      */
     static getOffset(elm) {
@@ -41,6 +43,16 @@ export class MA {
         const obj = Object.assign(document.createElement(tagName), props);
         for (const z in attrs) obj.setAttribute(z, attrs[z]);
         return obj;
+    }
+    static createDiv(className,html) {
+        return this.createElement('div',{className:className,innerHTML:html},{});
+    }
+
+    /**
+     * @param element {HTMLElement}
+     */
+    static removeElement(element) {
+        element.parentNode.removeChild(element);
     }
 
     /**
@@ -78,6 +90,40 @@ export class MA {
         if (!object) return null;
         return object.value !== undefined ? object.value : object.innerText;
     }
+
+    static moveOver(elmToMove, target, direction)
+    {
+        if (!direction) direction = 'top';
+        const off = this.getOffset(target);
+
+        elmToMove.style.left = (off.left - elmToMove.offsetWidth/2 + target.offsetWidth/2) + 'px';
+        if (direction === 'top') {
+            elmToMove.style.top  = (off.top - elmToMove.offsetHeight - 8) + 'px';
+        }
+        if (direction !== 'top' || elmToMove.offsetTop - window.scrollY < 0)
+        {
+            elmToMove.style.top = (off.top + target.offsetHeight + 7) + 'px';
+        }
+    }
+}
+export class AutoCreateElement {
+    #element;
+    #className;
+    constructor(className) {
+        this.#className = className;
+    }
+    static get() {
+        if (!this.#element) {
+            this.#init();
+        }
+        return this.#element;
+    }
+    static #init() {
+        this.#element = MA.createElement('div', {
+            className: this.#className
+        },{});
+        document.body.append(this.#element);
+    }
 }
 export class LocalNotifier {
     /**
@@ -99,53 +145,50 @@ export class LocalNotifier {
      * @param icon {string} "fa-check" or "fa-clone"...
      */
     static show(target, contentHTML, expireInMillis, icon) {
-        const off = MA.getOffset(target);
         const localNotifier = this.get();
         localNotifier.classList.remove('hidden');
+        localNotifier.style.opacity = '1';
         localNotifier.innerText = contentHTML;
         localNotifier.prepend(MA.createElement('i',{className:"mr-2 fa fa-fw "+icon},{}));
-        localNotifier.style.top = (off.top - localNotifier.offsetHeight - 8) + 'px';
-        localNotifier.style.left = (off.left - localNotifier.offsetWidth/2 + target.offsetWidth/2) + 'px';
-        if (localNotifier.offsetTop < 0)
-        {
-        localNotifier.style.top = (off.top + target.offsetHeight + 7) + 'px';
-
-        }
-
-        localNotifier.style.opacity = 1;
         if (expireInMillis) {
             const time = new Date().getTime();
             const expireAt = time + expireInMillis;
             localNotifier.setAttribute('data-expire', expireAt);
             localNotifier.setAttribute('data-from', time);
         }
+        MA.moveOver(localNotifier, target);
     }
     static #init() {
         this.#localNotifier = MA.createElement('div', {
-            className: 'localNotifier px-3 py-2 hidden'
+            className: 'pop-over localNotifier px-3 py-2 hidden'
         },{});
         document.body.append(this.#localNotifier);
     }
 }
 export class Clipboard {
     static copyToClipboard(text, callback) {
-        navigator.permissions.query({name: "clipboard-write"}).then(result => {
-            console.log("Result.state", result.state);
-            navigator.clipboard.writeText(text).then(
-                () => callback ? callback(null) : null,
-                (err) => callback ? callback(err) : null
-            );
-        }, err => {
-            console.error("Permission failed", err);
-        })
+        navigator.clipboard.writeText(text).then(
+            () => callback ? callback(null) : null,
+            (err) => callback ? callback(err) : null
+        );
     }
-    static parseCopiable() {
 
+    /**
+     * - Find all element with `.copy` class.
+     * - Add 'click' listener
+     * - On click, copy target content to clipboard
+     *
+     * Attributes:
+     * - data-text : Specify the text to be used in the tooltip.
+     *
+     * @see MA.getTargetText()
+     * @todo To manage the error case.
+     */
+    static parseCopiable() {
         document.querySelectorAll('.copy:not(.copy-processed)').forEach((elm) => {
             elm.classList.add('copy-processed');
             elm.addEventListener('click', ev => {
                 ev.preventDefault();
-                const out = elm.querySelector('.copy-out');
                 Clipboard.copyToClipboard(
                     MA.getTargetText(elm),
                     (err) => {
@@ -156,6 +199,35 @@ export class Clipboard {
             })
         });
     }
+}
+export function parseCloseButtons() {
+    document.querySelectorAll('.close-box-btn:not(.close-processed)').forEach((elm) => {
+        elm.classList.add('close-processed');
+        elm.addEventListener('click', ev => {
+            ev.preventDefault();
+            const box = elm.closest('.box');
+            if (box) {
+                // box.setAttribute('data-from', new Date().getTime().toString());
+                // box.setAttribute('data-expire', (new Date().getTime() + 2500).toString());
+                // box.setAttribute('data-style', 'slideUp,fadeOut');
+                box.classList.add('box-closed');
+                setTimeout(() => MA.removeElement(box), 1000);
+            }
+        });
+    });
+}export function parsePopupButtons() {
+    document.querySelectorAll('.pop-trigger:not(.pop-trigger-processed)').forEach((elm) => {
+        elm.classList.add('pop-trigger-processed');
+        elm.addEventListener('click', ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            PopOver.show(elm, [
+                {title:"Log in with StackOverflow", subTitle:"Using StackExchange API", icon: 'fa-brands fa-stack-overflow'},
+                {title:"Log in with GitHub", subTitle:"", icon: 'fa-brands fa-github'},
+                {title:"Log in with Google", subTitle:"", icon: 'fa-brands fa-google'}
+            ]);
+        });
+    });
 }
 export class MagiCron {
     static #callbacks = [
@@ -172,24 +244,28 @@ export class MagiCron {
         return this;
     }
     static run() {
-        this.#intervalId = window.setInterval(() => {
-            this.#callbacks.map((val, idx, arr) => {
-                val();
-            });
-        }, this.#interval);
+        this.#intervalId = window.setInterval(
+            () => this.#callbacks.map(val => val()),
+            this.#interval);
     }
+
     static expirer() {
         document.querySelectorAll('[data-expire]:not(.hidden)').forEach(elm => {
-            console.log("1")
-            if (elm.hasAttribute('data-expire')) {
-                const expireAt = elm.getAttribute('data-expire');
-                const created  = elm.getAttribute('data-from');
-                const time     = new Date().getTime();
-                if (time > expireAt) {
-                    elm.classList.add('hidden');
-                    return;
-                }
-                elm.style.opacity = 1 - (time - created) / (expireAt - created);
+            if (!elm.hasAttribute('data-expire')) {
+                return;
+            }
+            const styles = elm.hasAttribute('data-style')
+                ? elm.getAttribute('data-style').split(',')
+                : ['fadeOut'];
+            const expireAt = elm.getAttribute('data-expire');
+            const created = elm.getAttribute('data-from');
+            const time = new Date().getTime();
+            if (time > expireAt) {
+                elm.classList.add('hidden');
+                return;
+            }
+            if (styles.indexOf('fadeOut') !== -1) {
+                elm.style.opacity = (1 - (time - created) / (expireAt - created)).toString();
             }
         });
     }
