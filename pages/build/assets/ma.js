@@ -129,10 +129,14 @@ export class LocalNotifier {
 }
 export class Clipboard {
     static copyToClipboard(text, callback) {
-        navigator.clipboard.writeText(text).then(
-            () => callback ? callback(null) : null,
-            (err) => callback ? callback(err) : null
-        );
+        navigator.permissions.query({name: "clipboard-write"}).then(result => {
+            navigator.clipboard.writeText(text).then(
+                () => callback ? callback(null) : null,
+                (err) => callback ? callback(err) : null
+            );
+        }, err => {
+            console.error("Permission failed", err);
+        })
     }
     static parseCopiable() {
 
