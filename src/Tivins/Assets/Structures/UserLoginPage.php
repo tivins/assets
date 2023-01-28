@@ -37,7 +37,7 @@ class UserLoginPage
         if ($this->showErrorMessage) {
             $boxError = (new Box())
                 ->setTitle('Incorrect username or password.')
-                ->setBoxClasses('box-warning mb-3')
+                ->setBoxClasses(    'box-warning mb')
                 ->setHeaderClasses('no-borders')
                 ->addHeaderOption(Components::getCloseLink());
         }

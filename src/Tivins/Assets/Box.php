@@ -16,7 +16,7 @@ class Box
     /** @var string[] */
     private array $bodyClasses = [];
     /** @var string[] */
-    private array $boxClasses = ['mb-3'];
+    private array $boxClasses = ['mb'];
     /** @var string[] */
     private array $headerClasses = [];
 

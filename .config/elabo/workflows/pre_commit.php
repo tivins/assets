@@ -195,7 +195,7 @@ function buildPageModalLogin(): void {
 
     $boxError = (new Box())
         ->setTitle('Incorrect username or password.')
-        ->setBoxClasses('box-warning mb-3')
+        ->setBoxClasses('box-warning mb')
         ->setHeaderClasses('no-borders')
         ->addHeaderOption(Components::getCloseLink());
 
@@ -275,7 +275,7 @@ function buildPageModalRegister(): void {
 
     $boxError = (new Box())
         ->setTitleHTML('<ul><li>Invalid email</li><li>password too weak</li><li>username already used</li></ul>')
-        ->setBoxClasses('box-warning mb-3')
+        ->setBoxClasses('box-warning mb')
         ->setHeaderClasses('no-borders')
         ->addHeaderOption(Components::getCloseLink());
 

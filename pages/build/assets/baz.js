@@ -13,7 +13,7 @@ export class Box {
 
     construct() {
         this.#element = document.createElement('div');
-        this.#element.classList.add('box','mb-3');
+        this.#element.classList.add('box','mb');
         this.#elementHeader = document.createElement('div');
         this.#elementHeader.classList.add('header');
         this.#elementHeaderTitle = document.createElement('div');
