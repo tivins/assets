@@ -105,24 +105,46 @@ export class MA {
             elmToMove.style.top = (off.top + target.offsetHeight + 7) + 'px';
         }
     }
-}
-export class AutoCreateElement {
-    #element;
-    #className;
-    constructor(className) {
-        this.#className = className;
+
+    /**
+     * @param cname {string}
+     * @param value {string}
+     * @param expDays {number}
+     */
+    static setCookie(cname, value, expDays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = `${cname}=${value};${expires};path=/`;
     }
-    static get() {
-        if (!this.#element) {
-            this.#init();
+
+    /**
+     * @see https://www.w3schools.com/js/js_cookies.asp
+     * @param cname
+     * @return {string}
+     */
+    static getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
         }
-        return this.#element;
+        return "";
     }
-    static #init() {
-        this.#element = MA.createElement('div', {
-            className: this.#className
-        },{});
-        document.body.append(this.#element);
+
+    static parseElements(className, callback) {
+        const classProcessed = className + '-processed';
+        document.querySelectorAll(`.${className}:not(.${classProcessed})`)
+            .forEach(elm => {
+                elm.classList.add(classProcessed);
+                callback(elm);
+            });
     }
 }
 export class LocalNotifier {
@@ -147,7 +169,6 @@ export class LocalNotifier {
     static show(target, contentHTML, expireInMillis, icon) {
         const localNotifier = this.get();
         localNotifier.classList.remove('hidden');
-        localNotifier.style.opacity = '1';
         localNotifier.innerText = contentHTML;
         localNotifier.prepend(MA.createElement('i',{className:"mr-2 fa fa-fw "+icon},{}));
         if (expireInMillis) {
@@ -192,6 +213,12 @@ export class Clipboard {
                 Clipboard.copyToClipboard(
                     MA.getTargetText(elm),
                     (err) => {
+                        elm.querySelector('.state-success')?.classList.remove('hidden');
+                        elm.querySelector('.state-normal')?.classList.add('hidden');
+                        setTimeout(() => {
+                            elm.querySelector('.state-success')?.classList.add('hidden');
+                            elm.querySelector('.state-normal')?.classList.remove('hidden');
+                        },2000);
                         const text = elm.hasAttribute('data-text') ? elm.getAttribute('data-text') : 'Copied!';
                         LocalNotifier.show(elm, err ? err : text, 2000, "fa-regular fa-clone");
                     }
@@ -200,24 +227,35 @@ export class Clipboard {
         });
     }
 }
+export function closeButtonEvent(elm) {
+    const dialog = elm.closest('.dialog');
+    if (dialog) {
+        dialog.classList.add('closed');
+        return;
+    }
+    const box = elm.closest('.box');
+    if (box) {
+        // box.setAttribute('data-from', new Date().getTime().toString());
+        // box.setAttribute('data-expire', (new Date().getTime() + 2500).toString());
+        // box.setAttribute('data-style', 'slideUp,fadeOut');
+        //
+        box.style.height = box.offsetHeight + 'px';
+        setTimeout(() => box.classList.add('box-closed'), 50);
+        setTimeout(() => MA.removeElement(box), 1000);
+    }
+    return elm;
+}
 export function parseCloseButtons() {
-    document.querySelectorAll('.close-box-btn:not(.close-processed)').forEach((elm) => {
-        elm.classList.add('close-processed');
-        elm.addEventListener('click', ev => {
+    MA.parseElements('close-box-btn',
+        elm => elm.addEventListener('click', ev => {
             ev.preventDefault();
-            const box = elm.closest('.box');
-            if (box) {
-                // box.setAttribute('data-from', new Date().getTime().toString());
-                // box.setAttribute('data-expire', (new Date().getTime() + 2500).toString());
-                // box.setAttribute('data-style', 'slideUp,fadeOut');
-                box.classList.add('box-closed');
-                setTimeout(() => MA.removeElement(box), 1000);
-            }
-        });
-    });
-}export function parsePopupButtons() {
-    document.querySelectorAll('.pop-trigger:not(.pop-trigger-processed)').forEach((elm) => {
-        elm.classList.add('pop-trigger-processed');
+            closeButtonEvent(elm);
+        })
+    );
+}
+
+export function parsePopupButtons() {
+    MA.parseElements('pop-trigger', (elm) => {
         elm.addEventListener('click', ev => {
             ev.preventDefault();
             ev.stopPropagation();
@@ -228,6 +266,32 @@ export function parseCloseButtons() {
             ]);
         });
     });
+}
+
+export class Theme {
+    static get() {
+        return MA.getCookie('theme');
+    }
+    static applyCurrent() {
+        let oldTheme = this.get();
+        if (oldTheme === 'dark') document.body.classList.add('dark-theme');
+        else document.body.classList.remove('dark-theme');
+    }
+    static toggle() {
+        let oldTheme = this.get();
+        let newTheme = oldTheme === "dark" ? "" : "dark";
+        MA.setCookie("theme", newTheme, 30);
+        this.applyCurrent();
+    }
+    static initButtons() {
+        MA.parseElements('toggle-theme', elm => {
+            elm.addEventListener('click', event => {
+                event.preventDefault();
+                elm.blur();
+                this.toggle();
+            });
+        });
+    }
 }
 export class MagiCron {
     static #callbacks = [
@@ -265,7 +329,7 @@ export class MagiCron {
                 return;
             }
             if (styles.indexOf('fadeOut') !== -1) {
-                elm.style.opacity = (1 - (time - created) / (expireAt - created)).toString();
+                //elm.style.opacity = (1 - (time - created) / (expireAt - created)).toString();
             }
         });
     }

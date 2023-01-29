@@ -21,7 +21,24 @@
         /*margin-left:-2rem*/
     }
     .gutter-sm>[class*="col-"] {
-        padding-right:1rem !important;
-        padding-left:1rem !important
+        padding-right:1rem;
+        padding-left:1rem;
     }
+
+
+    .gutter>[class*="col-"] {
+        padding-right:1rem ;
+        padding-left:1rem
+    }
+    .gutter [class*="col-"]:first-of-type {
+        padding-left:0rem
+    }
+    .gutter [class*="col-"]:last-of-type {
+        padding-right:0rem
+    }
+
+
+
+    .pl-md-3{padding-left:1rem}
+    .pr-md-3{padding-right:1rem}
 }

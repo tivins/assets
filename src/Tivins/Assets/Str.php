@@ -12,7 +12,6 @@ class Str
 
     public function __toString(): string
     {
-        var_dump($this->value);
         return $this->safe ? $this->value : StrUtil::html($this->value);
     }
 }

@@ -1,257 +1,146 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-  <title>{{ title }}</title>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  <link type="text/css" rel="stylesheet" href="/assets/normalize.css">-->
-  <link type="text/css" rel="stylesheet" href="/assets/css/normalize.css">
-  <link type="text/css" rel="stylesheet" href="/assets/over.css">
-  <link href="/assets/fontawesome6/css/all.min.css" rel="stylesheet" />
-<!--  <script type="module" src="/assets/ma.js"></script>-->
-  <script type="module" src="/assets/main.js"></script>
-</head>
-<body class="theme-dark">
-
-<div class="container-lg px-3 my-5">
-<!-- TEST -->
-  <h1>Assets!</h1>
-
-  <div class="box mb-3">
-    <div class="header">
-      <div class="header-item title">Summary</div>
-    </div>
-    <div class="body">
-      <div class="link-list">
-
-        <a href="/assets/tpl-page.html" class="list-item item-link">
-          <i class="fa fa-chess p-3 op-025 fs-200"></i>
-          <div class="main py-3">
-            <span class="as-link">HTML Page template</span>
-            <div class="subtext-2">How to start with assets&hellip;</div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Assets! | Assets!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="/assets/css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/layout.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/highlight.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/markdown.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/over.css">
+    <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome6/css/all.min.css" >
+    <script type="module" src="/assets/js/default.js"></script>
+  </head>
+  <body class="">
+    <div class="container-lg px-3 my-5"><div class="d-flex flex-align my-4">
+            <h1 class="h1-icon flex-grow my-0">
+              <a href="/assets/" class="icon" title="Assets!"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.9 144.6c15.34-26.38 8.372-62.41-16.96-87.62c-25.21-25.32-61.22-32.26-87.61-16.95c-9.044 5.218-27.15 3.702-48.08 1.968c-50.78-4.327-127.4-10.73-207.6 69.56C-.6501 191.9 5.801 268.5 10.07 319.3c1.749 20.96 3.28 39.07-1.984 48.08c-15.35 26.4-8.357 62.45 16.92 87.57c16.26 16.37 37.05 25.09 56.83 25.09c10.89 0 21.46-2.64 30.83-8.092c9.013-5.249 27.12-3.718 48.08-1.968c50.69 4.233 127.4 10.7 207.6-69.56c80.27-80.28 73.82-156.9 69.56-207.7C436.2 171.8 434.7 153.7 439.9 144.6zM398.4 120.5c-12.87 22.09-10.67 48.41-8.326 76.25c4.155 49.3 8.841 105.2-55.67 169.7c-64.53 64.49-120.5 59.78-169.7 55.68c-27.85-2.328-54.12-4.53-76.26 8.311c-6.139 3.64-19.17 1.031-29.58-9.451c-10.39-10.33-12.95-23.35-9.372-29.49c12.87-22.09 10.67-48.41 8.326-76.25C53.72 265.1 49.04 210.1 113.5 145.5c48.27-48.27 91.71-57.8 131.2-57.8c13.28 0 26.12 1.078 38.52 2.125c27.9 2.359 54.17 4.561 76.26-8.311c6.123-3.577 19.18-1.031 29.49 9.357C399.4 101.2 402 114.4 398.4 120.5zM239.5 124.1c2.156 8.561-3.062 17.25-11.62 19.43C183.6 154.7 122.7 215.6 111.6 259.9C109.7 267.1 103.2 271.1 96.05 271.1c-1.281 0-2.593-.1562-3.905-.4687C83.58 269.3 78.4 260.6 80.52 252.1C94.67 195.8 163.8 126.7 220.1 112.5C228.8 110.4 237.3 115.5 239.5 124.1z"/></svg></a>
+              <div class="flex-grow">Assets!</div>
+            </h1>
+            <div>
+              <label class=" button ghost pr-1 py-1 mr-1" style="cursor: text;padding:.5rem;">
+                  <input type="search" placeholder="Search" class="no-background no-borders"/><i class="fa fa-fw fa-search"></i>
+              </label>
+            </div>
+            <a href="#" class="button ghost" title="admin"><i class="fa fa-fw fa-cog"></i></a>
+            <a href="#" class="button ghost toggle-theme" title="Set dark mode"><i class="fa-regular fa-fw fa-moon"></i></a>
+            <a href="#" class="button ghost" onclick="event.preventDefault();document.querySelector('.dialog').classList.remove('closed')"><i class="fa fa-fw fa-user"></i></a>
           </div>
+    <div class="d-flex-md">
+      <div class="col-8 pr-md-3"><div class="box mb"><div class="header "><span class="title header-item">Summary</span><a href="#" class="header-item">...</a></div><div class="body "><div class="link-list "><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/tpl-page.html" class="d-flex item-link w-100">
+          <i class="fs-200 fa fa-chess p-3 op-025" style="text-align:center;width:5rem"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">HTML Page template</span>
+            <div class="subtext-2">How to start with assets…</div>
+            </div>
         </a>
-
-
-        <a href="/assets/user-settings.html" class="list-item item-link">
-          <i class="fa fa-chess p-3 op-025 fs-200"></i>
-          <div class="main py-3">
+        </div><div class="list-item-separator">User related pages
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/user-settings.html" class="d-flex item-link w-100">
+          <i class="fs-200 fa fa-user-cog p-3 op-025" style="text-align:center;width:5rem"></i>
+          <div class="flex-grow py-3 pr-4">
+            
             <span class="as-link">User settings page</span>
             <div class="subtext-2">A landing user page with basic components</div>
-          </div>
-        </a>
-
-        <a href="/assets/modal-user-login.html" class="list-item item-link">
-          <i class="fa fa-chess p-3 op-025 fs-200"></i>
-          <div class="main py-3">
-            <span class="as-link">Modal / User Login</span>
-            <div class="subtext-2">A landing user page with basic components</div>
-          </div>
-        </a>
-
-
-        <a href="/assets/modal-user-register.html" class="list-item item-link">
-          <i class="fa fa-chess p-3 op-025 fs-200"></i>
-          <div class="main py-3">
-            <span class="as-link">Modal / User Register</span>
-            <div class="subtext-2">A landing user page with basic components</div>
-          </div>
-        </a>
-
-
-
-      </div>
-    </div>
-  </div>
-
-  <h3>box</h3>
-
-  <div class="box mb-3">
-    <div class="header">
-      <a href="#" class="header-item"><i class="fa fa-fw fa-chevron-left" aria-hidden="true" title="Search"></i></a>
-      <a href="#" class="header-item">#</a>
-      <span class="title header-item">header</span>
-      <a href="#" class="header-item"><i class="fa fa-fw fa-search" aria-hidden="true" title="Search"></i></a>
-      <a href="#" class="header-item">2</a>
-      <a href="#" class="header-item"><i class="fa fa-fw fa-ellipsis-h" aria-hidden="true" title="Search"></i></a>
-    </div>
-    <div class="body">
-      <div class="p-2">body</div>
-    </div>
-    <div class="footer">
-      footer
-    </div>
-  </div>
-
-  <div class="box mb-3">
-    <div class="header">
-      <a href="#" class="header-item" title="Back"><i class="fa fa-fw fa-chevron-left" aria-hidden="true" title="Search"></i></a>
-      <a href="#" class="header-item" title="Permalink">#</a>
-      <span class="title header-item">Box Statuses</span>
-      <a href="#" class="header-item" title="Search"><i class="fa fa-fw fa-search" aria-hidden="true"></i></a>
-      <a href="#" class="header-item" title="Help"><i class="fa fa-fw fa-question" aria-hidden="true"></i></a>
-      <a href="#" class="header-item" title="More"><i class="fa fa-fw fa-ellipsis-h" aria-hidden="true"></i></a>
-    </div>
-    <div class="body">
-      <div class="d-flex flex-wrap p-2">
-        <div class="flex-grow p-3 max-w-50">
-          <div class="box box-success">
-            <div class="header">
-              <div class="header-item title">Success</div>
-              <a href="#" class="header-item b-left" title="Help"><i class="fa fa-fw fa-question" aria-hidden="true"></i></a>
-              <a href="#" class="header-item b-left" title="Close"><i class="fa fa-fw fa-times" aria-hidden="true"></i></a>
             </div>
-            <div class="body p-3">
-              This box is a <b>Success Box</b>!
-              <hr>
-              <div class="subtext-3">
-                When you push to GitHub, we’ll check the most recent commit. If the author email on that commit is a private email on your GitHub account, we will block the push and warn you about exposing your private email.
-              </div>
-              <hr>
-              <div class="d-flex">
-                <div class="flex-grow"></div>
-                <button class="button success sm">Accept</button>
-              </div>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/modal-user-login.html" class="d-flex item-link w-100">
+          <i class="fs-200 fa fa-user-circle p-3 op-025" style="text-align:center;width:5rem"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">User Login</span>
+            <div class="subtext-2">A modal page with basic components</div>
             </div>
-          </div>
-        </div>
-        <div class="flex-grow p-3">
-          <div class="box box-info">
-            <div class="header">
-              <div class="header-item title">Info</div>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/modal-user-register.html" class="d-flex item-link w-100">
+          <i class="fs-200 fa fa-contact-card p-3 op-025" style="text-align:center;width:5rem"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">User Register</span>
+            <div class="subtext-2">A modal page with basic components</div>
             </div>
-            <div class="body p-3">
-              Informational message for you.
-              <form class="form">
-                <div class="field">
-                  <label>Select
-                    <select>
-                      <option>Value1</option>
-                      <option>Value2</option>
-                    </select>
-                  </label>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/modal-confirm.html" class="d-flex item-link w-100">
+          <i class="fs-200 fa fa-question p-3 op-025" style="text-align:center;width:5rem"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">Confirm page</span>
+            <div class="subtext-2">A modal page with basic components</div>
+            </div>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/page-blog-post.html" class="d-flex item-link w-100">
+          <i class="fs-200 fa fa-book p-3 op-025" style="text-align:center;width:5rem"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">Blog post</span>
+            <div class="subtext-2">A modal page with basic components</div>
+            </div>
+        </a>
+        </div></div></div></div></div>
+      <div class="col-4 pl-md-3 b-left-md"><h3 class="mt-0">Cards</h3><div class="box mb"><div class="body p-3 d-flex">
+                <div class="pr-3 text-center">
+                  <i class="fa-2x fa-fw fa-brands fa-stack-overflow" style="color:#ccc"></i>
+                  <hr>
+                  <i class="fa-regular fa-circle-up"></i>
+                  <div class="fs-80">19K</div> 
                 </div>
-                <div class="field">
-                  <label>Checkbox
-                    <input type="checkbox">
-                  </label>
+                <div class="flex-grow">
+                  <b>@johndoe65</b><br>
+                  <div class="my-2 fs-90">Developer, Ready to help on StackOverflow, Share code on GitHub.</div>
+                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>created on 2023</div>
                 </div>
-              </form>
+              </div></div><div class="box mb"><div class="body p-3 d-flex">
+                <div class="pr-3 text-center">
+                  <i class="fa-brands fa-fw fa-2x fa-github" style="color:#ccc"></i>
+                  <hr>
+                  <div class="fs-80"><i class="fa-regular fa-star"></i><br>24</div> 
+                </div>
+                <div class="flex-grow">
+                  <b>@jdoe987</b><br>
+                  <div class="my-2 fs-90">Developer, Ready to help on StackOverflow, Share code on GitHub.</div>
+                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>created on 2023</div>
+                </div>
+              </div><div class="footer fs-90 ">
+                        <a href="#" class="p">follow</a>
+                        <a href="#" class="p"><i class="fa fa-code-fork mr-1"></i>fork</a>
+                        </div></div><div class="box mb"><div class="body p-3 d-flex">
+                <div class="pr-3 text-center">
+                  <img src="https://i.stack.imgur.com/2EeK7.png" width="64" class="rounded" alt="user-avatar"/>
+                 <!-- <hr>
+                  <div class="fs-80"><i class="fa-regular fa-handshake"></i><br>86%</div>--> 
+                </div>
+                <div class="flex-grow">
+                  <b class="fs-120">John Doe</b>
+                  <div class="subtext-2">real estate agent</div>
+                  <div class="my-2 fs-90"><span class="fs-90">123 Anywhere on Earth St.,</span><br>Another City, ST 12354<br>CA, Country</div>
+                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>joined on 2023</div>
+                </div>
+              </div><div class="footer fs-90 p-1 flex-align">
+            <a href="#" class="p col-4 py-2 button ghost text-center"><i class="fa-regular fa-envelope d-block"></i></a>
+            <a href="#" class="p col-4 py-2 mx-1 button success text-center"><i class="fa fa-phone d-block"></i></a>
+            <a href="#" class="p col-4 py-2 button ghost text-center"><i class="fa fa-globe-americas d-block"></i></a>
+            </div></div></div>
+    </div>
+    
+            <div class="py-4 d-flex fs-80">
+                <a href="/assets/" class="flex-grow text-center p-2">
+                    Assets!
+                </a>
+                <a href="/assets/legal.html" class="flex-grow text-center p-2">Terms &amp; Privacy</a>
             </div>
-          </div>
         </div>
-        <div class="flex-grow p-3">
-          <div class="box box-warning">
-            <div class="header">
-              <div class="header-item title">Warning</div>
-            </div>
-            <div class="body p-3">Conversion error: Jekyll::Converters::Scss encountered an error while converting 'assets/css/style.scss':
-              No such file or directory @ dir_chdir - /github/workspace/docs</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      footer
-    </div>
-  </div>
-
-  <div class="box mb-3">
-    <div class="header">
-      <div class="header-item title">to</div>
-    </div>
-    <div class="body">
-      <div class="link-list">
-        <div>
-          <div class="main p-3">
-            <a href="#" class="">abc</a>
-            <div class="subtext">another information</div>
-          </div>
-          <a href="#edit" class="b-left  p-3">edit</a>
-        </div>
-        <div>
-          <a href="#" class="p-3"><i class="fa-regular fa-plus-square"></i></a>
-          <a href="#" class="main p-3">abc</a>
-          <a href="#edit" class="b-left p-3"><i class="fa fa-fw fa-pencil"></i></a>
-        </div>
-        <div>
-          <a href="#" class="p-3"><i class="fa-regular fa-minus-square"></i></a>
-          <div class="main p-3">
-            <div class="subtext-2">tivins/assets - pages build and deployment #1</div>
-            <a href="#" class="">Deploy Jekyll with GitHub Pages dependencies preinstalled</a>
-            <div class="pt-3"><div class="subtext"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Loading&hellip;</div></div>
-          </div>
-          <a href="#edit" class="b-left p-3"><i class="fa fa-fw fa-pencil"></i></a>
-        </div>
-        <div>
-          <a href="#" class="p-3"><i class="fa-regular fa-minus-square"></i></a>
-          <div class="main p-3">
-            <a href="#" class="">abc</a>
-            <div class="subtext">another information</div>
-            <div class="pt-3">MORE CONTENT</div>
-          </div>
-          <a href="#edit" class="b-left p-3"><i class="fa fa-fw fa-pencil"></i></a>
-        </div>
-        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
-        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
-        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
-        <div><a href="#" class="main">abc</a><a href="#edit" class="b-left">edit</a></div>
-      </div>
-    </div>
-    <div class="footer"></div>
-  </div>
-
-  <div class="box mb-3">
-    <div class="header">
-      <a href="#" class="header-item b-right">back</a>
-      <span class="header-item b-right">#<a href="/go" class="copy" data-target="href" data-text="URL copied!">4022</a></span>
-      <span class="title header-item">header</span>
-      <span class="header-item">text..<a href="#" class="copy" data-target="myself" data-text="Commit hash copied"><code>a5f1c87</code></a></span>
-      <a href="#" class="header-item b-left">1</a>
-      <a href="#" class="header-item b-left">2</a>
-      <a href="#" class="header-item b-left">...</a>
-    </div>
-    <div class="body">
-      <div class="p-4">body : <a href="#" class="button">button</a></div>
-      <hr>
-      <div class="box m-3">
-        <div class="p-4">yp
-          <hr>
-          <button class="button success">Subscribe</button>
-          <button class="button warning">Are you sure?</button>
-          <button class="button danger"><i class="fa fa-fw fa-warning mr-2"></i>You need to think about this!</button>
-          <button class="button info">I understand</button>
-        </div>
-      </div>
-    </div>
-    <div class="footer no-background p-2 op-05 flex-align">
-      <span class="flex-grow p-btn">footer</span><button class="sm">GO</button>
-    </div>
-  </div>
-
-  <h3>Copy to clipboard</h3>
-    <form class="form">
-      <div class="field">
-        <label>
-          <span class="form-label">Label</span>
-          <input type="text">
-        </label>
-      </div>
-    </form>
-<fieldset><legend>Copy to clipboard</legend>
-<label>Sandbox<textarea placeholder="paste text here to test"></textarea></label>
-<hr>
-  <label>Textarea
-<textarea id="textarea">Some text to copy...</textarea>
-  </label>
-  <button class="copy" data-target="#textarea">COPY Textarea</button>
-  <hr>
-<div id="div">lorem <b>ipsum</b> dolor sit amet</div>
-  <button class="copy" data-target="#div">COPY Div text</button>
-</fieldset>
-<!-- /TEST -->
-</div>
-
-</body>
+  </body>
 </html>

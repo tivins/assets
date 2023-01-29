@@ -12,6 +12,7 @@ class Template
         bool $local,
     ): string
     {
+        $theme = ''; // ($_COOKIE['theme']??"") === 'dark' ? '' : 'dark-theme';
         $basePath = $local
             ? '/assets'
             : 'https://tivins.github.io/assets';
@@ -19,15 +20,17 @@ class Template
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>'.$title.'</title>
+    <title>'.$title.' | '.Website::getTitle().'</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="'.$basePath.'/css/normalize.css">
-    <link type="text/css" rel="stylesheet" href="'.$basePath.'/layout.css">
-    <link type="text/css" rel="stylesheet" href="'.$basePath.'/over.css">
-    <link href="'.$basePath.'/fontawesome6/css/all.min.css" rel="stylesheet">
-    <script type="module" src="'.$basePath.'/main.js"></script>
+    <link type="text/css" rel="stylesheet" href="'.$basePath.'/css/layout.css">
+    <link type="text/css" rel="stylesheet" href="'.$basePath.'/css/highlight.css">
+    <link type="text/css" rel="stylesheet" href="'.$basePath.'/css/markdown.css">
+    <link type="text/css" rel="stylesheet" href="'.$basePath.'/css/over.css">
+    <link type="text/css" rel="stylesheet" href="'.$basePath.'/fonts/fontawesome6/css/all.min.css" >
+    <script type="module" src="'.$basePath.'/js/default.js"></script>
   </head>
-  <body>
+  <body class="'.$theme.'">
     '.$content.'
   </body>
 </html>';

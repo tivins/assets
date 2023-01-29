@@ -19,6 +19,8 @@ class Box
     private array $boxClasses = ['mb'];
     /** @var string[] */
     private array $headerClasses = [];
+    /** @var string[] */
+    private array $footerClasses = [];
 
     private string $footer = '';
     private string $icon = '';
@@ -88,6 +90,11 @@ class Box
         $this->headerClasses = $classes;
         return $this;
     }
+    public function setFooterClasses(string ...$classes): static
+    {
+        $this->footerClasses = $classes;
+        return $this;
+    }
 
     public function setFooter(string $v): static
     {
@@ -95,26 +102,30 @@ class Box
         return $this;
     }
 
-    public function render(): string
+    public function __toString(): string
     {
         $backLink = $this->backURL
             ? '<a href="' . $this->backURL . '" class="header-item" title="back"><i class="fa fa-fw fa-chevron-left" aria-hidden="true"></i></a>'
             : '';
 
-        $header = '<div class="header ' . join(' ', $this->headerClasses) . '">'
-            . $backLink
-            . join($this->leftLinks)
-            . '<span class="title header-item">'
-                . ($this->icon ? '<i class="fa-fw '.$this->icon.' op-05"></i>' : '')
+        $header = '';
+        if ($this->title || !empty($this->rightLinks) || !empty($this->leftLinks) || $this->icon) {
+
+            $header = '<div class="header ' . join(' ', $this->headerClasses) . '">'
+                . $backLink
+                . join($this->leftLinks)
+                . '<span class="title header-item">'
+                . ($this->icon ? '<i class="fa-fw ' . $this->icon . ' op-025"></i>' : '')
                 . ($this->title)
                 . '</span>'
-            . join($this->rightLinks)
-            . '</div>';
+                . join($this->rightLinks)
+                . '</div>';
+        }
 
         return '<div class="box ' . join(' ', $this->boxClasses) . '">'
             . $header
             . '<div class="body ' . join(' ', $this->bodyClasses) . '">' . $this->body . '</div>'
-            . '<div class="footer no-background fs-90">' . $this->footer . '</div>'
+            . ($this->footer ? '<div class="footer fs-90 ' . join(' ', $this->footerClasses) . '">' . $this->footer . '</div>' : '')
             . '</div>';
     }
 }

@@ -5,9 +5,8 @@ namespace Tivins\Assets\Structures;
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
 use Tivins\Assets\ListItem;
-use Tivins\Assets\Str;
 
-class UserLoginPage
+class UserRegisterPage
 {
     private bool $showErrorMessage = false;
 
@@ -17,45 +16,55 @@ class UserLoginPage
         return $this;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         $content = '';
-
         $form = '
-    <form class="form p-3 mx-auto max-w-350px">
+    <form class="form p-3">
     <div class="field">
       <label>
-        <span class="form-label">Email</span>
-        <input type="email" name="email" required placeholder="Type your email">
-        <!--<div class="validation">invalid</div>-->
+        <span class="form-label">User name</span>
+        <input type="text" name="username" required>
       </label>
     </div>
     <div class="field">
-      <div class="d-flex">
-      <label for="password" class="flex-grow"><span class="form-label">Password</span></label>
-      <a href="/assets/modal-user-password.html" class="fs-80 p-1">forgot password?</a> 
-      </div>
-      <input type="password" name="password" id="password" required placeholder="Password">
+      <label>
+        <span class="form-label">Email</span>
+        <input type="email" name="email" required>
+      </label>
     </div>
     <div class="field">
-    <button type="submit" class="button success w-100">Sign in</button>
+      <label>
+        <span class="form-label">Password</span>
+        <input type="password" name="password" required>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <span class="form-label">Password confirm</span>
+        <input type="password" name="password-confirm" required>
+      </label>
+    </div>
+    <div class="field">
+    <button type="submit" class="button success w-100">Sign up</button>
     </div>
     </form>';
 
         if ($this->showErrorMessage) {
-            $message = new Str('Incorrect username or password.');
-            $content .= Components::boxMessage($message, 'warning');
+            $messages = ['username already used','Invalid email','password too weak','passwords does not match'];
+            $content .= Components::boxMessage($messages, 'warning');
         }
 
         $box1 = (new Box())
             ->setTitle('')
-            ->setIcon('fa fa-lock')
+            ->setIcon('fa fa-contact-card')
             ->setBackURL('/assets')
             ->setHeaderClasses('text-center')
             ->setBoxClasses('flex-grow')
             ->setFooterClasses('no-background')
             ->setFooter('<div class="flex-grow">
-            <a href="/assets/modal-user-register.html" class="p-3 d-block text-center w-100 simi-link">
-                New here? <span class="simi-react">Create an account</span>.
+            <a href="/assets/modal-user-login.html" class="p-3 d-block text-center w-100 simi-link">
+                Already registered? <span class="simi-react">Sign in</span>!
             </a>
             </div>
           ')
