@@ -19,4 +19,13 @@ class MicroLayout
             <div class="col-4">'.$col2.'</div>
             </div>';
     }
+    public static function col363(string $col1, string $col2, string $col3): string
+    {
+        return '
+            <div class="d-flex-md gutter">
+            <div class="col-3">'.$col1.'</div>
+            <div class="col-6">'.$col2.'</div>
+            <div class="col-3">'.$col3.'</div>
+            </div>';
+    }
 }

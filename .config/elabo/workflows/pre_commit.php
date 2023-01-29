@@ -294,6 +294,12 @@ function buildPageIndex(): void
         link: '/assets/modal-confirm.html',
         icon: 'fa fa-question'
     ));
+    $linkList->push(new ListItem(
+        title: 'Container XL',
+        subTitle: 'A modal page with basic components',
+        link: '/assets/container-xl.html',
+        icon: 'fa fa-question'
+    ));
     /*
     $card1 = (new Box())
         ->setBodyClasses('p-3 d-flex')
@@ -378,7 +384,6 @@ function generateCards(Closure $callback, int $n = 6): string {
     }
     return Components::div('d-flex-md flex-wrap', $cards);
 }
-
 function buildPageCards(): void
 {
     $content = '';
@@ -429,10 +434,19 @@ function buildCSS(): void {
         );
     }
 }
+function buildPageContainerXL(): void
+{
+    $layout = new Page();
+    $layout->setTitle('Confirmation request');
+    $layout->setContent(MicroLayout::col363('abc', 'def', 'ghi'));
+    $layout->setContainerWidth('xl');
+    File::save('pages/build/assets/container-xl.html', $layout);
+}
 
 Website::setTitle('Assets!');
 buildCSS();
 buildPageIndex();
+buildPageContainerXL();
 buildPageTemplate();
 buildPageUserSettings();
 buildPageUserSettings2();

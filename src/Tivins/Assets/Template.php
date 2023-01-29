@@ -4,8 +4,9 @@ namespace Tivins\Assets;
 class Template
 {
     public static function container(string $content, string $size = 'lg'): string {
-        return '<div class="container-lg px-3 my-5">'.$content.'</div>';
+        return '<div class="container-'.$size.' px-3 my-5">'.$content.'</div>';
     }
+
     public static function tpl(
         string $title,
         string $content,

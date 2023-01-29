@@ -490,8 +490,22 @@ input[type=checkbox]:checked + label:before {
     content: "\f14a";
 }
 
+.container-md {
+    max-width:768px;
+    margin-right:auto;
+    margin-left:auto
+}
+.container-lg {
+    max-width:1012px;
+    margin-right:auto;
+    margin-left:auto
+}
+.container-xl {
+    max-width:1280px;
+    margin-right:auto;
+    margin-left:auto
+}
 
-.container-lg { max-width: 1024px; margin-left: auto; margin-right: auto;}
 .max-w-350px {max-width: 350px}
 .mx-over-5{}
 

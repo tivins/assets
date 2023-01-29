@@ -13,11 +13,15 @@ class Fake
         return self::$paragraphs[$key];
     }
 
-    static public function sentence(): string
+    static public function sentence(int $qty = 1): string
     {
         $sentences = array_filter(explode('. ', self::paragraph() . ' '));
-        $key       = array_rand($sentences);
-        return trim($sentences[$key], " \t.") . '.';
+        $out       = [];
+        while ($qty--) {
+            $key   = array_rand($sentences);
+            $out[] = trim($sentences[$key], " \r\n\t.") . '.';
+        }
+        return join(' ', $out);
     }
 
     static public function words(int $count): string
@@ -51,16 +55,14 @@ class Fake
             'k' => 1000,
             'dk' => 10000,
             'uk' => 100000,
-            'm'  => 1000000,
-        });
+            'm' => 1000000,
+        }
+        );
     }
-
-
 
     static private function load(): void
     {
         if (isset(self::$paragraphs)) return;
         self::$paragraphs = file(__file__ . '.data');
     }
-
 }

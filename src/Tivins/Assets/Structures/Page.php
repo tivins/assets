@@ -14,6 +14,7 @@ class Page
 {
     protected string $title = 'Modal page';
     protected string $content = '';
+    protected string $containerWidth = 'lg';
 
     public function setTitle(string $title): static
     {
@@ -26,23 +27,19 @@ class Page
         return $this;
     }
 
+    /**
+     * @param string $containerWidth 'md', 'lg', 'xl'
+     * @return Page
+     */
+    public function setContainerWidth(string $containerWidth): Page
+    {
+        $this->containerWidth = $containerWidth;
+        return $this;
+    }
+
     public function __toString(): string
     {
-        $dialog = '<div class="dialog closed">'
-            . (
-            (new Box())
-                ->setBoxClasses('box-info')
-                ->setTitle('ALERTE')
-                ->setBodyClasses('p')
-                ->addHTML('yo')
-                ->setFooterClasses('p-2')
-                ->addHeaderOption(Components::getCloseLink())
-                ->setFooter('<div class="flex-grow"></div>
-                    <button class="ghost close-box-btn" ">Cancel</button>
-                    <button class="success ml close-box-btn">OK</button>'
-                )
-            )
-            . '</div>';
+
         $cookie = Components::boxMessage(new HTMLStr('
                   <h3 class="mt-0 mb-0">Cookies</h3>
                   <div class="my-1">Ce site n\'utilise que des cookies essentiels.</div>
@@ -55,8 +52,7 @@ class Page
             . Components::getHeaderBar($this->title)
             . $this->content
             . $this->getFooter()
-//            . $dialog
-        ), true
+        , $this->containerWidth), true
         );
     }
 
