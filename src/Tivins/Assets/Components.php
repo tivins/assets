@@ -15,6 +15,39 @@ class Components
         return '<i class="fa-fw ' . $icon . '" aria-hidden="true"></i>';
     }
 
+    public static function ico(
+        string $icon = 'check',
+        bool $regular = false,
+        bool $lighter = true,
+        bool $fixedWidth = false,
+        string $margin = 'right'
+    ): string
+    {
+        $classes[] = 'fa' . ($regular ? '-regular' : '');
+        if ($fixedWidth) {
+            $classes[] = 'fa-fw';
+        }
+        $classes[] = 'fa-' . $icon;
+        if ($margin != 'none') {
+            $classes[] = 'm' . substr($margin, 0, 1) . '-1';
+        }
+        if ($lighter) {
+            $classes[] = 'op-05';
+        }
+        return '<i class="' . join(' ', $classes) . '"></i>';
+    }
+
+    public static function div(string $classes, string $content):string
+    {
+        return '<div class="' . $classes . '">' . $content . '</div>';
+    }
+    public static function subText(string $content, string $classes = ''):string {
+        return self::div('subtext ' . $classes, $content);
+    }
+    public static function subText2(string $content, string $classes = ''):string {
+        return self::div('subtext-2 ' . $classes, $content);
+    }
+
     /**
      * @param string $target "href","myself" or selector.
      * @return string
@@ -95,5 +128,14 @@ class Components
             <a href="#" class="button ghost toggle-theme" title="Set dark mode"><i class="fa-regular fa-fw fa-moon"></i></a>
             <a href="#" class="button ghost" onclick="event.preventDefault();document.querySelector(\'.dialog\').classList.remove(\'closed\')"><i class="fa fa-fw fa-user"></i></a>
           </div>';
+    }
+
+    public static function getTagList(array $tags): string
+    {
+        $items = [];;
+        foreach ($tags as $tag) {
+            $items[] = '<a href="#" class="tag">' . StrUtil::html($tag) . '</a>';
+        }
+        return '<div class="tag-list">' . join($items) . '</div>';
     }
 }

@@ -3,10 +3,12 @@
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\Fake;
 use Tivins\Assets\HTMLStr;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\ListSeparator;
+use Tivins\Assets\MicroLayout;
 use Tivins\Assets\Str;
 use Tivins\Assets\Structures\BlogPost;
 use Tivins\Assets\Structures\ForgotPasswordPage;
@@ -248,14 +250,25 @@ function buildPageConfirm(): void
 function buildPageIndex(): void
 {
     $linkList = new LinkList();
-
     $linkList->push(new ListItem(
         title: 'HTML Page template',
         subTitle: 'How to start with assets…',
         link: '/assets/tpl-page.html',
-        icon: 'fa fa-chess'
+        icon: 'fa fa-code'
     ));
-    $linkList->push(new ListSeparator());
+    $linkList->push(new ListItem(
+        title: 'Blog post',
+        subTitle: 'A modal page with basic components',
+        link: '/assets/page-blog-post.html',
+        icon: 'fa fa-book'
+    ));
+    $linkList->push(new ListItem(
+        title: 'Cards',
+        subTitle: 'A modal page with basic components',
+        link: '/assets/cards.html',
+        icon: 'fa fa-contact-card'
+    ));
+    $linkList->push(new ListSeparator('User related pages'));
     $linkList->push(new ListItem(
         title: 'User settings page',
         subTitle: 'A landing user page with basic components',
@@ -274,20 +287,14 @@ function buildPageIndex(): void
         link: '/assets/modal-user-register.html',
         icon: 'fa fa-contact-card'
     ));
-
+    $linkList->push(new ListSeparator('Components'));
     $linkList->push(new ListItem(
         title: 'Confirm page',
         subTitle: 'A modal page with basic components',
         link: '/assets/modal-confirm.html',
         icon: 'fa fa-question'
     ));
-    $linkList->push(new ListItem(
-        title: 'Blog post',
-        subTitle: 'A modal page with basic components',
-        link: '/assets/page-blog-post.html',
-        icon: 'fa fa-book'
-    ));
-
+    /*
     $card1 = (new Box())
         ->setBodyClasses('p-3 d-flex')
         ->addHTML('
@@ -300,30 +307,28 @@ function buildPageIndex(): void
                 <div class="flex-grow">
                   <b>@johndoe65</b><br>
                   <div class="my-2 fs-90">Developer, Ready to help on StackOverflow, Share code on GitHub.</div>
-                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>created on 2023</div>
+                  <div class="subtext-2">'.Components::ico('calendar', true, false).'created on 2023</div>
                 </div>
               ');
-
-    $card2 = (new Box())
-        ->setBodyClasses('p-3 d-flex')
-        ->setFooter(
-            '
-                        <a href="#" class="p">follow</a>
-                        <a href="#" class="p"><i class="fa fa-code-fork mr-1"></i>fork</a>
-                        '
+    */
+    $card1 = (new Components\Card('@johndoe65', 'Developer, Ready to help on StackOverflow, Share code on GitHub.'));
+    $card2 = (new Components\Card('@jdoe987', 'Developer, Ready to help on StackOverflow, Share code on GitHub.'))
+        ->addFooterLink((new Components\Button())
+            ->setUrl('#')
+            ->setClasses('px', 'py-2')
+            ->setLabel(new Str('Follow'))
+            ->setUrl('#')
         )
-        ->addHTML('
-                <div class="pr-3 text-center">
-                  <i class="fa-brands fa-fw fa-2x fa-github" style="color:#ccc"></i>
-                  <hr>
-                  <div class="fs-80"><i class="fa-regular fa-star"></i><br>24</div> 
-                </div>
-                <div class="flex-grow">
-                  <b>@jdoe987</b><br>
-                  <div class="my-2 fs-90">Developer, Ready to help on StackOverflow, Share code on GitHub.</div>
-                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>created on 2023</div>
-                </div>
-              ');
+        ->addFooterLink((new Components\Button())
+            ->setUrl('#')
+            ->setClasses('px', 'py-2')
+            ->setLabel(new Str('Fork'))
+            ->setIcon(
+                (new Components\Icon('code-fork', muted: false))
+            )
+            ->setUrl('#')
+        );
+
     $card3 = (new Box())
         ->setBodyClasses('p-3 d-flex')
         ->setFooterClasses('p-1 flex-align')
@@ -348,23 +353,14 @@ function buildPageIndex(): void
                 </div>
               ');
 
-    //$linkList->addClasses('col-8');
-
     $box1 = new Box();
     $box1->setTitle('Summary')
-        // ->setBackURL('/assets')
         ->addHeaderOption('<a href="#" class="header-item">...</a>')
-        //->addHeaderInfo('<i class="fa fa-user header-item b-right"></i>')
-        ->addHTML($linkList)
-    ;
+        ->addHTML($linkList);
 
-    $content = '
-    <div class="d-flex-md">
-      <div class="col-8 pr-md-3">'.$box1.'</div>
-      <div class="col-4 pl-md-3 b-left-md"><h3 class="mt-0">Cards</h3>'.$card1.$card2.$card3.'</div>
-    </div>
-    ';
+    $col2 = '<h3 class="mt-0">Cards</h3>'.$card1.$card2.$card3;
 
+    $content = MicroLayout::col84GutterBorder($box1, $col2);
 
     $layout = new Page();
     $layout->setTitle(Website::getTitle());
@@ -372,6 +368,47 @@ function buildPageIndex(): void
 
 
     File::save('pages/build/assets/index.html', $layout);
+}
+function generateCards(Closure $callback, int $n = 6): string {
+    $cards = '';
+    for ($i= 0;$i<$n;$i++) {
+        $cards .= Components::div('col-4 p-1',
+            $callback()->setBoxClasses('m-0 h-100')
+        );
+    }
+    return Components::div('d-flex-md flex-wrap', $cards);
+}
+
+function buildPageCards(): void
+{
+    $content = '';
+    // ------------------------------
+    $content .= '<h3>Cards</h3>' . generateCards(
+            fn() => (new Components\Card())
+            ->setUserName(Fake::name())
+            ->setCardIcon('user')
+            ->setText(Fake::sentence())
+        );
+    // ------------------------------
+    $content .= '<h3>Brand Cards</h3>'
+        . '<h4>StackOverflow</h4>'
+        . generateCards(
+            fn() => (new Components\StackOverflowCard())
+                ->setUserName(Fake::name())
+                ->setText(Fake::sentence())
+        ,3)
+        . '<h4>GitHub</h4>'
+        . generateCards(
+            fn() => (new Components\GitHubCard())
+                ->setUserName(Fake::name())
+                ->setText(Fake::sentence())
+        ,3)
+        . '';
+    // ------------------------------
+    $layout = new Page();
+    $layout->setTitle('Cards');
+    $layout->setContent($content);
+    File::save('pages/build/assets/cards.html', $layout);
 }
 function buildCSS(): void {
     $dir = 'pages/build/assets/css';
@@ -404,3 +441,4 @@ buildPageModalRegister();
 buildPageModalForgot();
 buildPageConfirm();
 buildPageBlogPost();
+buildPageCards();

@@ -31,6 +31,12 @@ class Box
         return $this;
     }
 
+    public function setHTML(string $html): static
+    {
+        $this->body = $html;
+        return $this;
+    }
+
     public function addHTML(string $html): static
     {
         $this->body .= $html;
@@ -99,6 +105,11 @@ class Box
     public function setFooter(string $v): static
     {
         $this->footer = $v;
+        return $this;
+    }
+    public function addFooter(string $v): static
+    {
+        $this->footer .= $v;
         return $this;
     }
 
