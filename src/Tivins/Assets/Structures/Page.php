@@ -5,6 +5,7 @@ namespace Tivins\Assets\Structures;
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
 use Tivins\Assets\HTMLStr;
+use Tivins\Assets\Size;
 use Tivins\Assets\Str;
 use Tivins\Assets\Template;
 use Tivins\Assets\Website;
@@ -14,7 +15,7 @@ class Page
 {
     protected string $title = 'Modal page';
     protected string $content = '';
-    protected string $containerWidth = 'lg';
+    protected Size $containerWidth = Size::LG;
 
     public function setTitle(string $title): static
     {
@@ -31,7 +32,7 @@ class Page
      * @param string $containerWidth 'md', 'lg', 'xl'
      * @return Page
      */
-    public function setContainerWidth(string $containerWidth): Page
+    public function setContainerWidth(Size $containerWidth): Page
     {
         $this->containerWidth = $containerWidth;
         return $this;

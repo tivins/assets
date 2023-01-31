@@ -18,15 +18,15 @@ class Comment extends Box
         //    </blockquote></div>'
         //;
 
-        $text = 'Written by';
-        if ($this->data->isReply()) {
-            $text = (new Icon('turn-up')) . 'Replied by';
-        }
-        $this->addHeaderInfo('<span class="subtext p pr-0">'.$text.'</span>');
-        $this->setTitle($this->data->author);
+        //$text = 'Written by';
+        //if ($this->data->isReply()) {
+        //    $text = (new Icon('turn-up')) . 'Replied by';
+        //}
+        $this->addHeaderInfo('<span class="subtext p pr-0">'.'by'.'</span>');
+        $this->setTitle($this->data->getAuthor());
         $this->addHeaderOption(
             '<div class="header-item muted-2 fs-90">on '
-            . '<a href="#comment-' . $this->data->id . '">' . date('F jS, Y', $this->data->timestamp) . '</a>'
+            . '<a href="#comment-' . $this->data->getId() . '">' . date('F jS, Y', $this->data->getTimestamp()) . '</a>'
             . '</div>'
         );
         $this->setBodyClasses('p-3');
@@ -34,7 +34,7 @@ class Comment extends Box
             $this->setFooter(
                 ($this->data->isReply() ?
                     '':
-                    '<a href="#" class="px py-2">' . Components::ico('reply') . 'reply</a>'
+                    '<a href="#" class="px py-2 disabled">' . Components::ico('reply') . 'reply</a>'
                 )
                 . Components::div('flex-grow', '')
                 . (new Button())
@@ -43,6 +43,6 @@ class Comment extends Box
                     ->setClasses('px py-2 muted-2 fs-90')
                     ->setUrl('#')
             );
-        $this->setHTML(Components::div('markdown-body', $this->data->body));
+        $this->setHTML(Components::div('markdown-body', $this->data->getBody()));
     }
 }

@@ -9,6 +9,7 @@ use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\ListSeparator;
 use Tivins\Assets\MicroLayout;
+use Tivins\Assets\Size;
 use Tivins\Assets\Str;
 use Tivins\Assets\Structures\BlogPost;
 use Tivins\Assets\Structures\ForgotPasswordPage;
@@ -33,7 +34,8 @@ function buildPageTemplate(): void
             tooltip: 'Copy code',
             linkClass: 'header-item b-left',
             successText: 'Copié'
-        ))
+        )
+        )
         ->addHTML('<pre id="html-page-code" class="p-3">')
         ->addText(Template::tpl("{{title}}", "", false))
         ->addHTML('</pre>');
@@ -46,7 +48,8 @@ function buildPageTemplate(): void
             tooltip: 'Copy code',
             linkClass: 'header-item b-left',
             text: 'Copy code'
-        ))
+        )
+        )
         ->setBodyClasses('p')
         /* ->addHTML('<pre class="highlight p"><a href="#" class="clipper" data-target="#code-7d643166">COPY</a><div id="code-7d643166"><span class="kn">use</span> <span class="nn">Tivins\Dev\JS\Env</span><span class="p">;</span>
 
@@ -74,7 +77,9 @@ Test<span class="o">.</span><span class="n">test</span> = <span class="s1">&#039
     $layout->setContent($box1 . $box2);
     File::save('pages/build/assets/tpl-page.html', $layout);
 }
-function buildPageUserSettings(): void {
+
+function buildPageUserSettings(): void
+{
 
     $html = '
 
@@ -125,7 +130,7 @@ function buildPageUserSettings(): void {
 
     $html = '
       <div class="d-flex-md gutter-sm">
-        <div class="col-8">'.$html.'</div>
+        <div class="col-8">' . $html . '</div>
         <div class="col-4 b-left-md b-top-sm text-center">
           <h4>Représentation graphique</h4>
           <img class="radius no-overflow" src="https://i.stack.imgur.com/2EeK7.png" />
@@ -141,21 +146,20 @@ function buildPageUserSettings(): void {
         ->addHeaderOption('<a href="#" class="header-item">...</a>')
         //->addHeaderInfo('<i class="fa fa-user header-item b-right"></i>')
         ->setBodyClasses('p-3')
-        ->addHTML($html)
-    ;
+        ->addHTML($html);
 
     $content = Template::container(
         Components::getHeaderBar('User Settings')
         . $box1
-        //. $box2->render()
-        , 'lg'
     );
 
-    $tpl     = Template::tpl('Template', $content, true);
+    $tpl = Template::tpl('Template', $content, true);
     File::save('pages/build/assets/user-settings.html', $tpl);
 
 }
-function buildPageUserSettings2(): void {
+
+function buildPageUserSettings2(): void
+{
 
     $linkList = new LinkList();
     $linkList->addClasses('col-8');
@@ -164,19 +168,22 @@ function buildPageUserSettings2(): void {
         subTitle: 'or the wrongest thing to do...',
         link: '#',
         icon: 'fa fa-passport'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'The right thing to do',
         subTitle: 'or the wrongest thing to do...',
         link: '#',
         icon: 'fa fa-anchor'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'Trophées et récompenses',
         subTitle: 'Reconnaissance pour services rendus',
         link: '#',
         icon: 'fa fa-award'
-    ));
+    )
+    );
 
     $box1 = new Box();
     $box1->setTitle('John Doe')
@@ -185,23 +192,21 @@ function buildPageUserSettings2(): void {
         ->addHeaderInfo('<i class="fa fa-user header-item b-right"></i>')
         ->addHTML(
             '<div class="d-flex-md">'
-            .$linkList
-            .'<div class="col-4 b-left">zff</div>'
-            .'</div>'
-        )
-    ;
+            . $linkList
+            . '<div class="col-4 b-left">zff</div>'
+            . '</div>'
+        );
 
     $content = Template::container(
         '<h1><a href="/assets">Assets!</a> - User Settings</h1><hr>'
         . $box1
-        //. $box2->render()
-        , 'lg'
     );
 
-    $tpl     = Template::tpl('Template', $content, true);
+    $tpl = Template::tpl('Template', $content, true);
     File::save('pages/build/assets/user-settings2.html', $tpl);
 
 }
+
 function buildPageModalLogin(): void
 {
     $page = new UserLoginPage();
@@ -211,6 +216,7 @@ function buildPageModalLogin(): void
     $layout->setContent($page);
     File::save('pages/build/assets/modal-user-login.html', $layout);
 }
+
 function buildPageModalRegister(): void
 {
     $page = (new UserRegisterPage());
@@ -220,9 +226,10 @@ function buildPageModalRegister(): void
     $layout->setContent($page);
     File::save('pages/build/assets/modal-user-register.html', $layout);
 }
+
 function buildPageModalForgot(): void
 {
-    $page = (new ForgotPasswordPage());
+    $page   = (new ForgotPasswordPage());
     $layout = new ModalPage();
     $layout->setTitle('Request a new password');
     $layout->setContent($page);
@@ -231,22 +238,25 @@ function buildPageModalForgot(): void
     $layout->setContent($page);
     File::save('pages/build/assets/modal-user-password-done.html', $layout);
 }
+
 function buildPageBlogPost(): void
 {
-    $page = (new BlogPost());
+    $page   = (new BlogPost());
     $layout = new Page();
     $layout->setTitle('Blog Post');
     $layout->setContent($page);
     File::save('pages/build/assets/page-blog-post.html', $layout);
 }
+
 function buildPageConfirm(): void
 {
-    $page = (new \Tivins\Assets\Structures\ConfirmationPage());
+    $page   = (new \Tivins\Assets\Structures\ConfirmationPage());
     $layout = new Page();
     $layout->setTitle('Confirmation request');
     $layout->setContent($page);
     File::save('pages/build/assets/modal-confirm.html', $layout);
 }
+
 function buildPageIndex(): void
 {
     $linkList = new LinkList();
@@ -255,51 +265,66 @@ function buildPageIndex(): void
         subTitle: 'How to start with assets…',
         link: '/assets/tpl-page.html',
         icon: 'fa fa-code'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'Blog post',
         subTitle: 'A modal page with basic components',
         link: '/assets/page-blog-post.html',
         icon: 'fa fa-book'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'Cards',
         subTitle: 'A modal page with basic components',
         link: '/assets/cards.html',
         icon: 'fa fa-contact-card'
-    ));
+    )
+    );
     $linkList->push(new ListSeparator('User related pages'));
     $linkList->push(new ListItem(
         title: 'User settings page',
         subTitle: 'A landing user page with basic components',
         link: '/assets/user-settings.html',
         icon: 'fa fa-user-cog'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'User Login',
         subTitle: 'A modal page with basic components',
         link: '/assets/modal-user-login.html',
         icon: 'fa fa-user-circle'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'User Register',
         subTitle: 'A modal page with basic components',
         link: '/assets/modal-user-register.html',
         icon: 'fa fa-contact-card'
-    ));
+    )
+    );
     $linkList->push(new ListSeparator('Components'));
     $linkList->push(new ListItem(
         title: 'Confirm page',
         subTitle: 'A modal page with basic components',
         link: '/assets/modal-confirm.html',
         icon: 'fa fa-question'
-    ));
+    )
+    );
     $linkList->push(new ListItem(
         title: 'Container XL',
         subTitle: 'A modal page with basic components',
         link: '/assets/container-xl.html',
         icon: 'fa fa-question'
-    ));
+    )
+    );
+    $linkList->push(new ListItem(
+        title: 'Table XL',
+        subTitle: 'A modal page with basic components',
+        link: '/assets/buildPageTable-xl.html',
+        icon: 'fa fa-question'
+    )
+    );
     /*
     $card1 = (new Box())
         ->setBodyClasses('p-3 d-flex')
@@ -317,8 +342,8 @@ function buildPageIndex(): void
                 </div>
               ');
     */
-    $card1 = (new Components\Card('@johndoe65', 'Developer, Ready to help on StackOverflow, Share code on GitHub.'));
-    $card2 = (new Components\Card('@jdoe987', 'Developer, Ready to help on StackOverflow, Share code on GitHub.'))
+    $card1 = (new Components\Card('@' . Fake::words(), Fake::sentence(2)));
+    $card2 = (new Components\Card('@' . Fake::words() . ' <span class="tag info small-caps">pro</span>', Fake::sentence(2)))
         ->addFooterLink((new Components\Button())
             ->setUrl('#')
             ->setClasses('px', 'py-2')
@@ -330,10 +355,12 @@ function buildPageIndex(): void
             ->setClasses('px', 'py-2')
             ->setLabel(new Str('Fork'))
             ->setIcon(
-                (new Components\Icon('code-fork', muted: false))
+                (new Components\Icon('code-fork', mutedLevel: false))
             )
             ->setUrl('#')
         );
+
+    $addr = Fake::addressStruct();
 
     $card3 = (new Box())
         ->setBodyClasses('p-3 d-flex')
@@ -352,19 +379,23 @@ function buildPageIndex(): void
                   <div class="fs-80"><i class="fa-regular fa-handshake"></i><br>86%</div>--> 
                 </div>
                 <div class="flex-grow">
-                  <b class="fs-120">John Doe</b>
-                  <div class="subtext-2">real estate agent</div>
-                  <div class="my-2 fs-90"><span class="fs-90">123 Anywhere on Earth St.,</span><br>Another City, ST 12354<br>CA, Country</div>
-                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>joined on 2023</div>
+                  <b class="fs-120">' . Fake::name() . '</b>
+                  <div class="subtext-2">' . Fake::words(4) . '</div>
+                  <div class="my-2 fs-90">
+                      <span class="fs-90">' . Fake::getAddress1($addr) . '</span>
+                      <br>' . $addr->postCode . ' ' . $addr->city . '
+                      <br>' . $addr->country . '</div>
+                  <div class="subtext-2"><i class="fa-regular fa-calendar mr-1"></i>joined on ' . date('Y', Fake::timestamp()) . '</div>
                 </div>
-              ');
+              '
+        );
 
     $box1 = new Box();
     $box1->setTitle('Summary')
         ->addHeaderOption('<a href="#" class="header-item">...</a>')
         ->addHTML($linkList);
 
-    $col2 = '<h3 class="mt-0">Cards</h3>'.$card1.$card2.$card3;
+    $col2 = '<h3 class="mt-0">Cards</h3>' . $card1 . $card2 . $card3;
 
     $content = MicroLayout::col84GutterBorder($box1, $col2);
 
@@ -375,24 +406,27 @@ function buildPageIndex(): void
 
     File::save('pages/build/assets/index.html', $layout);
 }
-function generateCards(Closure $callback, int $n = 6): string {
+
+function generateCards(Closure $callback, int $n = 6): string
+{
     $cards = '';
-    for ($i= 0;$i<$n;$i++) {
+    for ($i = 0; $i < $n; $i++) {
         $cards .= Components::div('col-4 p-1',
             $callback()->setBoxClasses('m-0 h-100')
         );
     }
     return Components::div('d-flex-md flex-wrap', $cards);
 }
+
 function buildPageCards(): void
 {
     $content = '';
     // ------------------------------
     $content .= '<h3>Cards</h3>' . generateCards(
             fn() => (new Components\Card())
-            ->setUserName(Fake::name())
-            ->setCardIcon('user')
-            ->setText(Fake::sentence())
+                ->setUserName(Fake::name())
+                ->setCardIcon('user')
+                ->setText(Fake::sentence())
         );
     // ------------------------------
     $content .= '<h3>Brand Cards</h3>'
@@ -401,13 +435,15 @@ function buildPageCards(): void
             fn() => (new Components\StackOverflowCard())
                 ->setUserName(Fake::name())
                 ->setText(Fake::sentence())
-        ,3)
+            , 3
+        )
         . '<h4>GitHub</h4>'
         . generateCards(
             fn() => (new Components\GitHubCard())
                 ->setUserName(Fake::name())
                 ->setText(Fake::sentence())
-        ,3)
+            , 3
+        )
         . '';
     // ------------------------------
     $layout = new Page();
@@ -415,8 +451,10 @@ function buildPageCards(): void
     $layout->setContent($content);
     File::save('pages/build/assets/cards.html', $layout);
 }
-function buildCSS(): void {
-    $dir = 'pages/build/assets/css';
+
+function buildCSS(): void
+{
+    $dir     = 'pages/build/assets/css';
     $outfile = $dir . '/all.css';
     $sources = [
         $dir . '/normalize.css',
@@ -430,23 +468,113 @@ function buildCSS(): void {
         file_put_contents($outfile,
             "/* $source */\n"
             . file_get_contents($source) . "\n\n",
-        FILE_APPEND
+            FILE_APPEND
         );
     }
 }
-function buildPageContainerXL(): void
+
+function buildPageTable(Size $size): void
 {
-    $layout = new Page();
-    $layout->setTitle('Confirmation request');
-    $layout->setContent(MicroLayout::col363('abc', 'def', 'ghi'));
-    $layout->setContainerWidth('xl');
-    File::save('pages/build/assets/container-xl.html', $layout);
+    $content = '<h2>Sales</h2>';
+
+    $content .= '
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Interventions</th>
+      </tr>
+    </thead>
+    <tbody>
+    ';
+    $tm = Fake::timestamp();
+
+    for ($i = 0; $i < 30; $i++) {
+      $tm -= Fake::number(10000);
+      $isUser = Fake::anyChance();
+      $isPro = $isUser && Fake::anyChance();
+        $content .= '<tr>
+        <td>'.date('H:i:s',$tm).Components::subText(date('F jS,Y', $tm)).'</td>
+        <td>
+          '.($isUser
+                ? new Components\Icon('user', fixedWidth: true)
+                : new Components\Icon('cart-shopping', fixedWidth: true)
+            )
+            .'</td><td>'
+          . Fake::name()
+          . ($isPro ? ' <span class="tag small-caps info">pro</span>'
+                . Components::subText(
+                    new Components\Icon('building')
+                    . Fake::name()
+                ) : '')
+
+        . '</td>
+        <td>' .  new Components\Icon('dollar-sign') . number_format(Fake::number()) . '</td>
+        <td>' . Fake::number() . '</td>
+      </tr>';
+    }
+    $content .= '</tbody>
+
+  </table>';
+
+    $layout = (new Page())
+        ->setTitle(__function__)
+        ->setContent($content)
+        ->setContainerWidth($size);
+
+    File::save('pages/build/assets/' . $size->suffix(__function__) . '.html', $layout);
+}
+
+function buildPageContainerWidth(Size $size): void
+{
+    $colsGen = function (array $conf) {
+        $colContent = function (int $sentencesCount = 5): Box {
+            return (new Box)
+                ->setTitleHTML('<code>col-' . $sentencesCount . '</code>')
+                ->setBoxClasses('h-100')
+                ->setBodyClasses('p')
+                ->addHTML(
+                    preg_replace('~\b(consequat|ipsum|Vestibulum)\b~i', '<i>$1</i>',
+                        preg_replace('~\b(libero|sagittis|lorem)\b~i', '<b>$1</b>',
+                            Fake::sentence($sentencesCount)
+                        )
+                    )
+                );
+        };
+        $l          = new MicroLayout($conf);
+        foreach ($conf as $k => $size) {
+            $l->setColumnContent($k, $colContent($size));
+        }
+        return $l;
+    };
+    $rows    = '';
+    $rows    .= (new \Tivins\Assets\Structures\InteractivePath('/pages/docs/menu/item'));
+    $rows    .= $colsGen([2, 6, 4])->setGutterSize(Size::SM);
+    $rows    .= $colsGen([3, 6, 3])->setGutterSize(Size::SM);
+    $rows    .= $colsGen([6, 6])->setGutterSize(Size::SM);
+    $rows    .= $colsGen([9, 3])->setGutterSize(Size::SM);
+    $rows    .= $colsGen([2, 8, 2])->setGutterSize(Size::SM);
+    $rows    .= $colsGen([12])->setGutterSize(Size::SM);
+    $rows    .= $colsGen([4, 8])->setColumnContent(0, '<i class="muted-2">offset</i>')->setGutterSize(Size::SM);
+
+
+    $layout = (new Page())
+        ->setTitle('Confirmation request')
+        ->setContent($rows)
+        ->setContainerWidth($size);
+
+    File::save('pages/build/assets/container-' . $size->value . '.html', $layout);
 }
 
 Website::setTitle('Assets!');
-buildCSS();
+// buildCSS();
 buildPageIndex();
-buildPageContainerXL();
+buildPageContainerWidth(Size::XL);
+buildPageContainerWidth(Size::LG);
+buildPageContainerWidth(Size::MD);
 buildPageTemplate();
 buildPageUserSettings();
 buildPageUserSettings2();
@@ -456,3 +584,6 @@ buildPageModalForgot();
 buildPageConfirm();
 buildPageBlogPost();
 buildPageCards();
+buildPageTable(Size::XL);
+buildPageTable(Size::LG);
+buildPageTable(Size::MD);

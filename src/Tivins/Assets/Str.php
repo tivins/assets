@@ -14,4 +14,9 @@ class Str
     {
         return $this->safe ? $this->value : StrUtil::html($this->value);
     }
+
+    public function empty(): bool
+    {
+        return empty($this->value);
+    }
 }

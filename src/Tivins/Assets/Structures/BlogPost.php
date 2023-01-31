@@ -4,6 +4,7 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\CommentData;
 use Tivins\Assets\Components\Timeline;
 use Tivins\Assets\Components\TimelineItem;
@@ -41,8 +42,8 @@ class BlogPost
             . Components::subText(Components::ico('tags') . 'Tags', 'mb-1')
             . Components::getTagList($this->tags)
             . '<hr>'
-            . Components::subText((new Components\Icon('eye', true)) . '24,549 views', 'py-1')
-            . Components::subText((new Components\Icon('comment', true)) . '64 comments', 'py-1')
+            . Components::subText((new Components\Icon('eye', true)) . number_format(Fake::number()).' views', 'py-1')
+            . Components::subText((new Components\Icon('comment', true)) . number_format(Fake::number()) . ' comments', 'py-1')
             ;
 
         return (new Box())
@@ -66,29 +67,29 @@ class BlogPost
             //     </div>
             // ')
             ->setFooter(
-                (new Components\Button())
-                    ->setIcon(new Components\Icon('eye', true, muted: false) )
-                    ->setClasses('ghost flex-grow')
+                (Button::newGhost())
+                    ->setIcon(new Components\Icon('eye', true, mutedLevel: 0) )
+                    ->addClasses('flex-grow')
                     ->setTitle('Total of views')
                     ->setLabel(new Str(number_format(Fake::number('m'))))
-                . (new Components\Button())
-                    ->setIcon(new Components\Icon('star', true, muted: false) )
-                    ->setClasses('ghost flex-grow')
+                . (Button::newGhost())
+                    ->setIcon(new Components\Icon('star', true, mutedLevel: 0) )
+                    ->addClasses('flex-grow')
                     ->setTitle('Total of star')
                     ->setLabel(new Str(number_format(Fake::number('dk'))))
-                . (new Components\Button())
-                    ->setIcon(new Components\Icon('heart', true, muted: false) )
-                    ->setClasses('ghost flex-grow')
+                . (Button::newGhost())
+                    ->setIcon(new Components\Icon('heart', true, mutedLevel: 0) )
+                    ->addClasses('flex-grow')
                     ->setTitle('Total of like')
                     ->setLabel(new Str(number_format(Fake::number('k'))))
-                . (new Components\Button())
-                    ->setIcon(new Components\Icon('comment', true, muted: false) )
-                    ->setClasses('ghost flex-grow')
+                . (Button::newGhost())
+                    ->setIcon(new Components\Icon('comment', true, mutedLevel: 0) )
+                    ->addClasses('flex-grow')
                     ->setTitle('Total of comments')
                     ->setLabel(new Str(number_format(Fake::number('d'))))
-                . (new Components\Button())
-                    ->setIcon(new Components\Icon('bookmark', true, muted: false) )
-                    ->setClasses('ghost flex-grow')
+                . (Button::newGhost())
+                    ->setIcon(new Components\Icon('bookmark', true, mutedLevel: 0) )
+                    ->addClasses('ghost flex-grow')
                     ->setTitle('Number of bookmarked')
                     ->setLabel(new Str(number_format(Fake::number('u'))))
             )
@@ -222,21 +223,20 @@ class BlogPost
     }
     private function getBody():string {
         return '<h1>Fusce vel tincidunt libero!</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id erat imperdiet, ullamcorper ligula ut, dapibus tortor. <code>Ut et nisl vel</code> ipsum scelerisque feugiat sit amet id eros.</p>
-          <p><b>Quisque laoreet</b>, velit at venenatis pharetra, orci lorem iaculis augue, vel consequat nisl augue sit amet tellus. Curabitur a metus tempus, ultrices risus et, ultrices mauris. Proin tempor ligula at nibh iaculis accumsan. Nulla id lacus semper orci accumsan vestibulum. Aliquam fermentum, magna et feugiat tempor, augue dolor aliquam ipsum, et pharetra turpis purus vitae massa. In a sagittis massa, eu tincidunt ante.</p>
-          <blockquote>'.Fake::paragraph().'</blockquote>
+          <p>'.Fake::paragraph().'</p>
+          <blockquote>'.Fake::sentence(5).'</blockquote>
           <div class="box box-info mb"><div class="header p no-borders">'.Fake::sentence(3).'</div></div>
           <p>'.Fake::paragraph().'</p>
           <pre class="highlight"><code><span class="kn">for</span> (;;) ;</code></pre>
-          <p>'.Fake::paragraph().'</p>
+          <p>'.Fake::sentence(3).'</p>
           <h2>'.trim(Fake::sentence(),'.').'?</h2>
-          <p>'.Fake::paragraph().'</p>
+          <p>'.Fake::sentence(5).'</p>
           <h3>'.rtrim(Fake::sentence(),'.').'!</h3>
-          <p>'.Fake::paragraph().'</p>
+          <p>'.Fake::sentence(3).'</p>
           <ul>
-          <li>'.Fake::sentence().Components::subText(Fake::sentence()).'</li>
-          <li>'.Fake::sentence().Components::subText(Fake::sentence()).'</li>
-          <li>'.Fake::sentence().Components::subText(Fake::sentence()).'</li>
+          <li>'.Fake::sentence(1).Components::subText(Fake::sentence(1, .2)).'</li>
+          <li>'.Fake::sentence(1).Components::subText(Fake::sentence(1, .5)).'</li>
+          <li>'.Fake::sentence(1).Components::subText(Fake::sentence(1, .7)).'</li>
           </ul>
           <p>'.Fake::paragraph().'</p>
           ';

@@ -9,14 +9,16 @@ class LinkList
     private array $items   = [];
     private array $classes = [];
 
-    public function push(ListItemBase $item): void
+    public function push(ListItemBase $item): static
     {
         $this->items[] = $item;
+        return $this;
     }
 
-    public function addClasses(string ...$classes): void
+    public function addClasses(string ...$classes): static
     {
         $this->classes = array_merge($this->classes, $classes);
+        return $this;
     }
 
     public function __toString(): string

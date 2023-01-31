@@ -74,4 +74,15 @@ class Button
         $this->dataAttrs[$name] = $value;
         return $this;
     }
+
+    // --------------------------------
+    // Static predefined configurations
+    // --------------------------------
+
+    public static function newGhost(): static {
+        return (new static())->setClasses('ghost');
+    }
+    public static function newLink(): static {
+        return (new static())->setClasses('link');
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace Tivins\Assets;
 
+use Tivins\Assets\Components\Button;
+use Tivins\Assets\Components\HTMLElement;
 use Tivins\Core\StrUtil;
 
 class Components
@@ -37,10 +39,17 @@ class Components
         return '<i class="' . join(' ', $classes) . '"></i>';
     }
 
-    public static function div(string $classes, string $content):string
+    public static function div(string|array $classes, string $content):string
     {
-        return '<div class="' . $classes . '">' . $content . '</div>';
+        if (is_string($classes)) {
+            $classes = explode(' ', $classes);
+        }
+        return (new HTMLElement('div'))
+            ->setClassList(...$classes)
+            ->setContent(new HTMLStr($content));
+        //return '<div class="' . $classes . '">' . $content . '</div>';
     }
+
     public static function subText(string $content, string $classes = ''):string {
         return self::div('subtext ' . $classes, $content);
     }
@@ -130,12 +139,19 @@ class Components
           </div>';
     }
 
+    /**
+     * @param string[] $tags
+     * @return string
+     */
     public static function getTagList(array $tags): string
     {
-        $items = [];;
+        $items = [];
         foreach ($tags as $tag) {
-            $items[] = '<a href="#" class="tag">' . StrUtil::html($tag) . '</a>';
+            $items[] = (new Button())
+                ->setLabel(new Str($tag))
+                ->setClasses('tag')
+                ->setUrl('#');
         }
-        return '<div class="tag-list">' . join($items) . '</div>';
+        return Components::div('tag-list', join($items));
     }
 }

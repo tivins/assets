@@ -4,13 +4,21 @@ namespace Tivins\Assets\Components;
 
 class Icon
 {
+    /**
+     * @param string $icon Main part of the icon name (after 'fa-').
+     * @param string|bool $class bool: regular or not, or string: 'regular','brands'...
+     * @param int $mutedLevel level
+     * @param bool $fixedWidth
+     * @param string $margin
+     * @param array $classes
+     */
     public function __construct(
-        public string $icon = 'check',
+        public string      $icon = 'check',
         public string|bool $class = '',
-        public bool   $muted = true,
-        public bool   $fixedWidth = false,
-        public string $margin = 'right',
-        public array $classes = [],
+        public int         $mutedLevel = 1,
+        public bool        $fixedWidth = false,
+        public string      $margin = 'right',
+        public array       $classes = [],
     )
     {
         if (is_bool($class)) {
@@ -28,7 +36,7 @@ class Icon
         if ($this->margin != 'none') {
             $classes[] = 'm' . substr($this->margin, 0, 1) . '-1';
         }
-        if ($this->muted) {
+        if ($this->mutedLevel) {
             $classes[] = 'op-05';
         }
         $classes = array_merge($classes, $this->classes);
