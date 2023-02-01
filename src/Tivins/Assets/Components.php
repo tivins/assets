@@ -138,7 +138,7 @@ class Components
     }
     public static function getHeaderBar(string $title): string {
         return '
-        <div class="d-flex flex-align my-3 my-md-4 header-bar">
+        <div class="d-flex flex-align my-3 header-bar">
             <a href="#" class="p button ghost pop-trigger mr visible-sm" data-target=".menu-mobile"><i class="fa fa-bars"></i></a>
             <h1 class="h1-icon flex-grow my-0">
               <a href="/assets/" class="icon" title="'. new Str(Website::getTitle()).'">'. Website::getIcon().'</a>
@@ -184,7 +184,14 @@ class Components
                     new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
                 )
             . '<h1 class="visible-sm">' . new Str($title) . '</h1>'
-            . '<div class="menu-mobile hidden p"><label>search<input></label><hr></div>';
+            . '<div class="menu-mobile hidden"><label class="d-block p b-bottom">search<input></label>'.(new LinkList(Size::SM))
+                ->addClasses('')
+                ->push(
+                    new ListSeparator(new Icon('user', true).'<span class="fw-light">Signed in as</span> '.Fake::name()),
+                    new ListItem('Profile','submenu1','#', 'fa fa-moon'),
+                    new ListItem('Settings','submenu1','/assets/user-settings.html', 'fa fa-user-gear'),
+                    new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
+                ).'<hr></div>';
     }
 
     /**

@@ -13,6 +13,7 @@ enum Size: string
     //
     case XXL = 'xxl';
     case XXS = 'xxs';
+    case Fluid = 'fluid';
 
     /**
      * Convert 'd-flex' to 'd-flex-md' or 'd-flex';

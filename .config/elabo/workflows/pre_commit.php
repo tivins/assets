@@ -333,6 +333,12 @@ function buildPageIndex(): void
         link: '/assets/buildPageMenuMobile.html',
         icon: 'fa fa-code'
     ));
+    $linkList->push(new ListItem(
+        title: 'container-fluid',
+        subTitle: 'container-fluid',
+        link: '/assets/container-fluid.html',
+        icon: 'fa fa-code'
+    ));
     $card1 = (new Components\Card('@' . Fake::words(), Fake::sentence(2)));
     $card2 = (new Components\Card('@' . Fake::words() . ' <span class="tag info small-caps">pro</span>', Fake::sentence(2)))
         ->addFooterLink((new Button())
@@ -443,13 +449,15 @@ function buildCSS(): void
     $dir     = 'pages/build/assets/css';
     $outfile = $dir . '/all.css';
     $sources = [
+        $dir . '/font.css',
         $dir . '/normalize.css',
         $dir . '/layout.css',
         $dir . '/highlight.css',
         $dir . '/markdown.css',
         $dir . '/over.css',
+
     ];
-    file_put_contents($outfile, "");
+    file_put_contents($outfile, "/*! all.css v1.0.1 | MIT License | github.com/tivins/assets */\n");
     foreach ($sources as $source) {
         file_put_contents($outfile,
             "/* $source */\n"
@@ -609,9 +617,18 @@ function buildPageContainerWidth(Size $size): void
 
     File::save('pages/build/assets/container-' . $size->value . '.html', $layout);
 }
+function buildPageFluid(): void
+{
+    $content = 'hello';
+
+    $layout = (new Page(__FUNCTION__, Size::Fluid))
+    ->setContent($content);
+    File::save('pages/build/assets/container-fluid.html', $layout);
+}
+
 
 Website::setTitle('Assets!');
-// buildCSS();
+buildCSS();
 buildPageIndex();
 buildPageContainerWidth(Size::XL);
 buildPageContainerWidth(Size::LG);
@@ -629,3 +646,4 @@ buildPageTable(Size::XL);
 buildPageTable(Size::LG);
 buildPageTable(Size::MD);
 buildPageMenuMobile();
+buildPageFluid();
