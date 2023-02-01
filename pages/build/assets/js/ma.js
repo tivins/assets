@@ -1,4 +1,4 @@
-import {PopOver} from "./baz.js";
+import {List, PopOver} from "./baz.js";
 
 export class MA {
     static version() {
@@ -96,7 +96,16 @@ export class MA {
         if (!direction) direction = 'top';
         const off = this.getOffset(target);
 
-        elmToMove.style.left = (off.left - elmToMove.offsetWidth/2 + target.offsetWidth/2) + 'px';
+        let left = (off.left - elmToMove.offsetWidth/2 + target.offsetWidth/2);
+        if (left + elmToMove.offsetWidth > window.innerWidth - 10) {
+            left = target.offsetLeft + target.offsetWidth - elmToMove.offsetWidth;
+        }
+        if (left < 0) {
+            left = target.offsetLeft;
+        }
+        elmToMove.style.left = left + 'px';
+
+
         if (direction === 'top') {
             elmToMove.style.top  = (off.top - elmToMove.offsetHeight - 8) + 'px';
         }
@@ -229,8 +238,13 @@ export class Clipboard {
 }
 export function closeButtonEvent(elm) {
     const dialog = elm.closest('.dialog');
+    const menuSM = elm.closest('.menu-sm');
     if (dialog) {
         dialog.classList.add('closed');
+        return;
+    }
+    if (menuSM) {
+        menuSM.classList.remove('menu-active');
         return;
     }
     const box = elm.closest('.box');
@@ -259,11 +273,16 @@ export function parsePopupButtons() {
         elm.addEventListener('click', ev => {
             ev.preventDefault();
             ev.stopPropagation();
-            PopOver.show(elm, [
-                {title:"Log in with StackOverflow", subTitle:"Using StackExchange API", icon: 'fa-brands fa-stack-overflow'},
-                {title:"Log in with GitHub", subTitle:"", icon: 'fa-brands fa-github'},
-                {title:"Log in with Google", subTitle:"", icon: 'fa-brands fa-google'}
-            ]);
+
+            /*
+            const list = new List();
+            list.addItem({title:"Log in with StackOverflow", subTitle:"Using StackExchange API", icon: 'fa-brands fa-stack-overflow'});
+            list.addItem({title:"Log in with GitHub", subTitle:"", icon: 'fa-brands fa-github'});
+            list.addItem({title:"Log in with Google", subTitle:"", icon: 'fa-brands fa-google'});
+            */
+            const targetElm = document.querySelector(elm.getAttribute('data-target'));
+            targetElm.classList.remove('hidden');
+            PopOver.show(elm, targetElm);
         });
     });
 }

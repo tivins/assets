@@ -217,7 +217,9 @@ class BlogPost
 
         $authorBox = (new Components\Card($this->authorName, Fake::sentence()));
 
-        return '<h1>Blog post</h1>'.MicroLayout::col84Gutter($box1
+        return
+            new InteractivePath('/blog/2023/assets')
+            . MicroLayout::col84Gutter($box1
             .'<h3>Author</h3>'.$authorBox
             .'<h3>Comments</h3>'.$boxCom,$box2.$box5.$box3.$box4.$box6);
     }

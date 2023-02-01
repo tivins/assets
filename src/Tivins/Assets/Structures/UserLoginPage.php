@@ -4,6 +4,7 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\Str;
 
@@ -59,13 +60,17 @@ class UserLoginPage
             </a>
             </div>
           ')
-            ->addHeaderOption(Components::getMoreLink('Connect with...','fa fa-plus',
-                new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
-                new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
-            ))
+            ->addHeaderOption(Components::getMoreLink2('.pop-menu-login','Connect with...','fa fa-plus'))
             ->addHTML($form);
 
         $content .= $box1;
+        $content .= (new LinkList())
+            ->addClasses('pop-menu-login hidden')
+            ->push(
+                new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
+                new ListItem('Log in with GitHub', 'use your GitHub account','#', 'fa-brands fa-github'),
+                new ListItem('Log in with Google', 'use your Google account','#', 'fa-brands fa-google'),
+            );
         return $content;
     }
 }

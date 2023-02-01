@@ -114,9 +114,29 @@ HTMLElement.prototype.on = function(eventType,callback) {
     return this;
 }
 
+export class List {
+    list;
+    constructor() {
+        this.list = MA.createElement('div',{className:'link-list'},{});
+    }
+    addItem(itm) {
+        this.list.appendChild(MA.createDiv('list-item',`
+                <a href="#" class="d-flex item-link w-100">
+                  <i class="icon ${itm.icon} p-3 op-025 text-center"></i>
+                  <div class="flex-grow py-3 pr-4">
+                    <div class="as-link">${itm.title}</div>
+                    <div class="subtext-2">${itm.subTitle}</div>
+                  </div>
+                </a>
+            `)
+        );
+    }
+}
 
 export class PopOver {
     static element;
+    static temporary;
+    static resizeObserver;
     static get() {
         if (!this.element) {
             this.init();
@@ -124,44 +144,38 @@ export class PopOver {
         return this.element;
     }
     static init() {
+        this.temporary = MA.createElement('div', {className:"hidden"},{});
         this.element = MA.createElement('div', {
-            className: 'pop-over pop-more hidden'
+            className: 'pop-over pop-more hidden box'
         },{});
         document.body.append(this.element);
+        document.body.append(this.temporary);
         document.addEventListener('click', (e) => {
             this.element.classList.add('hidden');
+        });
+        this.resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                entry.target.fooo()
+            }
         });
     }
 
     /**
      *
      * @param target
-     * @param data {Array}
+     * @param element {HTMLElement}
      */
-    static show(target, data) {
+    static show(target, element) {
         const elm = this.get();
         elm.classList.remove('hidden');
         elm.style.opacity = '1';
-
-        const list = MA.createElement('div',{className:'link-list'},{});
-
-        data.forEach(itm => {
-            // html += `<div class="item-link p-2"><a href="#" class="d-block">item${itm}yo!</a></div>`;
-            const listItem = MA.createDiv('list-item',`
-                <a href="#" class="d-flex item-link">
-                  <i class="fs-200 ${itm.icon} p-3 op-025" style="text-align:center;width:5rem"></i>
-                  <div class="flex-grow py-3 pr-4">
-                    <div class="as-link">${itm.title}</div>
-                    <div class="subtext-2">${itm.subTitle}</div>
-                  </div>
-                </a>
-            `);
-            list.appendChild(listItem);
-        });
-
-        elm.innerHTML = '';
-        elm.appendChild(list);
-        setTimeout(()=>{}, 0);
+        if (elm.childNodes.length) {
+            this.resizeObserver.unobserve(elm.firstChild);
+            this.temporary.appendChild(elm.firstChild);
+        }
+        element.fooo = () => MA.moveOver(elm, target, 'down');
+        elm.appendChild(element);
+        this.resizeObserver.observe(element);
         MA.moveOver(elm, target, 'down');
     }
 }

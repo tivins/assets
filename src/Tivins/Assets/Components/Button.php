@@ -7,7 +7,11 @@ use Tivins\Core\StrUtil;
 
 class Button
 {
-    private Str    $label;
+    private string|Str $label = '';
+
+    /**
+     * @var string Title attribute
+     */
     private string $title  = '';
     private string $url  = '';
     private ?Icon  $icon = null;
@@ -15,6 +19,7 @@ class Button
     private array $classes = [];
     /** @var array<string,string> */
     private array $dataAttrs = [];
+    private bool $dropDown = false;
 
     public function __toString(): string
     {
@@ -30,15 +35,23 @@ class Button
         foreach ($this->dataAttrs as $key => $value) {
             $attrs .= ' data-' . $key . '="' . StrUtil::html($value) . '"';
         }
-        return "<$tag$attrs>$this->icon$this->label</$tag>";
+        //<i class='ml-1 fs-80 muted-2 fa fa-angle-down'></i>
+        $dd = '';
+        if ($this->dropDown) {
+            $dd = new Icon('caret-down',margin: 'none', classes: ['ml-1' ,'fs-80 muted-2']);
+        }
+        return "<$tag$attrs>$this->icon$this->label$dd</$tag>";
     }
 
-    public function setLabel(Str $label): static
+    public function setLabel(Str|string $label): static
     {
-        $this->label = $label;
+        $this->label = is_string($label) ? StrUtil::html($label) : $label;
         return $this;
     }
 
+    /**
+     * Set title attribute
+     */
     public function setTitle(string $title): Button
     {
         $this->title = $title;
@@ -75,14 +88,23 @@ class Button
         return $this;
     }
 
+    public function setDropDown(bool $dropDown): Button
+    {
+        $this->dropDown = $dropDown;
+        return $this;
+    }
+
     // --------------------------------
     // Static predefined configurations
     // --------------------------------
 
+    public static function new(): static {
+        return (new static());
+    }
     public static function newGhost(): static {
-        return (new static())->setClasses('ghost');
+        return (new static())->setClasses('button ghost');
     }
     public static function newLink(): static {
-        return (new static())->setClasses('link');
+        return (new static())->setClasses('button link');
     }
 }

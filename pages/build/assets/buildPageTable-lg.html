@@ -13,220 +13,292 @@
     <script type="module" src="/assets/js/default.js"></script>
   </head>
   <body class="">
-    <div class="container-lg px-3 my-5"><div class="d-flex flex-align my-4">
+    <div class="container-lg px-3 my-5">
+        <div class="d-flex flex-align my-3 my-md-4">
+            <a href="#" class="p button ghost pop-trigger mr visible-sm" data-target=".menu-mobile"><i class="fa fa-bars"></i></a>
             <h1 class="h1-icon flex-grow my-0">
               <a href="/assets/" class="icon" title="Assets!"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.9 144.6c15.34-26.38 8.372-62.41-16.96-87.62c-25.21-25.32-61.22-32.26-87.61-16.95c-9.044 5.218-27.15 3.702-48.08 1.968c-50.78-4.327-127.4-10.73-207.6 69.56C-.6501 191.9 5.801 268.5 10.07 319.3c1.749 20.96 3.28 39.07-1.984 48.08c-15.35 26.4-8.357 62.45 16.92 87.57c16.26 16.37 37.05 25.09 56.83 25.09c10.89 0 21.46-2.64 30.83-8.092c9.013-5.249 27.12-3.718 48.08-1.968c50.69 4.233 127.4 10.7 207.6-69.56c80.27-80.28 73.82-156.9 69.56-207.7C436.2 171.8 434.7 153.7 439.9 144.6zM398.4 120.5c-12.87 22.09-10.67 48.41-8.326 76.25c4.155 49.3 8.841 105.2-55.67 169.7c-64.53 64.49-120.5 59.78-169.7 55.68c-27.85-2.328-54.12-4.53-76.26 8.311c-6.139 3.64-19.17 1.031-29.58-9.451c-10.39-10.33-12.95-23.35-9.372-29.49c12.87-22.09 10.67-48.41 8.326-76.25C53.72 265.1 49.04 210.1 113.5 145.5c48.27-48.27 91.71-57.8 131.2-57.8c13.28 0 26.12 1.078 38.52 2.125c27.9 2.359 54.17 4.561 76.26-8.311c6.123-3.577 19.18-1.031 29.49 9.357C399.4 101.2 402 114.4 398.4 120.5zM239.5 124.1c2.156 8.561-3.062 17.25-11.62 19.43C183.6 154.7 122.7 215.6 111.6 259.9C109.7 267.1 103.2 271.1 96.05 271.1c-1.281 0-2.593-.1562-3.905-.4687C83.58 269.3 78.4 260.6 80.52 252.1C94.67 195.8 163.8 126.7 220.1 112.5C228.8 110.4 237.3 115.5 239.5 124.1z"/></svg></a>
-              <div class="flex-grow">buildPageTable</div>
+              <div class="flex-grow visible-md">buildPageTable</div>
             </h1>
-            <div>
-              <label class=" button ghost pr-1 py-1 mr-1" style="cursor: text;padding:.5rem;">
+              <label class="visible-md button ghost pr-1 py-1 mr-1" title="Search on site" style="cursor: text;padding:.5rem;">
                   <input type="search" placeholder="Search" class="no-background no-borders"/><i class="fa fa-fw fa-search"></i>
               </label>
+              <button title="Configuration" class="button ghost mr-1 pop-trigger p-2" data-target=".pop-menu-admin"><i class="fa fa-fw fa-cog"></i><i class="fa fa-caret-down op-05 ml-1 fs-80 muted-2"></i></button><button title="User options" class="button ghost pop-trigger p-2" data-target=".pop-menu-user"><i class="fa-regular fa-fw fa-user"></i>Nulla<i class="fa fa-caret-down op-05 ml-1 fs-80 muted-2"></i></button>
+            <!-- onclick="event.preventDefault();document.querySelector('.dialog').classList.remove('closed')" -->
+          </div><div class="link-list link-list-sm pop-menu-admin hidden"><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="" class="d-flex item-link w-100 toggle-theme">
+          <i class="icon  fa fa-moon p-3 op-025 text-center"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">Theme</span>
+            <div class="subtext-2">submenu1</div>
             </div>
-            <a href="#" class="button ghost" title="admin"><i class="fa fa-fw fa-cog"></i></a>
-            <a href="#" class="button ghost toggle-theme" title="Set dark mode"><i class="fa-regular fa-fw fa-moon"></i></a>
-            <a href="#" class="button ghost" onclick="event.preventDefault();document.querySelector('.dialog').classList.remove('closed')"><i class="fa fa-fw fa-user"></i></a>
-          </div><h2>Sales</h2>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="#" class="d-flex item-link w-100 ">
+          <i class="icon  fa fa-chess p-3 op-025 text-center"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">menu1</span>
+            <div class="subtext-2">submenu1</div>
+            </div>
+        </a>
+        </div></div><div class="link-list link-list-sm pop-menu-user hidden"><div class="list-item-separator"><span class="fw-light">Signed in as</span> Mauris Turpis</div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="#" class="d-flex item-link w-100 ">
+          <i class="icon  fa fa-moon p-3 op-025 text-center"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">Profile</span>
+            <div class="subtext-2">submenu1</div>
+            </div>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="/assets/user-settings.html" class="d-flex item-link w-100 ">
+          <i class="icon  fa fa-user-gear p-3 op-025 text-center"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">Settings</span>
+            <div class="subtext-2">submenu1</div>
+            </div>
+        </a>
+        </div><div class="list-item">
+        <!-- <a href="#dd" class="p-3"><i class="fa-regular fa-minus-square"></i></a> -->
+        <a href="#" class="d-flex item-link w-100 ">
+          <i class="icon  fa fa-power-off p-3 op-025 text-center"></i>
+          <div class="flex-grow py-3 pr-4">
+            
+            <span class="as-link">Log out</span>
+            <div class="subtext-2">submenu1</div>
+            </div>
+        </a>
+        </div></div><h1 class="visible-sm">buildPageTable</h1><div class="menu-mobile hidden"><input><hr></div><h2>Sales</h2>
   <table class="table">
     <thead>
       <tr>
+        <th style="width: 1rem"></th>
         <th>Date</th>
-        <th>Type</th>
         <th>Name</th>
         <th>Company</th>
         <th>Interventions</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>00:16:38<div class="subtext ">August 26th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Feugiat Lobortis <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Ornare Convallis</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>2,963</td>
-        <td>200</td>
-      </tr><tr>
-        <td>21:32:57<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Scelerisque Massa</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,464</td>
-        <td>8676</td>
-      </tr><tr>
-        <td>19:51:25<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Faucibus Mattis</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>7,738</td>
-        <td>9852</td>
-      </tr><tr>
-        <td>19:03:58<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Nullam Purus <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Condimentum Fringilla</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>1,579</td>
-        <td>6655</td>
-      </tr><tr>
-        <td>18:33:44<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Ullamcorper Eros <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Molestie Nisi</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,682</td>
-        <td>7857</td>
-      </tr><tr>
-        <td>16:05:54<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Donec Vulputate <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Commodo Malesuada</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>599</td>
-        <td>4182</td>
-      </tr><tr>
-        <td>14:11:33<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Aliquet Volutpat</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>224</td>
-        <td>5032</td>
-      </tr><tr>
-        <td>11:52:27<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Maecenas Congue</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,906</td>
-        <td>1129</td>
-      </tr><tr>
-        <td>11:26:54<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Convallis Condimentum <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Lobortis</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,258</td>
-        <td>8282</td>
-      </tr><tr>
-        <td>09:15:00<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Sociosqu Litora</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,463</td>
-        <td>4894</td>
-      </tr><tr>
-        <td>09:10:03<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Lacus Imperdiet <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Nisl Convallis</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,537</td>
-        <td>4689</td>
-      </tr><tr>
-        <td>08:18:18<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Purus Tincidunt</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>678</td>
-        <td>9356</td>
-      </tr><tr>
-        <td>08:18:05<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Dictum Purus <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Magna Dapibus</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>5,519</td>
-        <td>6424</td>
-      </tr><tr>
-        <td>07:00:13<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Integer Tincidunt <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Proin Lacinia</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>421</td>
-        <td>2972</td>
-      </tr><tr>
-        <td>05:41:33<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Morbi Pellentesque</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>4,737</td>
-        <td>7941</td>
-      </tr><tr>
-        <td>03:27:07<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Felis Dignissim</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,667</td>
-        <td>7817</td>
-      </tr><tr>
-        <td>02:38:18<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Vivamus Turpis</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,599</td>
-        <td>2739</td>
-      </tr><tr>
-        <td>01:05:57<div class="subtext ">August 25th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Fermentum Varius <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Magna Sollicitudin</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,905</td>
-        <td>2582</td>
-      </tr><tr>
-        <td>23:25:01<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Luctus Tincidunt</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>2,896</td>
-        <td>910</td>
-      </tr><tr>
-        <td>23:03:38<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Nullam Pellentesque</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>8,246</td>
-        <td>2820</td>
-      </tr><tr>
-        <td>22:32:03<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Integer Tincidunt <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Interdum Varius</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>1,437</td>
-        <td>2430</td>
-      </tr><tr>
-        <td>19:46:51<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Luctus Volutpat</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>878</td>
-        <td>2078</td>
-      </tr><tr>
-        <td>19:13:23<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Magna Tincidunt</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,719</td>
-        <td>8020</td>
-      </tr><tr>
-        <td>16:51:57<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Tincidunt Dignissim</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>5,027</td>
-        <td>8407</td>
-      </tr><tr>
-        <td>15:34:56<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Tristique Venenatis</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,142</td>
-        <td>9087</td>
-      </tr><tr>
-        <td>14:16:08<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-user mr-1 op-05"></i></td><td>Magna Consectetur <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-building mr-1 op-05"></i>Pellentesque Elementum</div></td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,066</td>
-        <td>4175</td>
-      </tr><tr>
-        <td>13:25:13<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Tincidunt Pharetra</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>4,716</td>
-        <td>6960</td>
-      </tr><tr>
-        <td>11:11:00<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Lectus Ultrices</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>2,931</td>
-        <td>2683</td>
-      </tr><tr>
-        <td>10:01:23<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Felis Libero</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,268</td>
-        <td>1359</td>
-      </tr><tr>
-        <td>08:26:49<div class="subtext ">August 24th,2008</div></td>
-        <td>
-          <i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i></td><td>Tempor Erat</td>
-        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>115</td>
-        <td>3302</td>
+    <tr class="">
+        <td></td>
+        <td>02:18:36<div class="subtext ">July 7th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Proin Dignissim<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>tempor-volutpat@luctus-mollis.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,446</td>
+        <td>5646</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>01:21:05<div class="subtext ">July 7th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Dapibus Fermentum<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>dignissim-ante@interdum-faucibus.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>2,054</td>
+        <td>2990</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>23:19:37<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Pulvinar Varius<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>libero-molestie@fringilla-pretium.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,627</td>
+        <td>5476</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>23:08:25<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Morbi Fringilla<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>suspendisse-purus@dolor-posuere.com</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>1,307</td>
+        <td>8887</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>22:13:59<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Amet Consectetur<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>enim-molestie@quisque-dapibus.org</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,844</td>
+        <td>991</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>20:06:34<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Nulla Facilisi<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>potenti@congue-lorem.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,532</td>
+        <td>7843</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>17:48:01<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Suspendisse Potenti <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Vitae Tristique</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>donec-luctus@porta-turpis.org</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,937</td>
+        <td>817</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>17:42:55<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Mauris Elementum<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>proin-vestibulum@porta-nibh.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>5,939</td>
+        <td>8185</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>15:37:52<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Condimentum Purus<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>maecenas-mattis@tristique-dolor.com</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>1,449</td>
+        <td>6898</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>13:22:09<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Mollis<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>tellus-consequat@donec-rutrum.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,642</td>
+        <td>3791</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>11:07:56<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Risus Condimentum<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>purus-tincidunt@varius-risus.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,510</td>
+        <td>4577</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>09:46:56<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Suspendisse Maximus<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>mauris-vehicula@turpis-lacus.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>8,565</td>
+        <td>16</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>07:30:14<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Ullamcorper Convallis<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>proin-ligula@suspendisse-congue.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>5,793</td>
+        <td>4060</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>05:03:06<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Nullam Facilisis <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Magna Sapien</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>malesuada-auctor@aenean-varius.org</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,784</td>
+        <td>6137</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>03:16:02<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Vehicula Ultricies<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>sagittis-eleifend@nullam-dictum.com</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,848</td>
+        <td>8790</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>01:11:12<div class="subtext ">July 6th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Quam<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>libero-pharetra@aliquam-tincidunt.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,761</td>
+        <td>4617</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>22:55:22<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Felis<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>ullamcorper-eros@ligula-varius.com</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,468</td>
+        <td>8260</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>22:45:54<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Quisque Mauris<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>sodales-mauris@curabitur-maximus.org</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>7,217</td>
+        <td>4071</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>21:26:50<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Semper Facilisis<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>consequat-porttitor@mauris-ligula.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>1,470</td>
+        <td>5371</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>19:12:24<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Torquent Conubia<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>pulvinar-dictum@semper-facilisis.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,889</td>
+        <td>4309</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>18:09:10<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Donec Faucibus<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>tincidunt-velit@donec-imperdiet.org</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>4,316</td>
+        <td>2603</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>18:02:03<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Phasellus Maximus <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Pulvinar Purus</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>convallis-mattis@magna-tincidunt.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>3,453</td>
+        <td>8956</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>17:31:58<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Magna Faucibus <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Praesent Ligula</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>vehicula-ultricies@ultrices-luctus.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>1,702</td>
+        <td>7125</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>15:20:18<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Facilisis Massa <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Iaculis Libero</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>varius-tempor@justo.org</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>2,252</td>
+        <td>7479</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>13:28:20<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Congue Amet<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>pellentesque-vestibulum@pulvinar.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>8,303</td>
+        <td>6358</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>12:34:46<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Morbi Justo <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Elementum Justo</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>diam-gravida@varius-purus.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>6,400</td>
+        <td>3791</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>12:29:57<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Tempor Faucibus<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>imperdiet-felis@posuere-cubilia.me</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>647</td>
+        <td>5337</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="">
+        <td></td>
+        <td>11:09:03<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Consequat Porttitor <span class="tag small-caps info">pro</span><div class="subtext "><i class="fa fa-fw fa-building mr-1 op-05"></i>Mauris Justo</div><div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>molestie-ligula@fringilla-lacinia.com</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>7,747</td>
+        <td>6874</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>09:16:09<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-user mr-1 op-05"></i>Mollis<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>risus@semper-laoreet.io</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>9,481</td>
+        <td>7007</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
+      </tr><tr class="checked">
+        <td></td>
+        <td>06:39:26<div class="subtext ">July 5th,2013</div></td>
+      <td><i class="fa fa-fw fa-cart-shopping mr-1 op-05"></i>Interdum Faucibus<div class="subtext-2 "><i class="fa-regular fa-fw fa-envelope mr-1 op-05"></i>class-aptent@erat-commodo.com</div></td>
+        <td><i class="fa fa-dollar-sign mr-1 op-05"></i>5,260</td>
+        <td>7603</td>
+        <td><button class="info p-2"><i class="fa fa-list mr-1 op-05"></i></button></td>
       </tr></tbody>
-
-  </table>
-            <div class="py-4 d-flex fs-80">
-                <a href="/assets/" class="flex-grow text-center p-2">
-                    Assets!
-                </a>
-                <a href="/assets/legal.html" class="flex-grow text-center p-2">Terms &amp; Privacy</a>
-            </div>
-        </div>
+  </table><div class="box mt p-1"><button class="button ghost">1</button><button class="button ghost">2</button><button class="button ghost active">3</button><button class="button ghost">4</button><button class="button ghost">5</button><button class="button ghost disabled">&hellip;</button><button class="button ghost">6</button></div><div class="py-4 d-flex flex-center fs-80"><a href="/assets/" class="button ghost"><i class="fa-regular fa-lemon mr-1 op-05"></i>Assets!</a><a href="/assets/legal.html" class="button link">Terms &amp; Privacy</a><a href="/assets/docs/" class="button link">Help &amp; Docs</a><a href="/assets/contact.html" class="button link">Contact</a></div></div>
   </body>
 </html>

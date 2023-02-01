@@ -2,16 +2,21 @@
 
 namespace Tivins\Assets;
 
-use Tivins\Core\StrUtil;
-
 class LinkList
 {
     private array $items   = [];
     private array $classes = [];
-
-    public function push(ListItemBase $item): static
+    private Size $size;
+    
+    public function __construct(Size $size = Size::LG)
     {
-        $this->items[] = $item;
+        $this->size = $size;
+    }
+
+
+    public function push(ListItemBase ...$item): static
+    {
+        $this->items = array_merge($this->items, $item);
         return $this;
     }
 
@@ -26,7 +31,7 @@ class LinkList
         /**
          * Calls iteratively the __toString() on each items.
          */
-        return '<div class="link-list ' . join(' ', $this->classes) . '">' . join($this->items) . '</div>';
+        return '<div class="link-list ' . $this->size->suffix('link-list') . ' ' . join(' ', $this->classes) . '">' . join($this->items) . '</div>';
     }
 
 }

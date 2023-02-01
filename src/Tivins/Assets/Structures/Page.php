@@ -4,6 +4,8 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\Components\Button;
+use Tivins\Assets\Components\Icon;
 use Tivins\Assets\HTMLStr;
 use Tivins\Assets\Size;
 use Tivins\Assets\Str;
@@ -16,6 +18,12 @@ class Page
     protected string $title = 'Modal page';
     protected string $content = '';
     protected Size $containerWidth = Size::LG;
+
+    public function __construct(string $title = '', Size $containerWidth = Size::LG)
+    {
+        $this->title = $title;
+        $this->containerWidth = $containerWidth;
+    }
 
     public function setTitle(string $title): static
     {
@@ -57,14 +65,16 @@ class Page
         );
     }
 
-    public function getFooter(): string {
-        return '
-            <div class="py-4 d-flex fs-80">
-                <a href="/assets/" class="flex-grow text-center p-2">
-                    '.new Str(Website::getTitle()).'
-                </a>
-                <a href="/assets/legal.html" class="flex-grow text-center p-2">Terms &amp; Privacy</a>
-            </div>
-        ';
+    public function getFooter(): string
+    {
+        return Components::div("py-4 d-flex flex-center fs-80",
+            Button::newGhost()
+                ->setUrl('/assets/')
+                ->setLabel(new Str(Website::getTitle()))
+                ->setIcon(new Icon('lemon','regular'))
+            . Components\Button::newLink()->setUrl('/assets/legal.html')->setLabel(new Str('Terms & Privacy'))
+            . ($this->containerWidth != Size::SM ? Components\Button::newLink()->setUrl('/assets/docs/')->setLabel(new Str('Help & Docs')) : '')
+            . Components\Button::newLink()->setUrl('/assets/contact.html')->setLabel(new Str('Contact'))
+        );
     }
 }

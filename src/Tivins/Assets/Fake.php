@@ -92,7 +92,7 @@ class Fake
     }
 
     static public function anyChance(float $probability = 50): bool {
-        return rand(0,99) > $probability;
+        return rand(0,99) < $probability;
     }
 
     static public function anyOf(array $items): mixed {
@@ -107,5 +107,13 @@ class Fake
     {
         if (isset(self::$paragraphs)) return;
         self::$paragraphs = file(__file__ . '.data');
+    }
+
+    public static function email(): string
+    {
+        return str_replace(' ','-',strtolower(self::name()))
+            . '@'
+            . str_replace(' ','-',strtolower(self::name()))
+            . '.' . self::anyOf(['com','org','io','me']);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Tivins\Assets;
 
-use Tivins\Assets\Components\HTMLElement;
-
 class MicroLayout
 {
     /**
@@ -14,6 +12,10 @@ class MicroLayout
      * @var string[]
      */
     public array $columnContent = [];
+    /**
+     * @var string[]
+     */
+    public array $columnClasses = [];
     public Size  $gutterSize    = Size::NONE;
     public Size  $screenSize    = Size::MD;
 
@@ -38,6 +40,10 @@ class MicroLayout
     }
 
 
+    public function setColumnClasses(int $index, string ...$classes): static {
+        $this->columnClasses[$index] = $classes;
+        return $this;
+    }
     public function setColumnContent(int $index, string $content): static
     {
         $this->columnContent[$index] = $content;
@@ -46,13 +52,9 @@ class MicroLayout
 
     public function __toString(): string
     {
-        $html = '';/*
-        . '<div class="col-2">' . $col1 . '</div>'
-    . '<div class="col-8">' . $col2 . '</div>'
-    . '<div class="col-2">' . $col3 . '</div>';
-        */
+        $html = '';
         foreach ($this->columnConfig as $key => $size) {
-            $html .= Components::div('col-' . $size, $this->columnContent[$key]);
+            $html .= Components::div('col-' . $size . ' ' . join($this->columnClasses[$key] ?? []), $this->columnContent[$key]);
         }
         $classes = [
             $this->screenSize->suffix('d-flex'),

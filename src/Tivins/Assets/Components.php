@@ -4,6 +4,7 @@ namespace Tivins\Assets;
 
 use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\HTMLElement;
+use Tivins\Assets\Components\Icon;
 use Tivins\Core\StrUtil;
 
 class Components
@@ -84,6 +85,19 @@ class Components
         return '<a href="#" class="header-item close-box-btn" 
             title="'.StrUtil::html($tooltip).'"><i class="fa fa-fw fa-times"></i></a>';
     }
+    public static function getMoreLink2(
+        string $trigger ,
+        string $tooltip = 'More',
+        string $icon = 'fa fa-ellipsis-h',
+    ): string
+    {
+        return '<a href="#" class="header-item pop-trigger"'
+            . ' data-target="'.$trigger.'"'
+            . ' title="'.StrUtil::html($tooltip).'"'
+            . '>'
+            . '<i class="fa-fw '.$icon.'"></i>'
+            . '</a>';
+    }
     public static function getMoreLink(
         string $tooltip = 'More',
         string $icon = 'fa fa-ellipsis-h',
@@ -123,20 +137,54 @@ class Components
         return $box;
     }
     public static function getHeaderBar(string $title): string {
-        return '<div class="d-flex flex-align my-4">
+        return '
+        <div class="d-flex flex-align my-3 my-md-4">
+            <a href="#" class="p button ghost pop-trigger mr visible-sm" data-target=".menu-mobile"><i class="fa fa-bars"></i></a>
             <h1 class="h1-icon flex-grow my-0">
               <a href="/assets/" class="icon" title="'. new Str(Website::getTitle()).'">'. Website::getIcon().'</a>
-              <div class="flex-grow">'.new Str($title).'</div>
+              <div class="flex-grow visible-md">'.new Str($title).'</div>
             </h1>
-            <div>
-              <label class=" button ghost pr-1 py-1 mr-1" style="cursor: text;padding:.5rem;">
+              <label class="visible-md button ghost pr-1 py-1 mr-1" title="Search on site" style="cursor: text;padding:.5rem;">
                   <input type="search" placeholder="Search" class="no-background no-borders"/><i class="fa fa-fw fa-search"></i>
               </label>
-            </div>
-            <a href="#" class="button ghost" title="admin"><i class="fa fa-fw fa-cog"></i></a>
-            <a href="#" class="button ghost toggle-theme" title="Set dark mode"><i class="fa-regular fa-fw fa-moon"></i></a>
-            <a href="#" class="button ghost" onclick="event.preventDefault();document.querySelector(\'.dialog\').classList.remove(\'closed\')"><i class="fa fa-fw fa-user"></i></a>
-          </div>';
+              '
+            . Button::newGhost()
+                ->setDataAttr('target', '.pop-menu-admin')
+                ->setTitle('Configuration')
+                ->setIcon(new Icon('cog', mutedLevel: 0, fixedWidth: true, margin: 'none'))
+                ->addClasses('mr-1 pop-trigger p-2')
+                ->setDropDown(true)
+            // . Button::newGhost()
+            //     ->setTitle('Set dark mode')
+            //     ->setIcon(new Icon('moon', 'regular', mutedLevel: 0, fixedWidth: true, margin: 'none'))
+            //     ->addClasses('toggle-theme')
+            . Button::newGhost()
+                ->setDataAttr('target', '.pop-menu-user')
+                ->setTitle('User options')
+                ->setIcon(new Icon('user', 'regular', mutedLevel: 0, fixedWidth: true, margin: 'none'))
+                ->addClasses('pop-trigger p-2')
+                ->setLabel(Fake::name())
+                // ->setLabel(new HTMLStr('<img src="https://i.stack.imgur.com/2EeK7.png" width="24" style="display: inline-block" />'))
+                ->setDropDown(true)
+            .'
+            <!-- onclick="event.preventDefault();document.querySelector(\'.dialog\').classList.remove(\'closed\')" -->
+          </div>'
+            .(new LinkList(Size::SM))
+                ->addClasses('pop-menu-admin hidden')
+                ->push(
+                new ListItem('Theme','submenu1','', 'fa fa-moon', classes: 'toggle-theme'),
+                new ListItem('menu1','submenu1','#'),
+            )
+            .(new LinkList(Size::SM))
+                ->addClasses('pop-menu-user hidden')
+                ->push(
+                    new ListSeparator('<span class="fw-light">Signed in as</span> '.Fake::name()),
+                new ListItem('Profile','submenu1','#', 'fa fa-moon'),
+                new ListItem('Settings','submenu1','/assets/user-settings.html', 'fa fa-user-gear'),
+                new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
+            )
+            . '<h1 class="visible-sm">' . new Str($title) . '</h1>'
+            .'<div class="menu-mobile hidden"><input><hr></div>';
     }
 
     /**
