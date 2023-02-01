@@ -2,7 +2,6 @@
 
 namespace Tivins\Assets\Structures;
 
-use Tivins\Assets\Box;
 use Tivins\Assets\Components;
 use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\Icon;
@@ -11,7 +10,6 @@ use Tivins\Assets\Size;
 use Tivins\Assets\Str;
 use Tivins\Assets\Template;
 use Tivins\Assets\Website;
-use Tivins\Core\StrUtil;
 
 class Page
 {
@@ -36,10 +34,6 @@ class Page
         return $this;
     }
 
-    /**
-     * @param string $containerWidth 'md', 'lg', 'xl'
-     * @return Page
-     */
     public function setContainerWidth(Size $containerWidth): Page
     {
         $this->containerWidth = $containerWidth;
@@ -48,12 +42,11 @@ class Page
 
     public function __toString(): string
     {
-
         $cookie = Components::boxMessage(new HTMLStr('
                   <h3 class="mt-0 mb-0">Cookies</h3>
                   <div class="my-1">Ce site n\'utilise que des cookies essentiels.</div>
                   '
-        ), 'warning', 'sticky-top top-2 mt-2', true
+        ), 'warning', 'sticky-top top-2 mt-2'
         );
         $cookie = '';
         return Template::tpl($this->title, Template::container(
@@ -61,7 +54,8 @@ class Page
             . Components::getHeaderBar($this->title)
             . $this->content
             . $this->getFooter()
-        , $this->containerWidth), true
+            , $this->containerWidth
+        ), true
         );
     }
 

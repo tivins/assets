@@ -3,7 +3,6 @@
 namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Size;
-use Tivins\Assets\Str;
 use Tivins\Assets\Template;
 use Tivins\Assets\Website;
 use Tivins\Core\StrUtil;

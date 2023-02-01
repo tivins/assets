@@ -100,6 +100,13 @@ a.simi-link{color:inherit;text-decoration: none;}
 
 .focus-width-8:focus{width: 8rem;}
 
+.header-bar {
+    /*#position: sticky;*/
+/*    top: 0;*/
+    background: var(--background-0);
+    z-index: 3;
+}
+
 .modal-icon svg {
     fill: #0086B3;
     height: 64px;
@@ -116,6 +123,7 @@ a.simi-link{color:inherit;text-decoration: none;}
 .h1-icon:hover svg {
     fill: #08c;
 }
+
 /* --- Borders --- */
 .text-danger{color:#900}
 

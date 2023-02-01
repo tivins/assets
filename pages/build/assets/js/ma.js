@@ -44,8 +44,9 @@ export class MA {
         for (const z in attrs) obj.setAttribute(z, attrs[z]);
         return obj;
     }
-    static createDiv(className,html) {
-        return this.createElement('div',{className:className,innerHTML:html},{});
+
+    static createDiv(className, html) {
+        return this.createElement('div', {className: className, innerHTML: html}, {});
     }
 
     /**
