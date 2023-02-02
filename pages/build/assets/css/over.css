@@ -484,15 +484,14 @@ a.button.sm, button.sm {
     /*box-shadow: inset 0 0 0 .5rem #cdf;*/
     background: linear-gradient(90deg, #eee 0%, #fff 10%, #fff 50%, #eee 100%);;
     color:#08c;
-
 }
-.table tr > td:first-of-type:after {
+.table.select tr > td:first-of-type:after {
     font-family: "Font Awesome 6 Free";
     font-weight: 300;
     content: "\f111";
     color: #ccc;
 }
-.table tr.checked > td:first-of-type:after {
+.table.select tr.checked > td:first-of-type:after {
     color: #666;
     content: "\f058";
 }

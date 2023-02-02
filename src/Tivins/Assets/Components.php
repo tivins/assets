@@ -191,7 +191,7 @@ class Components
                     new ListItem('Profile','submenu1','#', 'fa fa-moon'),
                     new ListItem('Settings','submenu1','/assets/user-settings.html', 'fa fa-user-gear'),
                     new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
-                ).'<hr></div>';
+                ).'</div>';
     }
 
     /**
