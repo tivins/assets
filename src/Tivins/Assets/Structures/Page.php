@@ -16,6 +16,7 @@ class Page
     protected string $title = 'Modal page';
     protected string $content = '';
     protected Size $containerWidth = Size::LG;
+    protected array $footerButtons = [];
 
     public function __construct(string $title = '', Size $containerWidth = Size::LG)
     {
@@ -63,12 +64,20 @@ class Page
     {
         return Components::div("py-4 d-flex flex-center fs-80",
             Button::newGhost()
-                ->setUrl('/assets/')
+                ->setUrl(Website::getRootURL())
                 ->setLabel(new Str(Website::getTitle()))
-                ->setIcon(new Icon('lemon','regular'))
+                ->setIcon(Website::getIcon())
             . Components\Button::newLink()->setUrl('/assets/legal.html')->setLabel(new Str('Terms & Privacy'))
-            . ($this->containerWidth != Size::SM ? Components\Button::newLink()->setUrl('/assets/docs/')->setLabel(new Str('Help & Docs')) : '')
+            . ($this->containerWidth != Size::SM ? Components\Button::newLink()->setUrl('/assets/docs/')->addClasses('visible-md')->setLabel(new Str('Help & Docs')) : '')
             . Components\Button::newLink()->setUrl('/assets/contact.html')->setLabel(new Str('Contact'))
+            . ($this->containerWidth != Size::SM
+                ? Components\Button::newLink()
+                    ->setUrl('/assets/docs/')
+                    ->addClasses('visible-md pop-trigger')
+                    ->setLabel(new Str('Follow us'))
+                    ->setDropUp()
+                    ->setDataAttr('target', '#')
+                : '')
         );
     }
 }

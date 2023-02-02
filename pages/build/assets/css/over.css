@@ -102,21 +102,25 @@ a.simi-link{color:inherit;text-decoration: none;}
     z-index: 3;
 }
 
+.website-icon svg {
+    fill: transparent;
+    color: #08c;
+}
+
+.modal-icon i {
+    font-size: 64px;
+}
 .modal-icon svg {
-    fill: #0086B3;
     height: 64px;
 }
+
 .h1-icon {
     display: flex;
 }
 .h1-icon svg {
     display: block;
-    fill: #069;
     width: 2rem;
     margin-right: 1rem;
-}
-.h1-icon:hover svg {
-    fill: #08c;
 }
 
 /* --- Borders --- */

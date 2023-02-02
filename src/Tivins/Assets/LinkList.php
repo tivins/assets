@@ -29,9 +29,13 @@ class LinkList
     public function __toString(): string
     {
         /**
+         * Add 'link-list' and 'link-list-sm' to class list,
+         */
+        $classes = array_merge($this->classes, ['link-list', $this->size->suffix('link-list')]);
+        /**
          * Calls iteratively the __toString() on each items.
          */
-        return '<div class="link-list ' . $this->size->suffix('link-list') . ' ' . join(' ', $this->classes) . '">' . join($this->items) . '</div>';
+        return Components::div($classes, join($this->items));
     }
 
 }

@@ -23,12 +23,9 @@
 }
 @media (min-width: 768px)
 {
-    .visible-sm {
-        display: none!important;
-    }
-    .visible-md {
-        display: block!important;
-    }
+    .visible-sm {display: none!important;}
+    .visible-md {display: block!important;}
+
     .w-100-sm {width: auto;}
 
     .d-flex-md { display:flex; }
@@ -55,18 +52,4 @@
     .pl-md-3{padding-left:1rem!important;}
     .pr-md-3{padding-right:1rem!important;}
     .my-md-4{margin-top:2rem!important;margin-bottom:2rem!important;}
-}
-
-@media (max-width: 768px) {
-    .menu-sm.menu-active {
-        display: block!important;
-        padding: 0 !important;
-        width: auto !important;
-        position: fixed;
-        top: 4.5rem;
-        left: 1rem;
-    }
-    .menu-sm.menu-active .box{
-        box-shadow: 0 5px 10px rgb(0 0 0 / 10%)!important;
-    }
 }

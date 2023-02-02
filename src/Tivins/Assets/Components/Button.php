@@ -19,7 +19,7 @@ class Button
     private array $classes = [];
     /** @var array<string,string> */
     private array $dataAttrs = [];
-    private bool $dropDown = false;
+    private string $dropDown = '';
 
     public function __toString(): string
     {
@@ -38,7 +38,7 @@ class Button
         //<i class='ml-1 fs-80 muted-2 fa fa-angle-down'></i>
         $dd = '';
         if ($this->dropDown) {
-            $dd = new Icon('caret-down',margin: 'none', classes: ['ml-1' ,'fs-80 muted-2']);
+            $dd = new Icon('caret-' . $this->dropDown,margin: 'none', classes: ['ml-1' ,'fs-80 muted-2']);
         }
         return "<$tag$attrs>$this->icon$this->label$dd</$tag>";
     }
@@ -88,9 +88,14 @@ class Button
         return $this;
     }
 
-    public function setDropDown(bool $dropDown): Button
+    public function setDropDown(): Button
     {
-        $this->dropDown = $dropDown;
+        $this->dropDown = 'down';
+        return $this;
+    }
+    public function setDropUp(): Button
+    {
+        $this->dropDown = 'up';
         return $this;
     }
 

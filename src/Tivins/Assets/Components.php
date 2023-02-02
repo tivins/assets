@@ -141,13 +141,17 @@ class Components
         <div class="d-flex flex-align my-3 header-bar">
             <a href="#" class="p button ghost pop-trigger mr visible-sm" data-target=".menu-mobile"><i class="fa fa-bars"></i></a>
             <h1 class="h1-icon flex-grow my-0">
-              <a href="/assets/" class="icon" title="'. new Str(Website::getTitle()).'">'. Website::getIcon().'</a>
+              <a href="/assets/" class="website-icon" title="'. new Str(Website::getTitle()).'">'. Website::getIcon().'</a>
               <span class="flex-grow visible-md">'.new Str($title).'</span>
             </h1>
               <label class="visible-md button ghost pr-1 py-1 mr-1" title="Search on site" style="cursor: text;padding:.5rem;">
                   <input type="search" placeholder="Search" class="no-background no-borders"/><i class="fa fa-fw fa-search"></i>
               </label>
               '
+            . Button::newGhost()
+                ->setTitle('Search')
+                ->setIcon(new Icon('search', mutedLevel: 0, fixedWidth: true, margin: 'none'))
+                ->addClasses('p-2 visible-sm')
             . Button::newGhost()
                 ->setDataAttr('target', '.pop-menu-admin')
                 ->setTitle('Configuration')
@@ -184,7 +188,7 @@ class Components
                     new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
                 )
             . '<h1 class="visible-sm">' . new Str($title) . '</h1>'
-            . '<div class="menu-mobile hidden"><label class="d-block p b-bottom">search<input></label>'.(new LinkList(Size::SM))
+            . '<div class="menu-mobile hidden">'.(new LinkList(Size::SM))
                 ->addClasses('')
                 ->push(
                     new ListSeparator(new Icon('user', true).'<span class="fw-light">Signed in as</span> '.Fake::name()),

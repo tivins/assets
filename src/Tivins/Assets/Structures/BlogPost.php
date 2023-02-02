@@ -25,9 +25,9 @@ class BlogPost
         $this->authorName = Fake::name();
         $this->createdAt = Fake::timestamp();
         $this->tags[] = Fake::words(2);
-        $this->tags[] = Fake::words(1);
+        $this->tags[] = Fake::words();
         $this->tags[] = Fake::words(2);
-        $this->tags[] = Fake::words(1);
+        $this->tags[] = Fake::words();
     }
 
     public function getAboutBox(): string
@@ -76,7 +76,7 @@ class BlogPost
                     ->setIcon(new Components\Icon('star', true, mutedLevel: 0) )
                     ->addClasses('flex-grow')
                     ->setTitle('Total of star')
-                    ->setLabel(new Str(number_format(Fake::number('dk'))))
+                    ->setLabel(new Str(number_format(Fake::number())))
                 . (Button::newGhost())
                     ->setIcon(new Components\Icon('heart', true, mutedLevel: 0) )
                     ->addClasses('flex-grow')
@@ -104,7 +104,7 @@ class BlogPost
                 (new CommentData(Fake::name(), Fake::sentence(), Fake::timestamp(), 3546))
                     ->setReplyOf(3456),
             );
-            $commentList->addComment($comment1);
+            $commentList->addComments($comment1);
         }
 
 
@@ -236,9 +236,9 @@ class BlogPost
           <h3>'.rtrim(Fake::sentence(),'.').'!</h3>
           <p>'.Fake::sentence(3).'</p>
           <ul>
-          <li>'.Fake::sentence(1).Components::subText(Fake::sentence(1, .2)).'</li>
-          <li>'.Fake::sentence(1).Components::subText(Fake::sentence(1, .5)).'</li>
-          <li>'.Fake::sentence(1).Components::subText(Fake::sentence(1, .7)).'</li>
+          <li>'.Fake::sentence().Components::subText(Fake::sentence(1, .2)).'</li>
+          <li>'.Fake::sentence().Components::subText(Fake::sentence(1, .5)).'</li>
+          <li>'.Fake::sentence().Components::subText(Fake::sentence(1, .7)).'</li>
           </ul>
           <p>'.Fake::paragraph().'</p>
           ';

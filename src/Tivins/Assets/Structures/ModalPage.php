@@ -19,9 +19,9 @@ class ModalPage extends Page
         return Template::tpl($this->title, Template::container(
             '
             <div class="text-center">
-                <div class="p-4 modal-icon">
+                <a href="/assets/" class="d-block p-4 website-icon modal-icon">
                   '.Website::getIcon().'
-                </div>
+                </a>
                 <h2 class="mt-0 mb-4 fw-light">' . StrUtil::html($this->title) . '</h2>
             </div>
             '
