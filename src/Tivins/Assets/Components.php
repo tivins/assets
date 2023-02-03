@@ -48,6 +48,7 @@ class Components
         return (new HTMLElement('div'))
             ->setClassList(...$classes)
             ->setContent(new HTMLStr($content));
+
         //return '<div class="' . $classes . '">' . $content . '</div>';
     }
 

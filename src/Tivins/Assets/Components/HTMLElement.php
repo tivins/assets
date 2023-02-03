@@ -22,7 +22,6 @@ class HTMLElement
     public function __toString(): string
     {
         $tag = '<' . $this->nodeName;
-        $tag .= ($this->selfClosedType == 2 ? '/' : '');
         foreach ($this->attributes as $attrName => $attrValue) {
             if (!preg_match('~[a-z\-]~', $attrName)) {
                 continue;
@@ -38,6 +37,7 @@ class HTMLElement
         foreach ($this->attributes as $key => $value) {
             $tag .= ' ' . $key . '="' . StrUtil::html($value) . '"';
         }
+        $tag .= ($this->selfClosedType == 2 ? '/' : '');
         $tag .= '>';
         if (!$this->selfClosedType) {
             if (!$this->content->empty()) {

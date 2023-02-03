@@ -24,8 +24,19 @@ class UserLoginPage
         $content = '';
 
         $frm = new Form();
-        $frm->addField((new FieldInput('text'))->setLabel('Email')->setPlaceholder('Type your email address')->setRequired());
-        $frm->addField((new FieldInput('password'))->setLabel('Password')->setPlaceholder('Password')->setRequired());
+        $frm->addField(
+            (new FieldInput('text'))
+                ->setLabel('Email')
+                ->setPlaceholder('Type your email address')
+                ->setRequired()
+        );
+        $frm->addField(
+            (new FieldInput('password'))
+                ->setLabel('Password')
+                ->setLabelButton(Components\Button::newLink()->setUrl('#')->setClasses('p-2 pr-0 fs-80')->setLabel(new Str("forgot password?")))
+                ->setPlaceholder('Password')
+                ->setRequired()
+        );
 
         $form = $frm . ' <hr>
     <form class="form p-3 mx-auto max-w-350px">

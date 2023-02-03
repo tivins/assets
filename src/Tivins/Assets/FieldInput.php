@@ -13,14 +13,24 @@ class FieldInput extends Field
         $this->type = $type;
     }
 
+    protected function getLabel(): string
+    {
+        $guid  = $this->getID();
+        $label = '<label for="' . $guid . '" class="flex-grow"><span class="form-label">' . new Str($this->label) . '</span></label>';
+        if (isset($this->labelButton)) {
+            return Components::div('d-flex', $label . $this->labelButton);
+        }
+        return $label;
+    }
+
     public function __toString(): string
     {
-        $guid = 'field-' . Util::getObjectID($this);
-
-        $html = '<label for="' . $guid . '">
-        <span class="form-label">' . new Str($this->label) . '</span>
-        <input id="' . $guid . '" type="' . $this->type . '" name="' . $this->name . '" required placeholder="' . $this->placeholder . '">
-        </label>';
-        return Components::div('field', $html);
+        $html = $this->getLabel();
+        $html .= '<input id="' . $this->getID() . '" type="' . $this->type . '"'
+            . ' name="' . $this->name . '"'
+            . ($this->required ? ' required' : '')
+            . ($this->placeholder ? ' placeholder="' . $this->placeholder . '"' : '')
+            . '>';
+        return $this->wrap($html);
     }
 }
