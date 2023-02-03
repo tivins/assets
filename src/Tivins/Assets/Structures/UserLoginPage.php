@@ -4,6 +4,8 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\FieldInput;
+use Tivins\Assets\Form;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\Str;
@@ -21,7 +23,11 @@ class UserLoginPage
     public function __toString(): string {
         $content = '';
 
-        $form = '
+        $frm = new Form();
+        $frm->addField((new FieldInput('text'))->setLabel('Email')->setPlaceholder('Type your email address')->setRequired());
+        $frm->addField((new FieldInput('password'))->setLabel('Password')->setPlaceholder('Password')->setRequired());
+
+        $form = $frm . ' <hr>
     <form class="form p-3 mx-auto max-w-350px">
     <div class="field">
       <label>
@@ -55,9 +61,9 @@ class UserLoginPage
             ->setBoxClasses('flex-grow')
             ->setFooterClasses('no-background')
             ->setFooter('<div class="flex-grow">
-            <a href="/assets/modal-user-register.html" class="p-3 d-block text-center w-100 simi-link">
-                New here? <span class="simi-react">Create an account</span>.
-            </a>
+                <a href="/assets/modal-user-register.html" class="p-3 d-block text-center w-100 simi-link">
+                    New here? <span class="simi-react">Create an account</span>.
+                </a>
             </div>
           ')
             ->addHeaderOption(Components::getMoreLink2('.pop-menu-login','Connect with...','fa fa-plus'))

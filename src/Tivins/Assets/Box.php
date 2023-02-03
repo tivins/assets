@@ -2,6 +2,8 @@
 
 namespace Tivins\Assets;
 
+use Tivins\Assets\Components\Button;
+use Tivins\Assets\Components\Icon;
 use Tivins\Core\StrUtil;
 
 class Box
@@ -23,6 +25,11 @@ class Box
     private array $footerClasses = [];
 
     private string $footer = '';
+
+    /**
+     * @var string
+     * @todo Change type Icon.
+     */
     private string $icon = '';
 
     public function setBackURL(string $url): static
@@ -54,6 +61,7 @@ class Box
         $this->title = $title;
         return $this;
     }
+
     public function setTitle(string $title): static
     {
         $this->title = StrUtil::html($title);
@@ -96,6 +104,7 @@ class Box
         $this->headerClasses = $classes;
         return $this;
     }
+
     public function setFooterClasses(string ...$classes): static
     {
         $this->footerClasses = $classes;
@@ -107,6 +116,7 @@ class Box
         $this->footer = $v;
         return $this;
     }
+
     public function addFooter(string $v): static
     {
         $this->footer .= $v;
@@ -116,12 +126,15 @@ class Box
     public function __toString(): string
     {
         $backLink = $this->backURL
-            ? '<a href="' . $this->backURL . '" class="header-item" title="back"><i class="fa fa-fw fa-chevron-left" aria-hidden="true"></i></a>'
+            ? (new Button())
+                ->setClasses('header-item')
+                ->setTitle('Back')
+                ->setUrl($this->backURL)
+                ->setIcon(new Icon('chevron-left', mutedLevel: 0, margin: 'none'))
             : '';
 
         $header = '';
         if ($this->title || !empty($this->rightLinks) || !empty($this->leftLinks) || $this->icon) {
-
             $header = '<div class="header ' . join(' ', $this->headerClasses) . '">'
                 . $backLink
                 . join($this->leftLinks)
@@ -133,10 +146,14 @@ class Box
                 . '</div>';
         }
 
-        return '<div class="box ' . join(' ', $this->boxClasses) . '">'
-            . $header
-            . '<div class="body ' . join(' ', $this->bodyClasses) . '">' . $this->body . '</div>'
-            . ($this->footer ? '<div class="footer fs-90 ' . join(' ', $this->footerClasses) . '">' . $this->footer . '</div>' : '')
-            . '</div>';
+        $boxClasses = array_merge(['box'], $this->boxClasses);
+        $bodyClasses = array_merge(['body'], $this->bodyClasses);
+        $footerClasses = array_merge(['footer', 'fs-90'], $this->footerClasses);
+        return Components::div(
+            $boxClasses,
+            $header
+            . Components::div($bodyClasses, $this->body)
+            . ($this->footer ? Components::div($footerClasses, $this->footer) : '')
+        );
     }
 }

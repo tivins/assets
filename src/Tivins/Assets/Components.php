@@ -121,7 +121,7 @@ class Components
         }
         $box= (new Box())
             ->setTitleHTML($title)
-            ->setBoxClasses(    'box-'.$status.' mb ' . $classes)
+            ->setBoxClasses('box-'.$status.' mb ' . $classes)
             ->setHeaderClasses('no-borders');
         if ($closable) {
             $box->addHeaderOption(Components::getCloseLink());
