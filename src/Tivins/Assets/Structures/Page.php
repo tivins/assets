@@ -103,9 +103,13 @@ class Page
             ->setBoxClasses('box-info my-2');
             */
 
-        $messages='';
-        $messages.=$cookie;
-        $messages.=$info;
+        $GDPR = $_COOKIE['GDPR'] ?? 'undefined';
+
+        $messages = '';
+        if ($GDPR == 'undefined') {
+            $messages .= $cookie;
+        }
+        $messages .= $info;
 
         // $cookie = '';
         return Template::tpl($this->title, Template::container(

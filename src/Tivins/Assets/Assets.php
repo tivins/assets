@@ -3,13 +3,14 @@
 namespace Tivins\Assets;
 
 use Tivins\Core\System\File;
+use Tivins\Core\System\FileSys;
 
 class Assets
 {
     public static function buildCSS(string $outfile): void
     {
-        $dir     = __dir__ . '/Front/css';
-        $sources = [
+        $dir        = __dir__ . '/Front/css';
+        $sources    = [
             $dir . '/font.css',
             $dir . '/normalize.css',
             $dir . '/layout.css',
@@ -29,6 +30,19 @@ class Assets
                 data: "/* $source */\n" . File::load($source) . "\n\n",
                 append: true
             );
+        }
+    }
+
+    public static function buildJS(string $outDir): void
+    {
+        $inDir    = __dir__ . '/Front/js';
+        $iterator = FileSys::getIterator($inDir);
+        foreach ($iterator as $file) {
+            if ($file->isDir()) {
+                continue;
+            }
+            $outFile = str_replace($inDir, $outDir, $file->getPathname());
+            File::save($outFile, File::load($file->getPathname()));
         }
     }
 }

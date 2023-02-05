@@ -142,7 +142,7 @@ class Components
         <div class="d-flex flex-align my-3 header-bar">
             <a href="#" class="p button ghost pop-trigger mr visible-sm" data-target=".menu-mobile"><i class="fa fa-bars"></i></a>
             <h1 class="h1-icon flex-grow my-0">
-              <a href="/assets/" class="website-icon mr-2" title="'. new Str(Website::getTitle()).'">'. Website::getIcon().'</a>
+              <a href="'.Website::getRootURL().'" class="website-icon mr-2" title="'. new Str(Website::getTitle()).'">'. Website::getIcon().'</a>
               <span class="flex-grow visible-md">'.new Str($title).'</span>
             </h1>
               <label class="visible-md button ghost pr-1 py-1 mr-1" title="Search on site" style="cursor: text;padding:.5rem;">
