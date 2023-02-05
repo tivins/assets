@@ -8,29 +8,29 @@ use Tivins\Core\StrUtil;
 
 class Box
 {
-    private ?string $backURL = '';
-    private string  $body    = '';
-    private Str|string  $title   = '';
+    protected ?string $backURL = '';
+    protected string  $body    = '';
+    protected Str|string  $title   = '';
     /** @var string[] */
-    private array $leftLinks = [];
+    protected array $leftLinks = [];
     /** @var string[] */
-    private array $rightLinks = [];
+    protected array $rightLinks = [];
     /** @var string[] */
-    private array $bodyClasses = [];
+    protected array $bodyClasses = [];
     /** @var string[] */
-    private array $boxClasses = ['mb'];
+    protected array $boxClasses = ['mb'];
     /** @var string[] */
-    private array $headerClasses = [];
+    protected array $headerClasses = [];
     /** @var string[] */
-    private array $footerClasses = [];
+    protected array $footerClasses = [];
 
-    private string $footer = '';
+    protected string $footer = '';
 
     /**
      * @var string
      * @todo Change type Icon.
      */
-    private string $icon = '';
+    protected string $icon = '';
 
     public function setBackURL(string $url): static
     {
@@ -56,6 +56,10 @@ class Box
         return $this;
     }
 
+    public function getBody(): string {
+        return $this->body;
+    }
+
     public function setTitleHTML(string $title): static
     {
         $this->title = $title;
@@ -66,6 +70,10 @@ class Box
     {
         $this->title = StrUtil::html($title);
         return $this;
+    }
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     public function setIcon(string $icon): static
@@ -96,6 +104,11 @@ class Box
     public function setBodyClasses(string ...$classes): static
     {
         $this->bodyClasses = $classes;
+        return $this;
+    }
+    public function addBodyClasses(string ...$classes): static
+    {
+        $this->bodyClasses = array_merge($this->bodyClasses,$classes);
         return $this;
     }
 
@@ -134,13 +147,13 @@ class Box
             : '';
 
         $header = '';
-        if ($this->title || !empty($this->rightLinks) || !empty($this->leftLinks) || $this->icon) {
+        if ($this->getTitle() || !empty($this->rightLinks) || !empty($this->leftLinks) || $this->icon) {
             $header = '<div class="header ' . join(' ', $this->headerClasses) . '">'
                 . $backLink
                 . join($this->leftLinks)
                 . '<span class="title header-item">'
                 . ($this->icon ? '<i class="fa-fw ' . $this->icon . ' op-025"></i>' : '')
-                . ($this->title)
+                . $this->getTitle()
                 . '</span>'
                 . join($this->rightLinks)
                 . '</div>';
@@ -152,7 +165,7 @@ class Box
         return Components::div(
             $boxClasses,
             $header
-            . Components::div($bodyClasses, $this->body)
+            . Components::div($bodyClasses, $this->getBody())
             . ($this->footer ? Components::div($footerClasses, $this->footer) : '')
         );
     }

@@ -284,6 +284,13 @@ function buildPageIndex(): void
             icon: 'fa fa-contact-card'
         )
     );
+    $linkList->push(new ListItem(
+            title: 'page-context.html',
+            subTitle: 'page-context.html',
+            link: '/assets/page-context.html',
+            icon: 'fa fa-contact-card'
+        )
+    );
     $linkList->push(new ListSeparator('User related pages'));
     $linkList->push(new ListItem(
         title: 'User settings page',
@@ -405,7 +412,7 @@ function generateCards(Closure $callback, int $n = 6): string
     $cards = '';
     for ($i = 0; $i < $n; $i++) {
         $cards .= Components::div('col-4 p-1',
-            $callback()->setBoxClasses('m-0 h-100')
+            $callback()->setBoxClasses('m-0')->addBodyClasses('flex-grow')
         );
     }
     return Components::div('d-flex-md flex-wrap', $cards);
@@ -617,13 +624,51 @@ function buildPageContainerWidth(Size $size): void
 
     File::save('pages/build/assets/container-' . $size->value . '.html', $layout);
 }
+function buildPageContext(): void
+{
+    $iframe = '<div class="d-flex"><div class="flex-grow"></div><iframe id="frame-viewer"
+      style="width:100%;height:50vh"
+      src="/assets/index.html"></iframe>
+      <div class="flex-grow"></div>
+      </div>';
+
+    $buttons = Button::new()
+        ->addClasses('btn-response mr-1')
+        ->setDataAttr('width', '100%')
+        ->setIcon(new Icon('desktop'));
+    $buttons .= Button::new()
+        ->addClasses('btn-response mr-1')
+        ->setDataAttr('width', '770px')
+        ->setIcon(new Icon('tablet-screen-button'));
+    $buttons .= Button::new()
+        ->addClasses('btn-response mr-1')
+        ->setDataAttr('width', '24rem')
+        ->setIcon(new Icon('mobile-screen'));
+    $buttons = Components::div('py-1 text-center', $buttons);
+
+    $content = Components::div('p iframe-response', $buttons . $iframe);
+
+    $layout = (new Page(__FUNCTION__, Size::XL))
+        ->setContent($content);
+    File::save('pages/build/assets/page-context.html', $layout);
+
+}
 function buildPageFluid(): void
 {
-    $content = 'hello';
+    $content = 'FLUID!';
 
-    $layout = (new Page(__FUNCTION__, Size::Fluid))
+    $layout = (new Page('Legal', Size::Fluid))
     ->setContent($content);
     File::save('pages/build/assets/container-fluid.html', $layout);
+}
+function buildPageLegal(): void
+{
+    $content = '<h3>Current cookies</h3>'
+        .Components::div('cookie-list', '');
+
+    $layout = (new Page('Legal', Size::LG))
+    ->setContent($content);
+    File::save('pages/build/assets/legal.html', $layout);
 }
 
 
@@ -632,8 +677,8 @@ Website::setRootURL('/assets');
 Website::setIcon(new Components\SVGIcon('<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 7.5l16.5-4.125M12 6.75c-2.708 0-5.363.224-7.948.655C2.999 7.58 2.25 8.507 2.25 9.574v9.176A2.25 2.25 0 004.5 21h15a2.25 2.25 0 002.25-2.25V9.574c0-1.067-.75-1.994-1.802-2.169A48.329 48.329 0 0012 6.75zm-1.683 6.443l-.005.005-.006-.005.006-.005.005.005zm-.005 2.127l-.005-.006.005-.005.005.005-.005.005zm-2.116-.006l-.005.006-.006-.006.005-.005.006.005zm-.005-2.116l-.006-.005.006-.005.005.005-.005.005zM9.255 10.5v.008h-.008V10.5h.008zm3.249 1.88l-.007.004-.003-.007.006-.003.004.006zm-1.38 5.126l-.003-.006.006-.004.004.007-.006.003zm.007-6.501l-.003.006-.007-.003.004-.007.006.004zm1.37 5.129l-.007-.004.004-.006.006.003-.004.007zm.504-1.877h-.008v-.007h.008v.007zM9.255 18v.008h-.008V18h.008zm-3.246-1.87l-.007.004L6 16.127l.006-.003.004.006zm1.366-5.119l-.004-.006.006-.004.004.007-.006.003zM7.38 17.5l-.003.006-.007-.003.004-.007.006.004zm-1.376-5.116L6 12.38l.003-.007.007.004-.004.007zm-.5 1.873h-.008v-.007h.008v.007zM17.25 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zm0 4.5a.75.75 0 110-1.5.75.75 0 010 1.5z" stroke-linecap="round" stroke-linejoin="round"></path></svg>'));
 Website::setIcon(new Components\SVGIcon('<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" stroke-linecap="round" stroke-linejoin="round"></path></svg>'));
 Website::setIcon(new Components\Icon('lemon', true));
-
-buildCSS();
+\Tivins\Assets\Assets::buildCSS('pages/build/assets/css/all.css');
+// buildCSS();
 buildPageIndex();
 buildPageContainerWidth(Size::XL);
 buildPageContainerWidth(Size::LG);
@@ -652,3 +697,5 @@ buildPageTable(Size::LG);
 buildPageTable(Size::MD);
 buildPageMenuMobile();
 buildPageFluid();
+buildPageContext();
+buildPageLegal();

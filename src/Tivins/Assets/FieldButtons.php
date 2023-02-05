@@ -4,10 +4,16 @@ namespace Tivins\Assets;
 
 class FieldButtons extends Field
 {
+    protected array $buttons = [];
+
     public function __toString(): string
     {
-        $html = '';//$this->getLabel();
-        $html .= 'ok';
-        return $this->wrap($html);
+        return $this->wrap(join($this->buttons));
+    }
+
+    public function addButton(string $button): static
+    {
+        $this->buttons[] = $button;
+        return $this;
     }
 }

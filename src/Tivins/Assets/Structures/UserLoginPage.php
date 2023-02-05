@@ -4,15 +4,21 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
-use Tivins\Assets\FieldInput;
-use Tivins\Assets\Form;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
+use Tivins\Assets\ListSeparator;
+use Tivins\Assets\Size;
 use Tivins\Assets\Str;
 
 class UserLoginPage
 {
-    private bool $showErrorMessage = false;
+    protected bool $showErrorMessage = false;
+    protected UserLoginForm $form;
+
+    public function __construct()
+    {
+        $this->form = new UserLoginForm();
+    }
 
     public function setShowErrorMessage(bool $show): static
     {
@@ -22,42 +28,6 @@ class UserLoginPage
 
     public function __toString(): string {
         $content = '';
-
-        $frm = new Form();
-        $frm->addField(
-            (new FieldInput('text'))
-                ->setLabel('Email')
-                ->setPlaceholder('Type your email address')
-                ->setRequired()
-        );
-        $frm->addField(
-            (new FieldInput('password'))
-                ->setLabel('Password')
-                ->setLabelButton(Components\Button::newLink()->setUrl('#')->setClasses('p-2 pr-0 fs-80')->setLabel(new Str("forgot password?")))
-                ->setPlaceholder('Password')
-                ->setRequired()
-        );
-
-        $form = $frm . ' <hr>
-    <form class="form p-3 mx-auto max-w-350px">
-    <div class="field">
-      <label>
-        <span class="form-label">Email</span>
-        <input type="email" name="email" required placeholder="Type your email">
-        <!--<div class="validation">invalid</div>-->
-      </label>
-    </div>
-    <div class="field">
-      <div class="d-flex">
-      <label for="password" class="flex-grow"><span class="form-label">Password</span></label>
-      <a href="/assets/modal-user-password.html" class="fs-80 p-1">forgot password?</a> 
-      </div>
-      <input type="password" name="password" id="password" required placeholder="Password">
-    </div>
-    <div class="field">
-    <button type="submit" class="button success w-100">Sign in</button>
-    </div>
-    </form>';
 
         if ($this->showErrorMessage) {
             $message = new Str('Incorrect username or password.');
@@ -76,17 +46,18 @@ class UserLoginPage
                     New here? <span class="simi-react">Create an account</span>.
                 </a>
             </div>
-          ')
+            ')
             ->addHeaderOption(Components::getMoreLink2('.pop-menu-login','Connect with...','fa fa-plus'))
-            ->addHTML($form);
+            ->addHTML($this->form);
 
         $content .= $box1;
-        $content .= (new LinkList())
+        $content .= (new LinkList(Size::SM))
             ->addClasses('pop-menu-login hidden')
             ->push(
-                new ListItem('Log in with StackOverflow', 'use your StackOverflow account','#', 'fa-brands fa-stack-overflow'),
-                new ListItem('Log in with GitHub', 'use your GitHub account','#', 'fa-brands fa-github'),
-                new ListItem('Log in with Google', 'use your Google account','#', 'fa-brands fa-google'),
+                new ListSeparator('Log in with'),
+                new ListItem('StackOverflow', '','#', 'fa-brands fa-stack-overflow'),
+                new ListItem('GitHub', '','#', 'fa-brands fa-github'),
+                new ListItem('Google', '','#', 'fa-brands fa-google'),
             );
         return $content;
     }

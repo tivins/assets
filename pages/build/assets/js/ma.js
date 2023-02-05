@@ -125,7 +125,19 @@ export class MA {
         const d = new Date();
         d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
-        document.cookie = `${cname}=${value};${expires};path=/`;
+        document.cookie = `${cname}=${value};${expires};SameSite=None;Secure;path=/`;
+    }
+
+    /**
+     * @return {{}}
+     */
+    static getCookies() {
+        let cooks = {};
+        document.cookie.split(';').map(n => {
+            const kv = n.split('=').map(e => e.trim());
+            cooks[kv[0]] = kv[1];
+        });
+        return cooks;
     }
 
     /**
@@ -137,10 +149,7 @@ export class MA {
         let name = cname + "=";
         let ca = document.cookie.split(';');
         for(let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
+            let c = ca[i].trim();
             if (c.indexOf(name) === 0) {
                 return c.substring(name.length, c.length);
             }
@@ -323,14 +332,36 @@ export class MagiCron {
         this.#callbacks.push(callback);
         return this;
     }
+
+    /**
+     * @param milliseconds {number}
+     * @return {MagiCron}
+     */
     static setInterval(milliseconds) {
         this.#interval = milliseconds;
         return this;
     }
+
+    /**
+     * @return {MagiCron}
+     */
+    static stop() {
+        if (this.#intervalId) {
+            window.clearInterval(this.#intervalId);
+        }
+        return this;
+    }
+
+    /**
+     *
+     * @return {MagiCron}
+     */
     static run() {
+        this.stop();
         this.#intervalId = window.setInterval(
             () => this.#callbacks.map(val => val()),
             this.#interval);
+        return this;
     }
 
     static expirer() {

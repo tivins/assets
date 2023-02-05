@@ -12,6 +12,7 @@ use Tivins\Assets\Fake;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\MicroLayout;
+use Tivins\Assets\Size;
 use Tivins\Assets\Str;
 
 class BlogPost
@@ -217,11 +218,24 @@ class BlogPost
 
         $authorBox = (new Components\Card($this->authorName, Fake::sentence()));
 
+        $layout = (new MicroLayout([8,4]))
+            ->setScreenSize(Size::MD)
+            ->setGutterSize(Size::SM);
+        // $layout->setColumnContent(0, 'menu');
+        $layout->setColumnContent(0, $box1
+            .'<h3>Author</h3>'.$authorBox
+            .'<h3>Comments</h3>'.$boxCom);
+        $layout->setColumnContent(1, $box2.$box5.$box3.$box4.$box6);
+
         return
             new InteractivePath('/blog/2023/assets')
-            . MicroLayout::col84Gutter($box1
-            .'<h3>Author</h3>'.$authorBox
-            .'<h3>Comments</h3>'.$boxCom,$box2.$box5.$box3.$box4.$box6);
+            . $layout
+            . MicroLayout::col84Gutter(
+                $box1
+                    .'<h3>Author</h3>'.$authorBox
+                    .'<h3>Comments</h3>'.$boxCom,
+                $box2.$box5.$box3.$box4.$box6
+            );
     }
     private function getBody():string {
         return '<h1>Fusce vel tincidunt libero!</h1>

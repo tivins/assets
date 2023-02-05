@@ -19,4 +19,11 @@ class Str
     {
         return empty($this->value);
     }
+
+    public static function plain(string $value): static {
+        return new static($value);
+    }
+    public static function html(string $value): static {
+        return new static($value, true);
+    }
 }

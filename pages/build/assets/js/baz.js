@@ -183,7 +183,6 @@ export class PopOver {
 
 export class Baz {
     static init() {
-
         console.debug(MA.version());
         MagiCron.setInterval(1000).run();
         Clipboard.parseCopiable();

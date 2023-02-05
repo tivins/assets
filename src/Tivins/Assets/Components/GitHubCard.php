@@ -12,9 +12,16 @@ class GitHubCard extends Card
         $this->cardIcon->class = 'brands';
         $this->cardIcon->icon = 'github';
         $this->addFooterLink(
-            (new Button())
-                ->setClasses('ghost')
-            ->setLabel(new Str('follow'))
+            (Button::newLink())
+                ->setIcon(new Icon('star', 'regular'))
+                ->setLabel(new Str('8'))
+                ->setUrl('https://github.com/tivins/database/star')
+        );
+        $this->addFooterLink(
+            (Button::newLink())
+                ->setLabel(new Str('fork'))
+                ->setIcon(new Icon('code-fork'))
+                ->setUrl('https://github.com/tivins/database/fork')
         );
     }
 }

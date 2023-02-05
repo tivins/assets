@@ -2,7 +2,7 @@
 
 namespace Tivins\Assets;
 
-use Tivins\Core\Util;
+use Tivins\Assets\Components\HTMLElement;
 
 class FieldInput extends Field
 {
@@ -25,12 +25,22 @@ class FieldInput extends Field
 
     public function __toString(): string
     {
-        $html = $this->getLabel();
-        $html .= '<input id="' . $this->getID() . '" type="' . $this->type . '"'
-            . ' name="' . $this->name . '"'
-            . ($this->required ? ' required' : '')
-            . ($this->placeholder ? ' placeholder="' . $this->placeholder . '"' : '')
-            . '>';
-        return $this->wrap($html);
+        $label = $this->getLabel();
+        $input      = (new HTMLElement('input'))
+            ->setAttributes([
+                'id'   => $this->getID(),
+                'type' => $this->type,
+                'name' => $this->name,
+            ])
+            ->setSelfClosedType(1);
+
+        if ($this->required) {
+            $input->addAttribute('required', null);
+        }
+        if ($this->placeholder) {
+            $input->addAttribute('placeholder', $this->placeholder);
+        }
+
+        return $this->wrap($label . $input);
     }
 }

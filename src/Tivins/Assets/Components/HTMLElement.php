@@ -34,9 +34,9 @@ class HTMLElement
         }
 
         $tag .= ' class="' . join(' ', $this->classList) . '"';
-        foreach ($this->attributes as $key => $value) {
-            $tag .= ' ' . $key . '="' . StrUtil::html($value) . '"';
-        }
+        //foreach ($this->attributes as $key => $value) {
+        //    $tag .= ' ' . $key . '="' . StrUtil::html($value) . '"';
+        //}
         $tag .= ($this->selfClosedType == 2 ? '/' : '');
         $tag .= '>';
         if (!$this->selfClosedType) {
@@ -83,6 +83,9 @@ class HTMLElement
         return $this;
     }
 
+    /**
+     * @param int $selfClosedType 0: `&lt;b>&lt;/b>`, 1: `&lt;hr>`, 2: `&lt;img />
+     */
     public function setSelfClosedType(int $selfClosedType): static
     {
         $this->selfClosedType = $selfClosedType;

@@ -1,4 +1,4 @@
-
+/*ok*/
 body {
     --background-0: #fff;
     --background-1: #fff;
@@ -220,6 +220,8 @@ a.tag:hover {
     overflow: hidden;
     transition: height .5s ease-in-out, margin .5s ease, opacity .5s ease;
     background: var(--background-1);
+    display: flex;
+    flex-direction: column;
 }
 .big-shadow{
 
@@ -514,6 +516,17 @@ a.button.sm, button.sm {
     text-align: left;
 }
 /* --- FORM --- */
+#frame-viewer {
+    margin:1rem auto;
+    box-shadow: 0 0 5px #000;
+    border:none;
+    border-radius: 3px;
+    transition: width 200ms ease;
+}
+.iframe-response {
+    background: linear-gradient(0deg, #ccc 0%, #999 100%);
+}
+/* --- FORM --- */
 .form-label{
     display: block;
     padding: 5px 0;
@@ -626,7 +639,7 @@ input[type=checkbox]:checked + label:before {
 .hidden{display:none!important;}
 .no-background{background:none!important;}
 .no-overflow{overflow: hidden!important;}
-.no-borders{border: none!important;}
+.no-border,.no-borders{border: none!important;}
 .op-025{opacity: .25;}
 .op-05{opacity: .5;}
 .radius{border-radius: 3px;}
@@ -634,11 +647,6 @@ input[type=checkbox]:checked + label:before {
 .radius-xl{border-radius: 5px;}
 .radius-xxl{border-radius: 8px;}
 .rounded{border-radius: 50%;}
-.text-center{text-align: center}
-.text-right{text-align: right}
-.text-left{text-align: left}
-
-.float-left{float:left}
 
 .position-absolute{position: absolute}
 .position-relative{position: relative}
@@ -648,6 +656,7 @@ input[type=checkbox]:checked + label:before {
 .flex-wrap{flex-wrap: wrap}
 .flex-align{align-items: center}
 .flex-center{justify-content: center;}
+.flex-shrink-0{flex-shrink:0;}
 
 .h-100{height:100%}
 .h-inherit{height:inherit}
@@ -661,8 +670,10 @@ input[type=checkbox]:checked + label:before {
 .w-75{width:75%;}
 .w-50{width:50%;}
 .w-25{width:25%;}
-.w-0{width:0rem;}
-/* -- font */
+.w-0{width:0;}
+.w-5{width:5rem;}
+.w-4{width:4rem;}
+/* -- font -- */
 .fs-80{font-size: 80%}
 .fs-90{font-size: 90%}
 .fs-120{font-size: 120%}
@@ -672,7 +683,9 @@ input[type=checkbox]:checked + label:before {
 .fs-300{font-size: 300%}
 .fw-normal{font-weight: normal}
 .fw-light{font-weight: 300}
-
+.text-center{text-align: center}
+.text-right{text-align: right}
+.text-left{text-align: left}
 .small-caps{font-variant: small-caps}
 /* -- */
 .m-0{margin:0}
