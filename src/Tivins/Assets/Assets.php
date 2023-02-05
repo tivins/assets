@@ -41,8 +41,11 @@ class Assets
             if ($file->isDir()) {
                 continue;
             }
-            $outFile = str_replace($inDir, $outDir, $file->getPathname());
-            File::save($outFile, File::load($file->getPathname()));
+            $inFile = $file->getPathname();
+            $outFile = str_replace($inDir, $outDir, $inFile);
+            if (!File::isReadable($outFile) || filemtime($outFile) < filemtime($inFile)) {
+                File::save($outFile, File::load($file->getPathname()));
+            }
         }
     }
 }
