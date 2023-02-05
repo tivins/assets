@@ -1,5 +1,31 @@
-import {List, PopOver} from "./baz.js";
+/*! Sun, 05 Feb 2023 21:46:09 +0000 */
 
+import {List, PopOver} from "./baz.js";
+export class Cookies {
+    /**
+     * @param cname {string}
+     * @param value {string}
+     * @param expDays {number}
+     */
+    static setCookie(cname, value, expDays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = `${cname}=${value};${expires};SameSite=None;Secure;path=/`;
+    }
+    /**
+     * @return {{}}
+     */
+    static getCookies() {
+        let cooks = {};
+        document.cookie.split(';').map(n => {
+            const kv = n.split('=').map(e => e.trim());
+            cooks[kv[0]] = kv[1];
+        });
+        return cooks;
+    }
+
+}
 export class MA {
     static version() {
         return {
@@ -116,29 +142,6 @@ export class MA {
         }
     }
 
-    /**
-     * @param cname {string}
-     * @param value {string}
-     * @param expDays {number}
-     */
-    static setCookie(cname, value, expDays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = `${cname}=${value};${expires};SameSite=None;Secure;path=/`;
-    }
-
-    /**
-     * @return {{}}
-     */
-    static getCookies() {
-        let cooks = {};
-        document.cookie.split(';').map(n => {
-            const kv = n.split('=').map(e => e.trim());
-            cooks[kv[0]] = kv[1];
-        });
-        return cooks;
-    }
 
     /**
      * @see https://www.w3schools.com/js/js_cookies.asp
@@ -309,7 +312,7 @@ export class Theme {
     static toggle() {
         let oldTheme = this.get();
         let newTheme = oldTheme === "dark" ? "" : "dark";
-        MA.setCookie("theme", newTheme, 30);
+        Cookies.setCookie("theme", newTheme, 30);
         this.applyCurrent();
     }
     static initButtons() {

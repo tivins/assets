@@ -1,5 +1,47 @@
 import {List, PopOver} from "./baz.js";
 
+export class Cookies {
+    /**
+     * @param cname {string}
+     * @param value {string}
+     * @param expDays {number}
+     */
+    static setCookie(cname, value, expDays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = `${cname}=${value};${expires};SameSite=None;Secure;path=/`;
+    }
+    /**
+     * @return {{}}
+     */
+    static getCookies() {
+        let cooks = {};
+        document.cookie.split(';').map(n => {
+            const kv = n.split('=').map(e => e.trim());
+            cooks[kv[0]] = kv[1];
+        });
+        return cooks;
+    }
+
+    /**
+     * @see https://www.w3schools.com/js/js_cookies.asp
+     * @param cname
+     * @return {string}
+     */
+    static getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i].trim();
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+}
+
 export class MA {
     static version() {
         return {
@@ -45,6 +87,12 @@ export class MA {
         return obj;
     }
 
+    /**
+     * Shortcut to create
+     * @param className
+     * @param html
+     * @return {HTMLElement}
+     */
     static createDiv(className, html) {
         return this.createElement('div', {className: className, innerHTML: html}, {});
     }
@@ -116,46 +164,7 @@ export class MA {
         }
     }
 
-    /**
-     * @param cname {string}
-     * @param value {string}
-     * @param expDays {number}
-     */
-    static setCookie(cname, value, expDays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = `${cname}=${value};${expires};SameSite=None;Secure;path=/`;
-    }
 
-    /**
-     * @return {{}}
-     */
-    static getCookies() {
-        let cooks = {};
-        document.cookie.split(';').map(n => {
-            const kv = n.split('=').map(e => e.trim());
-            cooks[kv[0]] = kv[1];
-        });
-        return cooks;
-    }
-
-    /**
-     * @see https://www.w3schools.com/js/js_cookies.asp
-     * @param cname
-     * @return {string}
-     */
-    static getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-            let c = ca[i].trim();
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
 
     static parseElements(className, callback) {
         const classProcessed = className + '-processed';
@@ -299,7 +308,7 @@ export function parsePopupButtons() {
 
 export class Theme {
     static get() {
-        return MA.getCookie('theme');
+        return Cookies.getCookie('theme');
     }
     static applyCurrent() {
         let oldTheme = this.get();
@@ -309,7 +318,7 @@ export class Theme {
     static toggle() {
         let oldTheme = this.get();
         let newTheme = oldTheme === "dark" ? "" : "dark";
-        MA.setCookie("theme", newTheme, 30);
+        Cookies.setCookie("theme", newTheme, 30);
         this.applyCurrent();
     }
     static initButtons() {

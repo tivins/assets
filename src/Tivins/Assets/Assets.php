@@ -44,7 +44,8 @@ class Assets
             $inFile = $file->getPathname();
             $outFile = str_replace($inDir, $outDir, $inFile);
             if (!File::isReadable($outFile) || filemtime($outFile) < filemtime($inFile)) {
-                File::save($outFile, File::load($file->getPathname()));
+                $pfx = '/*! '.gmdate('r').' */'."\n\n";
+                File::save($outFile, $pfx . File::load($inFile));
             }
         }
     }

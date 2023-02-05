@@ -1,5 +1,5 @@
 import {Baz} from "./baz.js";
-import {closeButtonEvent, MA} from "./ma.js";
+import {closeButtonEvent, Cookies, MA} from "./ma.js";
 
 Baz.init();
 
@@ -16,11 +16,11 @@ MA.parseElements('btn-action', elm =>
         console.log(action);
         switch (action) {
             case 'GDPR-accept':
-                MA.setCookie('GDPR', 'all', 360);
+                Cookies.setCookie('GDPR', 'all', 360);
                 closeButtonEvent(elm);
                 break;
             case 'GDPR-reject':
-                MA.setCookie('GDPR', 'none', 360);
+                Cookies.setCookie('GDPR', 'none', 360);
                 closeButtonEvent(elm);
                 break;
             case 'GDPR-setup':
@@ -40,7 +40,7 @@ export class CookieInfo {
 
 MA.parseElements('cookie-list', elm =>
 {
-    const cooks = MA.getCookies();
+    const cooks = Cookies.getCookies();
     const cookInfo = [];
 
 

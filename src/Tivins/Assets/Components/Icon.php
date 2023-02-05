@@ -28,7 +28,7 @@ class Icon
 
     public function __toString(): string
     {
-        $classes[] = 'fa' . ($this->class ? '-'.$this->class : '');
+        $classes[] = 'fa' . ($this->class ? '-' . $this->class : '');
         if ($this->fixedWidth) {
             $classes[] = 'fa-fw';
         }
@@ -43,4 +43,8 @@ class Icon
         return '<i class="' . join(' ', $classes) . '"></i>';
     }
 
+    public function setMargin(string $margin): static {
+        $this->margin = $margin;
+        return $this;
+    }
 }
