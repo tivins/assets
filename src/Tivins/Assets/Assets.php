@@ -7,6 +7,12 @@ use Tivins\Core\System\FileSys;
 
 class Assets
 {
+    public static function compile(string $publicDir): void
+    {
+        self::buildCSS($publicDir.'/assets/css/all.css');
+        self::buildJS($publicDir.'/assets/js');
+    }
+
     public static function buildCSS(string $outfile): void
     {
         $dir        = __dir__ . '/Front/css';
@@ -32,7 +38,6 @@ class Assets
             );
         }
     }
-
     public static function buildJS(string $outDir): void
     {
         $inDir    = __dir__ . '/Front/js';
