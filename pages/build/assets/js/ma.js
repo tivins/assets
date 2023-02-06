@@ -1,6 +1,7 @@
-/*! Sun, 05 Feb 2023 21:46:09 +0000 */
+/*! Mon, 06 Feb 2023 21:35:35 +0000 */
 
 import {List, PopOver} from "./baz.js";
+
 export class Cookies {
     /**
      * @param cname {string}
@@ -25,7 +26,24 @@ export class Cookies {
         return cooks;
     }
 
+    /**
+     * @see https://www.w3schools.com/js/js_cookies.asp
+     * @param cname
+     * @return {string}
+     */
+    static getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i].trim();
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 }
+
 export class MA {
     static version() {
         return {
@@ -71,6 +89,12 @@ export class MA {
         return obj;
     }
 
+    /**
+     * Shortcut to create
+     * @param className
+     * @param html
+     * @return {HTMLElement}
+     */
     static createDiv(className, html) {
         return this.createElement('div', {className: className, innerHTML: html}, {});
     }
@@ -143,22 +167,6 @@ export class MA {
     }
 
 
-    /**
-     * @see https://www.w3schools.com/js/js_cookies.asp
-     * @param cname
-     * @return {string}
-     */
-    static getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-            let c = ca[i].trim();
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
 
     static parseElements(className, callback) {
         const classProcessed = className + '-processed';
@@ -302,7 +310,7 @@ export function parsePopupButtons() {
 
 export class Theme {
     static get() {
-        return MA.getCookie('theme');
+        return Cookies.getCookie('theme');
     }
     static applyCurrent() {
         let oldTheme = this.get();

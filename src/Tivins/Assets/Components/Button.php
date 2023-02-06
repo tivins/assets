@@ -2,6 +2,7 @@
 
 namespace Tivins\Assets\Components;
 
+use Tivins\Assets\HDirection;
 use Tivins\Assets\Str;
 use Tivins\Core\StrUtil;
 
@@ -19,7 +20,7 @@ class Button
     private array $classes = [];
     /** @var array<string,string> */
     private array $dataAttrs = [];
-    private string $dropDown = '';
+    private HDirection $dropDown = HDirection::None;
 
     public function __toString(): string
     {
@@ -37,8 +38,8 @@ class Button
         }
         //<i class='ml-1 fs-80 muted-2 fa fa-angle-down'></i>
         $dd = '';
-        if ($this->dropDown) {
-            $dd = new Icon('caret-' . $this->dropDown,margin: 'none', classes: ['ml-1' ,'fs-80 muted-2']);
+        if ($this->dropDown != HDirection::None) {
+            $dd = new Icon('caret-' . ($this->dropDown->value>0?'up':'down'),margin: 'none', classes: ['ml-1' ,'fs-80 muted-2']);
         }
         return "<$tag$attrs>$this->icon$this->label$dd</$tag>";
     }
@@ -88,14 +89,9 @@ class Button
         return $this;
     }
 
-    public function setDropDown(): Button
+    public function setDropDir(HDirection $direction): Button
     {
-        $this->dropDown = 'down';
-        return $this;
-    }
-    public function setDropUp(): Button
-    {
-        $this->dropDown = 'up';
+        $this->dropDown = $direction;
         return $this;
     }
 

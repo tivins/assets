@@ -1044,6 +1044,8 @@ body {
     --placeholder-color: #999;
     --input-color: #666;
     --input-focus-color: #333;
+    --info-bg: #f4f4fa;
+    --info-bc: #dde;
 }
 body.dark-theme {
     --background-0: #333;
@@ -1065,6 +1067,8 @@ body.dark-theme {
     --placeholder-color: #999;
     --input-color: #ccc;
     --input-focus-color: #fff;
+    --info-bg: #3e3e5e;
+    --info-bc: #1c1c37;
 }
 a { text-decoration: none; color: var(--a-color); }
 a:hover,a:focus { text-decoration: underline; color: var(--a-color-hover); }
@@ -1291,11 +1295,11 @@ a.tag:hover {
     border-bottom: 1px solid #cec;
 }
 .box.box-info{
-    border: 1px solid #bbd;
+    border: 1px solid var(--info-bc);
 }
 .box.box-info .header {
-    background: #f4f4fa;
-    border-bottom: 1px solid #dde;
+    background: var(--info-bg);
+    border-bottom: 1px solid var(--info-bc);
 }
 .box.box-warning{
     border: 1px solid rgb(235 228 177);

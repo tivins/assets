@@ -158,7 +158,7 @@ class Components
                 ->setTitle('Configuration')
                 ->setIcon(new Icon('cog', mutedLevel: 0, fixedWidth: true, margin: 'none'))
                 ->addClasses('mr-1 pop-trigger p-2')
-                ->setDropDown(true)
+                ->setDropDir(HDirection::Down)
             // . Button::newGhost()
             //     ->setTitle('Set dark mode')
             //     ->setIcon(new Icon('moon', 'regular', mutedLevel: 0, fixedWidth: true, margin: 'none'))
@@ -170,7 +170,7 @@ class Components
                 ->addClasses('pop-trigger p-2')
                 ->setLabel(Fake::name())
                 // ->setLabel(new HTMLStr('<img src="https://i.stack.imgur.com/2EeK7.png" width="24" style="display: inline-block" />'))
-                ->setDropDown(true)
+                ->setDropDir(HDirection::Down)
             .'
             <!-- onclick="event.preventDefault();document.querySelector(\'.dialog\').classList.remove(\'closed\')" -->
           </div>'

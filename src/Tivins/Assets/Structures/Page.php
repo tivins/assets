@@ -6,7 +6,11 @@ use Tivins\Assets\Components;
 use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\Icon;
 use Tivins\Assets\Components\Message;
+use Tivins\Assets\HDirection;
 use Tivins\Assets\HTMLStr;
+use Tivins\Assets\LinkList;
+use Tivins\Assets\ListItem;
+use Tivins\Assets\ListSeparator;
 use Tivins\Assets\Size;
 use Tivins\Assets\Str as S;
 use Tivins\Assets\Template;
@@ -109,7 +113,7 @@ class Page
         if ($GDPR == 'undefined') {
             $messages .= $cookie;
         }
-        $messages .= $info;
+        //$messages .= $info;
 
         // $cookie = '';
         return Template::tpl($this->title, Template::container(
@@ -137,9 +141,17 @@ class Page
                     ->setUrl('/assets/docs/')
                     ->addClasses('visible-md pop-trigger')
                     ->setLabel(new S('Follow us'))
-                    ->setDropUp()
-                    ->setDataAttr('target', '#')
+                    ->setDropDir(HDirection::Up)
+                    ->setDataAttr('target', '.pop-follow')
                 : '')
+            . (new LinkList(Size::SM))
+            ->addClasses('pop-follow hidden')
+            ->push(
+                new ListSeparator('Follow us on'),
+                new ListItem('StackOverflow', '','#', 'fa-brands fa-stack-overflow'),
+                new ListItem('GitHub', '','#', 'fa-brands fa-github'),
+                new ListItem('Google', '','#', 'fa-brands fa-google'),
+            )
         );
     }
 }

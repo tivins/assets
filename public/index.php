@@ -2,6 +2,7 @@
 
 use Tivins\Assets\Assets;
 use Tivins\Assets\Components\Icon;
+use Tivins\Assets\Fake;
 use Tivins\Assets\Size;
 use Tivins\Assets\Structures\Page;
 use Tivins\Assets\Website;
@@ -14,6 +15,6 @@ Website::setIcon(new Icon('lemon', true));
 Assets::compile(__dir__);
 
 $layout = (new Page('Home', Size::LG))
-    ->setContent('world');
+    ->setContent(Fake::paragraph());
 
 echo $layout;
