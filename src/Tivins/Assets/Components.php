@@ -41,16 +41,14 @@ class Components
         return '<i class="' . join(' ', $classes) . '"></i>';
     }
 
-    public static function div(string|array $classes, string $content):string
+    public static function div(string|array $classes, string $content, string $tag = 'div'): string
     {
         if (is_string($classes)) {
             $classes = explode(' ', $classes);
         }
-        return (new HTMLElement('div'))
+        return (new HTMLElement($tag))
             ->setClassList(...$classes)
             ->setContent(new HTMLStr($content));
-
-        //return '<div class="' . $classes . '">' . $content . '</div>';
     }
 
     public static function subText(string $content, string $classes = ''):string {
@@ -58,6 +56,9 @@ class Components
     }
     public static function subText2(string $content, string $classes = ''):string {
         return self::div('subtext-2 ' . $classes, $content);
+    }
+    public static function subText3(string $content, string $classes = ''):string {
+        return self::div('subtext-3 ' . $classes, $content);
     }
 
     /**

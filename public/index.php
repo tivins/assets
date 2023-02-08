@@ -1,6 +1,7 @@
 <?php
 
 use Tivins\Assets\Assets;
+use Tivins\Assets\Components;
 use Tivins\Assets\Components\Icon;
 use Tivins\Assets\Fake;
 use Tivins\Assets\ListItem;
@@ -15,17 +16,29 @@ Website::setRootURL('/');
 Website::setIcon(new Icon('lemon', true));
 Assets::compile(__dir__);
 
+$user = (object)[
+    'name'=>Fake::name(),
+];
+
 $page = new Page('Home', Size::LG);
 $header = $page->getHeaderBar();
-$header->setUsername(Fake::name());
+$header->setUsername($user->name);
 $header->setSearchShown(false);
 $header->setUserNameShown(true);
 $header->setUserIsLogged(true);
 $header->getConfigList()
     ->push(
         $header->getThemeItem(),
-        new ListItem('test','yo','#','fa fa-check'),
+        new ListItem('Cookies','Manage your cookies','/?cookies','fa fa-cookie'),
+        new ListItem('test','test','#','fa fa-check'),
     );
-$page->setContent(Fake::paragraph());
+
+if (isset($_GET['cookies'])) {
+    $page->setContent(Components::div('cookie-list', ''));
+}
+else {
+    $page->setContent("<p>Hi, {$user->name}.</p>".Fake::paragraph());
+}
+
 
 echo $page;

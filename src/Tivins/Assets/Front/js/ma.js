@@ -12,6 +12,9 @@ export class Cookies {
         let expires = "expires=" + d.toUTCString();
         document.cookie = `${cname}=${value};${expires};SameSite=None;Secure;path=/`;
     }
+    static remove(cname) {
+        this.setCookie(cname, '', -1);
+    }
     /**
      * @return {{}}
      */
@@ -288,17 +291,10 @@ export function parseCloseButtons() {
 }
 
 export function parsePopupButtons() {
-    MA.parseElements('pop-trigger', (elm) => {
+    MA.parseElements('pop-trigger', elm => {
         elm.addEventListener('click', ev => {
             ev.preventDefault();
             ev.stopPropagation();
-
-            /*
-            const list = new List();
-            list.addItem({title:"Log in with StackOverflow", subTitle:"Using StackExchange API", icon: 'fa-brands fa-stack-overflow'});
-            list.addItem({title:"Log in with GitHub", subTitle:"", icon: 'fa-brands fa-github'});
-            list.addItem({title:"Log in with Google", subTitle:"", icon: 'fa-brands fa-google'});
-            */
             const targetElm = document.querySelector(elm.getAttribute('data-target'));
             targetElm.classList.remove('hidden');
             PopOver.show(elm, targetElm);

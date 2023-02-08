@@ -52,7 +52,7 @@ export class Box {
         return this;
     }
     setFooterClass(...c) {
-        this.#elementFooter.classList.add(c);
+        c.forEach(e => this.#elementFooter.classList.add(e));
         return this;
     }
     addOption(e) {
@@ -66,6 +66,20 @@ export class Box {
             href: "#",
         }, {});
         return this.addOption(closeBtn);
+    }
+
+    /**
+     * @param s {string}
+     * @return {Box}
+     */
+    setTitle(s) {
+        this.#elementHeaderTitle.innerText = s;
+        return this;
+    }
+
+    setTitleHTML(s) {
+        this.#elementHeaderTitle.innerHTML = s;
+        return this;
     }
 }
 
@@ -93,6 +107,7 @@ export class Dialog extends  Base {
         this.box = new Box();
         this.box
             .addCloseButton()
+            .setTitle('Alert')
             .setBodyHTML('Hello <b>World</b>')
             .setBodyClass('p-3')
             .setFooterClass('p-1')
@@ -102,10 +117,10 @@ export class Dialog extends  Base {
                 <button class=" success ml close-box-btn">OK</button>
             `);
         this.box.appendTo(elm);
-
         parseCloseButtons();
     }
-    static show() {
+    static show(title,body) {
+        this.box.setTitle(title).setBodyHTML(body);
         this.get().classList.remove('closed');
     }
 }
