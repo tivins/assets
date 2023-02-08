@@ -18,10 +18,11 @@ class FieldTextArea extends Field
             ->setAttributes([
                 'id'   => $this->getID(),
                 'name' => $this->name,
-                'value' => $this->getValue(),
                 'rows' => 5,
             ])
-            ->setSelfClosedType(0);
+            ->setSelfClosedType(0)
+            ->setContent(new Str($this->getValue()))
+        ;
 
         if ($this->required) {
             $input->addAttribute('required', null);

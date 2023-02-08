@@ -69,6 +69,7 @@ else {
             ->setLabel('Text')
             ->setPlaceholder('What ever you want to write.')
             ->setRequired()
+            ->setValue("test <html>")
     );
     $form->addField(
         (new \Tivins\Assets\FieldSelect())
