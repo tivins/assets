@@ -9,6 +9,7 @@ class Form
 
     public function __construct(string $method = 'post')
     {
+        $this->method = $method;
     }
 
     public function addField(Field $field): static
