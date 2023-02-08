@@ -14,10 +14,11 @@ use Tivins\Assets\Website;
 class HeaderBar
 {
     public string $title;
-    private string $username;
     private LinkList $configList;
-    private bool $userNameShown = true;
     private bool $searchShown = true;
+    private bool $userIsLogged = false;
+    private string $username = '';
+    private bool $userNameShown = true;
 
     public function __construct(string $title)
     {
@@ -29,6 +30,17 @@ class HeaderBar
             new ListItem('menu1','submenu1','#'),
         )
         */
+    }
+
+    public function isUserIsLogged(): bool
+    {
+        return $this->userIsLogged;
+    }
+
+    public function setUserIsLogged(bool $userIsLogged): HeaderBar
+    {
+        $this->userIsLogged = $userIsLogged;
+        return $this;
     }
 
     /**
@@ -129,7 +141,7 @@ class HeaderBar
             //     ->setIcon(new Icon('moon', 'regular', mutedLevel: 0, fixedWidth: true, margin: 'none'))
             //     ->addClasses('toggle-theme')
             . Button::newGhost()
-                ->setLabel($this->isUserNameShown() ? $this->username : '')
+                ->setLabel($this->isUserNameShown() ? ($this->isUserIsLogged() ? $this->username : 'Sign in/Sign up') : '')
                 ->setIcon(new Icon('user', 'regular', mutedLevel: 0, fixedWidth: true, margin: 'none'))
                 ->setTitle('User options')
                 ->setDataAttr('target', '.pop-menu-user')

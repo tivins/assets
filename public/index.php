@@ -19,7 +19,8 @@ $page = new Page('Home', Size::LG);
 $header = $page->getHeaderBar();
 $header->setUsername(Fake::name());
 $header->setSearchShown(false);
-$header->setUserNameShown(false);
+$header->setUserNameShown(true);
+$header->setUserIsLogged(true);
 $header->getConfigList()
     ->push(
         $header->getThemeItem(),
