@@ -13,6 +13,9 @@ class LinkList
         $this->size = $size;
     }
 
+    public function empty(): bool {
+        return empty($this->items);
+    }
 
     public function push(ListItemBase ...$item): static
     {

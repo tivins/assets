@@ -4,10 +4,10 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Components;
 use Tivins\Assets\Components\Button;
+use Tivins\Assets\Components\HeaderBar;
 use Tivins\Assets\Components\Icon;
 use Tivins\Assets\Components\Message;
 use Tivins\Assets\HDirection;
-use Tivins\Assets\HTMLStr;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\ListSeparator;
@@ -18,15 +18,17 @@ use Tivins\Assets\Website;
 
 class Page
 {
-    protected string $title = 'Modal page';
-    protected string $content = '';
-    protected Size $containerWidth = Size::LG;
-    protected array $footerButtons = [];
+    protected string    $title          = 'Modal page';
+    protected string    $content        = '';
+    protected Size      $containerWidth = Size::LG;
+    protected HeaderBar $headerBar;
+    protected array     $footerButtons  = [];
 
     public function __construct(string $title = '', Size $containerWidth = Size::LG)
     {
-        $this->title = $title;
+        $this->title          = $title;
         $this->containerWidth = $containerWidth;
+        $this->headerBar      = new HeaderBar($title);
     }
 
     public function setTitle(string $title): static
@@ -34,13 +36,14 @@ class Page
         $this->title = $title;
         return $this;
     }
+
     public function setContent(string $content): static
     {
         $this->content = $content;
         return $this;
     }
 
-    public function setContainerWidth(Size $containerWidth): Page
+    public function setContainerWidth(Size $containerWidth): static
     {
         $this->containerWidth = $containerWidth;
         return $this;
@@ -62,7 +65,7 @@ class Page
                     Button::newLink()
                         ->addClasses('btn-action')
                         ->setLabel(S::plain('Reject all cookies'))
-                    ->setDataAttr('action', 'GDPR-reject')
+                        ->setDataAttr('action', 'GDPR-reject')
                 )
                 ->addButton(
                     Button::newLink()
@@ -95,17 +98,17 @@ class Page
             (new Message('info', 'info', ''))
                 ->setTitle('Données factices')
                 ->addHTML('Cette page utilise des données factices');
-            /*Components::boxMessage(new HTMLStr('
-            <b class="d-block">Données factices</b>
-            <div class="my-2 fs-90">Cette page utilise des données factices.</div>
-            '))
-            ->addHeaderInfo(
-                Components::div('header-item w-4 text-center pr-0',
-                    new Icon('info  fs-200', margin: 'none')
-                )
+        /*Components::boxMessage(new HTMLStr('
+        <b class="d-block">Données factices</b>
+        <div class="my-2 fs-90">Cette page utilise des données factices.</div>
+        '))
+        ->addHeaderInfo(
+            Components::div('header-item w-4 text-center pr-0',
+                new Icon('info  fs-200', margin: 'none')
             )
-            ->setBoxClasses('box-info my-2');
-            */
+        )
+        ->setBoxClasses('box-info my-2');
+        */
 
         $GDPR = $_COOKIE['GDPR'] ?? 'undefined';
 
@@ -118,7 +121,7 @@ class Page
         // $cookie = '';
         return Template::tpl($this->title, Template::container(
             $messages
-            . Components::getHeaderBar($this->title)
+            . $this->headerBar
             . $this->content
             . $this->getFooter()
             , $this->containerWidth
@@ -145,13 +148,28 @@ class Page
                     ->setDataAttr('target', '.pop-follow')
                 : '')
             . (new LinkList(Size::SM))
-            ->addClasses('pop-follow hidden')
-            ->push(
-                new ListSeparator('Follow us on'),
-                new ListItem('StackOverflow', '','#', 'fa-brands fa-stack-overflow'),
-                new ListItem('GitHub', '','#', 'fa-brands fa-github'),
-                new ListItem('Google', '','#', 'fa-brands fa-google'),
-            )
+                ->addClasses('pop-follow hidden')
+                ->push(
+                    new ListSeparator('Follow us on'),
+                    new ListItem('StackOverflow', '', '#', 'fa-brands fa-stack-overflow'),
+                    new ListItem('GitHub', '', '#', 'fa-brands fa-github'),
+                    new ListItem('Google', '', '#', 'fa-brands fa-google'),
+                )
         );
     }
+
+    public function getHeaderBar(): HeaderBar
+    {
+        return $this->headerBar;
+    }
+
+    /**
+     * Replace the current header bar by the given one.
+     */
+    public function setHeaderBar(HeaderBar $headerBar): static
+    {
+        $this->headerBar = $headerBar;
+        return $this;
+    }
+
 }

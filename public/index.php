@@ -3,6 +3,7 @@
 use Tivins\Assets\Assets;
 use Tivins\Assets\Components\Icon;
 use Tivins\Assets\Fake;
+use Tivins\Assets\ListItem;
 use Tivins\Assets\Size;
 use Tivins\Assets\Structures\Page;
 use Tivins\Assets\Website;
@@ -14,7 +15,16 @@ Website::setRootURL('/');
 Website::setIcon(new Icon('lemon', true));
 Assets::compile(__dir__);
 
-$layout = (new Page('Home', Size::LG))
-    ->setContent(Fake::paragraph());
+$page = new Page('Home', Size::LG);
+$header = $page->getHeaderBar();
+$header->setUsername(Fake::name());
+$header->setSearchShown(false);
+$header->setUserNameShown(false);
+$header->getConfigList()
+    ->push(
+        $header->getThemeItem(),
+        new ListItem('test','yo','#','fa fa-check'),
+    );
+$page->setContent(Fake::paragraph());
 
-echo $layout;
+echo $page;
