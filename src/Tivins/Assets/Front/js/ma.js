@@ -170,10 +170,10 @@ export class MA {
 
 
     static parseElements(className, callback) {
-        const classProcessed = className + '-processed';
+        const classProcessed = (className + '-processed').split(' ');
         document.querySelectorAll(`.${className}:not(.${classProcessed})`)
             .forEach(elm => {
-                elm.classList.add(classProcessed);
+                classProcessed.forEach(c => elm.classList.add(c));
                 callback(elm);
             });
     }

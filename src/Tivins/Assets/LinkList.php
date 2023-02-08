@@ -6,6 +6,7 @@ class LinkList
 {
     private array $items   = [];
     private array $classes = [];
+    private array $attrs = [];
     private Size $size;
     
     public function __construct(Size $size = Size::LG)
@@ -23,6 +24,11 @@ class LinkList
         return $this;
     }
 
+    public function addAttributes(array $attrs): static
+    {
+        $this->attrs = array_merge($this->attrs, $attrs);
+        return $this;
+    }
     public function addClasses(string ...$classes): static
     {
         $this->classes = array_merge($this->classes, $classes);
@@ -38,7 +44,7 @@ class LinkList
         /**
          * Calls iteratively the __toString() on each items.
          */
-        return Components::div($classes, join($this->items));
+        return Components::div($classes, join($this->items))->setAttributes($this->attrs);
     }
 
 }

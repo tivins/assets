@@ -51,6 +51,15 @@ class Field
         $this->labelButton = $button;
         return $this;
     }
+    protected function getLabel(): string
+    {
+        $guid  = $this->getID();
+        $label = '<label for="' . $guid . '" class="flex-grow"><span class="form-label">' . new Str($this->label) . '</span></label>';
+        if (isset($this->labelButton)) {
+            return Components::div('d-flex', $label . $this->labelButton);
+        }
+        return $label;
+    }
 
 }
 

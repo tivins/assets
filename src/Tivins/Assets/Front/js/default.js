@@ -49,7 +49,6 @@ export function ParseCookieRemovers() {
     MA.parseElements('cookie-remover', elm => {
         elm.addEventListener('click', event => {
             event.preventDefault();
-            console.log(elm.getAttribute('data-cookie'));
             Cookies.remove(elm.getAttribute('data-cookie'));
             LocalNotifier.show(elm, 'Cookie marked as expired.\nRefresh the page to apply changes.', 2000, "fa fa-info");
         });
@@ -134,3 +133,14 @@ MA.parseElements('cookie-list', elm =>
     elm.appendChild(content);
     ParseCookieRemovers();
 });
+
+MA.parseElements('select-selector a', elm => {
+    elm.addEventListener('click', event => {
+        event.preventDefault();
+        const list = elm.closest('.link-list');
+        const item = elm.closest('.list-item');
+        const targetSelector = list.getAttribute('data-select');
+        document.querySelector(targetSelector)
+            .setAttribute('value', item.getAttribute('data-value'));
+    });
+})

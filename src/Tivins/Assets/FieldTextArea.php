@@ -4,25 +4,23 @@ namespace Tivins\Assets;
 
 use Tivins\Assets\Components\HTMLElement;
 
-class FieldInput extends Field
+class FieldTextArea extends Field
 {
-    protected string $type = 'text';
-
-    public function __construct($type = 'text')
+    public function __construct()
     {
-        $this->type = $type;
     }
+
 
     public function __toString(): string
     {
         $label = $this->getLabel();
-        $input      = (new HTMLElement('input'))
+        $input      = (new HTMLElement('textarea'))
             ->setAttributes([
                 'id'   => $this->getID(),
-                'type' => $this->type,
                 'name' => $this->name,
+                'rows' => 5,
             ])
-            ->setSelfClosedType(1);
+            ->setSelfClosedType(0);
 
         if ($this->required) {
             $input->addAttribute('required', null);

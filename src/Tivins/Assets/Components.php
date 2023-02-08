@@ -41,7 +41,7 @@ class Components
         return '<i class="' . join(' ', $classes) . '"></i>';
     }
 
-    public static function div(string|array $classes, string $content, string $tag = 'div'): string
+    public static function div(string|array $classes, string $content, string $tag = 'div'): HTMLElement
     {
         if (is_string($classes)) {
             $classes = explode(' ', $classes);
@@ -162,5 +162,9 @@ class Components
                 ->setUrl('#');
         }
         return Components::div('tag-list', join($items));
+    }
+
+    public static function getCookieListItem(string $url = '/?cookies'): ListItem {
+        return new ListItem('Cookies','Manage your cookies', $url,'fa fa-cookie');
     }
 }

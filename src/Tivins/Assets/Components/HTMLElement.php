@@ -16,6 +16,7 @@ class HTMLElement
 
     public function __construct(string $nodeName)
     {
+        $this->content = new Str('');
         $this->nodeName = $nodeName;
     }
 
