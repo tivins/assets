@@ -28,22 +28,15 @@ class FieldSelect extends Field
                 'id'   => $this->getID(),
                 'type'   => 'hidden',
                 'name' => $this->name,
-                'rows' => 5,
-                'value' => '',
+                'value' => $this->getValue(),
             ])
             ->setSelfClosedType(1);
 
         $target = 'pop-menu-select-'. $this->getID();
 
-        // $input .= Button::newGhost()
-        //     ->setLabel($this->placeholder ? 'select' :'')
-        //     ->addClasses('w-100 pop-trigger')
-        //     ->setDataAttr('target', '.' . $target)
-        //     ->setDropDir(HDirection::Down);
-
         $input .= (new LinkList(Size::SM))
             ->addClasses('box pop-trigger')
-            ->push(new ListItem($this->placeholder ? 'select' :''))
+            ->push(new ListItem($this->placeholder ? $this->placeholder : 'select'))
             ->addAttributes(['data-target' => '.' . $target])
             ;
 

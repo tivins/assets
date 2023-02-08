@@ -140,8 +140,9 @@ MA.parseElements('select-selector a', elm => {
         const list = elm.closest('.link-list');
         const item = elm.closest('.list-item');
         const targetSelector = list.getAttribute('data-select');
-        document.querySelector(targetSelector)
-            //.setAttribute('value', item.getAttribute('data-value'));
-            .value = item.getAttribute('data-value');
+        const id = targetSelector.substring(1);
+        const origin = document.querySelector('[data-target=".pop-menu-select-'+id+'"]')
+        const asLink = origin.querySelector(".as-link").innerText= elm.innerText;
+        document.querySelector(targetSelector).value = item.getAttribute('data-value');
     });
 })

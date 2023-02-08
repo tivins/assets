@@ -11,6 +11,7 @@ class Field
     protected bool   $required    = false;
     protected string $label       = '';
     protected string $name        = '';
+    protected string $value       = '';
     protected Button $labelButton;
 
     public function getID(): string
@@ -59,6 +60,17 @@ class Field
             return Components::div('d-flex', $label . $this->labelButton);
         }
         return $label;
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public function setValue(string $value): Field
+    {
+        $this->value = $value;
+        return $this;
     }
 
 }

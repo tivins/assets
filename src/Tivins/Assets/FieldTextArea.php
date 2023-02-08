@@ -18,6 +18,7 @@ class FieldTextArea extends Field
             ->setAttributes([
                 'id'   => $this->getID(),
                 'name' => $this->name,
+                'value' => $this->getValue(),
                 'rows' => 5,
             ])
             ->setSelfClosedType(0);

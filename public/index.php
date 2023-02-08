@@ -53,6 +53,7 @@ else {
             ->setLabel('Email')
             ->setPlaceholder('Type your email address')
             ->setRequired()
+            ->setValue('test')
     );
     $form->addField(
         (new FieldInput('password'))
@@ -73,7 +74,7 @@ else {
         (new \Tivins\Assets\FieldSelect())
             ->setName('select_value')
             ->setLabel('Select option')
-            ->setPlaceholder('Select Placeholder.')
+            ->setPlaceholder('Label 1')
             ->setOptions([
                 'val1' => new ListItem('Label 1'),
                 'val2' => new ListItem('Label 2',icon: 'fa fa-check'),

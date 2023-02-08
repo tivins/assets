@@ -21,6 +21,7 @@ class FieldInput extends Field
                 'id'   => $this->getID(),
                 'type' => $this->type,
                 'name' => $this->name,
+                'value' => $this->getValue()
             ])
             ->setSelfClosedType(1);
 
@@ -33,4 +34,5 @@ class FieldInput extends Field
 
         return $this->wrap($label . $input);
     }
+
 }
