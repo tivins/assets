@@ -23,9 +23,10 @@ class FieldSelect extends Field
     public function __toString(): string
     {
         $label = $this->getLabel();
-        $input      = (new HTMLElement('hidden'))
+        $input      = (new HTMLElement('input'))
             ->setAttributes([
                 'id'   => $this->getID(),
+                'type'   => 'hidden',
                 'name' => $this->name,
                 'rows' => 5,
                 'value' => '',

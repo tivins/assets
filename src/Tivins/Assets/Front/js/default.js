@@ -141,6 +141,7 @@ MA.parseElements('select-selector a', elm => {
         const item = elm.closest('.list-item');
         const targetSelector = list.getAttribute('data-select');
         document.querySelector(targetSelector)
-            .setAttribute('value', item.getAttribute('data-value'));
+            //.setAttribute('value', item.getAttribute('data-value'));
+            .value = item.getAttribute('data-value');
     });
 })

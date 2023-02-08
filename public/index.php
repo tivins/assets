@@ -42,6 +42,10 @@ if (isset($_GET['cookies'])) {
 }
 else {
 
+    if (!empty($_POST)) {
+        var_dump($_POST);die;
+    }
+
     $form = new \Tivins\Assets\Form();
     $form->addField(
         (new FieldInput('text'))
