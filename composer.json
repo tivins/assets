@@ -11,6 +11,9 @@
   "require": {
     "tivins/php-common": "dev-main"
   },
+  "require-dev": {
+    "nikic/php-parser": "v4.15"
+  },
   "autoload": {
     "psr-4": {
       "Tivins\\": "src/Tivins"

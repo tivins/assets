@@ -1,11 +1,15 @@
 /*
+    Over.css
 
+    The last (before application) overrides.
 */
+/*noinspection DuplicatedCode*/
 body {
     --background-0: #fff;
     --background-1: #fff;
     --fore-0: #333;
     --color-btn-primary-text: #555;
+    --btn-bg-color: #f6f8fa;
     --btn-border-color: #e1e4e8;
     --btn-ghost-border-color: #ccc;
     --btn-ghost-fore-color: #333;
@@ -23,12 +27,15 @@ body {
     --input-focus-color: #333;
     --info-bg: #f4f4fa;
     --info-bc: #dde;
+    --pre-bg-color: #f6f8fa;
 }
+/*noinspection DuplicatedCode*/
 body.dark-theme {
     --background-0: #333;
     --fore-0: #ccc;
     --background-1: #444;
-    --color-btn-primary-text: blue;
+    --btn-bg-color: #666;
+    --color-btn-primary-text: #ccc;
     --btn-border-color: #555;
     --btn-ghost-border-color: #444;
     --btn-ghost-fore-color: #ccc;
@@ -46,6 +53,7 @@ body.dark-theme {
     --input-focus-color: #fff;
     --info-bg: #3e3e5e;
     --info-bc: #1c1c37;
+    --pre-bg-color: #303030;
 }
 * { box-sizing: border-box; }
 *:focus { outline: none; }
@@ -80,6 +88,10 @@ pre {
     margin: 0;overflow: auto;
     scrollbar-color: #999 #fff;
     scrollbar-width: auto;
+}
+
+.markdown-body .highlight pre, .markdown-body pre {
+    background: var(--pre-bg-color);
 }
 .markdown-body blockquote {
     color:#aaa;

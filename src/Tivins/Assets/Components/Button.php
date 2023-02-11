@@ -2,6 +2,7 @@
 
 namespace Tivins\Assets\Components;
 
+use Tivins\Assets\ClassList;
 use Tivins\Assets\HDirection;
 use Tivins\Assets\Size;
 use Tivins\Assets\Style;
@@ -18,14 +19,19 @@ class Button
     private string $title  = '';
     private string $url  = '';
     private ?Icon  $icon = null;
-    /** @var string[] */
-    private array $classes = [];
+    private ClassList $classes;
     /** @var array<string,string> */
     private array $dataAttrs = [];
     private HDirection $dropDown = HDirection::None;
     private Style $style = Style::Default;
     private Size $size = Size::MD;
     private bool $active = false;
+    private bool $disabled = false;
+
+    public function __construct()
+    {
+        $this->classes = new ClassList();
+    }
 
     public function __toString(): string
     {
@@ -37,21 +43,29 @@ class Button
         if ($this->title) {
             $attrs .= ' title="' . StrUtil::html($this->title) . '"';
         }
-        $classes = $this->classes;
+        $classes = clone $this->classes;
         if ($this->url) {
-            $classes[] = 'button';
+            $classes->add('button');
         }
         if ($this->style != Style::Default) {
-            $classes[] = $this->style->value;
+            $classes->add($this->style->value);
         }
         if ($this->size != Size::MD) {
-            $classes[] = $this->size->value;
+            $classes->add($this->size->value);
         }
         if ($this->active) {
-            $classes[] = 'active';
+            $classes->add('active');
         }
-        if (!empty($classes)) {
-            $attrs .= ' class="' . join(' ', $classes) . '"';
+        if ($this->disabled) {
+            if ($this->url) {
+                $classes->add('disabled');
+            }
+            else {
+                $attrs .= ' disabled';
+            }
+        }
+        if (! $classes->empty()) {
+            $attrs .= ' class="' . $classes . '"';
         }
         foreach ($this->dataAttrs as $key => $value) {
             $attrs .= ' data-' . $key . '="' . StrUtil::html($value) . '"';
@@ -91,15 +105,22 @@ class Button
         return $this;
     }
 
+    public function getClassList(): ClassList {
+        return $this->classes;
+    }
+    public function setClassList(ClassList $classList): static {
+        $this->classes = $classList;
+        return $this;
+    }
     public function setClasses(string ...$classes): static
     {
-        $this->classes = $classes;
+        $this->classes->reset()->set(...$classes);
         return $this;
     }
 
     public function addClasses(string ...$classes): static
     {
-        $this->classes = array_merge($this->classes, $classes);
+        $this->classes->add(...$classes);
         return $this;
     }
 
@@ -124,6 +145,10 @@ class Button
     }
     public function setActive(bool $active): static {
         $this->active = $active;
+        return $this;
+    }
+    public function setDisabled(bool $disabled): static {
+        $this->disabled = $disabled;
         return $this;
     }
     // --------------------------------

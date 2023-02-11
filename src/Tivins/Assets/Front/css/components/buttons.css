@@ -13,7 +13,7 @@
 .button, button {
     cursor: pointer;
     display: inline-block;
-    background: #f6f8fa;
+    background:  var(--btn-bg-color);
     border-radius: 3px;
     border: 1px solid var(--btn-border-color);
     color: var(--color-btn-primary-text);
