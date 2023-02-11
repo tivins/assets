@@ -129,16 +129,27 @@ pre {
             $dir . '/markdown.css',
             $dir . '/over.css',
         ];
-        $lastUpdate = max(array_map('filemtime', $sources));
+        $inc        = [
+            $dir . '/components/buttons.css',
+        ];
+        $lastUpdate = max(array_map('filemtime', array_merge($sources, $inc)));
         $lastBuild  = File::isReadable($outfile) ? filemtime($outfile) : 0;
-        if ($lastUpdate < $lastBuild)
+        if ($lastUpdate < $lastBuild) {
             return;
-
+        }
         File::save($outfile, "/*! all.css v1.0.1 | MIT License | github.com/tivins/assets */\n");
         foreach ($sources as $source) {
+            $src = File::load($source);
+            $src = preg_replace_callback(
+                pattern: '~/\*@include (.*?)\*/~',
+                callback: function (array $matches) use ($source) {
+                    return File::load(dirname($source) . '/' . $matches[1] . '.css');
+                },
+                subject: $src
+            );
             File::save(
                 $outfile,
-                data: "/* $source */\n" . File::load($source) . "\n\n",
+                data: "/* $source */\n$src\n\n",
                 append: true
             );
         }

@@ -15,6 +15,7 @@ class HeaderBar
 {
     public string $title;
     private LinkList $configList;
+    private LinkList $userMenu;
     private bool $searchShown = true;
     private bool $userIsLogged = false;
     private string $username = '';
@@ -24,12 +25,7 @@ class HeaderBar
     {
         $this->title = $title;
         $this->configList = (new LinkList(Size::SM))->addClasses('pop-menu-admin hidden');
-        /*
-        ->push(
-            new ListItem('Theme','submenu1','', 'fa fa-moon', classes: 'toggle-theme'),
-            new ListItem('menu1','submenu1','#'),
-        )
-        */
+        $this->userMenu = (new LinkList(Size::SM))->addClasses('pop-menu-user hidden');
     }
 
     public function isUserIsLogged(): bool
@@ -43,37 +39,23 @@ class HeaderBar
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isSearchShown(): bool
     {
         return $this->searchShown;
     }
 
-    /**
-     * @param bool $searchShown
-     * @return HeaderBar
-     */
-    public function setSearchShown(bool $searchShown): HeaderBar
+    public function setSearchShown(bool $searchShown): static
     {
         $this->searchShown = $searchShown;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isUserNameShown(): bool
     {
         return $this->userNameShown;
     }
 
-    /**
-     * @param bool $userNameShown
-     * @return HeaderBar
-     */
-    public function setUserNameShown(bool $userNameShown): HeaderBar
+    public function setUserNameShown(bool $userNameShown): static
     {
         $this->userNameShown = $userNameShown;
         return $this;
@@ -88,24 +70,20 @@ class HeaderBar
         return $this->configList;
     }
 
-    /**
-     * @return string
-     */
+    public function getUserMenu(): LinkList {
+        return $this->userMenu;
+    }
+
     public function getUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     * @return HeaderBar
-     */
-    public function setUsername(string $username): HeaderBar
+    public function setUsername(string $username): static
     {
         $this->username = $username;
         return $this;
     }
-
 
     public function __toString(): string
     {
@@ -151,24 +129,16 @@ class HeaderBar
             .'
             <!-- onclick="event.preventDefault();document.querySelector(\'.dialog\').classList.remove(\'closed\')" -->
           </div>'
-            .$this->configList
-            .(new LinkList(Size::SM))
-                ->addClasses('pop-menu-user hidden')
-                ->push(
-                    new ListSeparator('<span class="fw-light">Signed in as</span> '.$this->username),
-                    new ListItem('Profile','submenu1','#', 'fa fa-moon'),
-                    new ListItem('Settings','submenu1','/assets/user-settings.html', 'fa fa-user-gear'),
-                    new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
-                )
             . '<h1 class="visible-sm">' . new Str($this->title) . '</h1>'
-            . '<div class="menu-mobile hidden">'
-            .(new LinkList(Size::SM))
-                ->addClasses('')
-                ->push(
-                    new ListSeparator(new Icon('user', true).'<span class="fw-light">Signed in as</span> '.$this->username),
-                    new ListItem('Profile','submenu1','#', 'fa fa-moon'),
-                    new ListItem('Settings','submenu1','/assets/user-settings.html', 'fa fa-user-gear'),
-                    new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
-                ).'</div>';
+            // .(new LinkList(Size::SM))
+            //     ->addClasses('pop-menu-user hidden')
+            //     ->push(
+            //         new ListSeparator('<span class="fw-light">Signed in as</span> '.$this->username),
+            //         new ListItem('Profile','submenu1','#', 'fa fa-moon'),
+            //         new ListItem('Settings','submenu1','/assets/user-settings.html', 'fa fa-user-gear'),
+            //         new ListItem('Log out','submenu1','#', 'fa fa-power-off'),
+            //     )
+            . $this->userMenu
+            . $this->configList;
     }
 }

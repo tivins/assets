@@ -3,6 +3,7 @@
 namespace Tivins\Assets\Components;
 
 use Tivins\Assets\HDirection;
+use Tivins\Assets\Style;
 use Tivins\Assets\Str;
 use Tivins\Core\StrUtil;
 
@@ -21,6 +22,7 @@ class Button
     /** @var array<string,string> */
     private array $dataAttrs = [];
     private HDirection $dropDown = HDirection::None;
+    private Style $style = Style::Default;
 
     public function __toString(): string
     {
@@ -32,7 +34,11 @@ class Button
         if ($this->title) {
             $attrs .= ' title="' . StrUtil::html($this->title) . '"';
         }
-        $attrs .= ' class="' . join(' ', $this->classes) . '"';
+        $classes = $this->classes;
+        if ($this->style != Style::Default) {
+            $classes[] = $this->style->value;
+        }
+        $attrs .= ' class="' . join(' ', $classes) . '"';
         foreach ($this->dataAttrs as $key => $value) {
             $attrs .= ' data-' . $key . '="' . StrUtil::html($value) . '"';
         }
@@ -89,12 +95,15 @@ class Button
         return $this;
     }
 
-    public function setDropDir(HDirection $direction): Button
+    public function setDropDir(HDirection $direction): static
     {
         $this->dropDown = $direction;
         return $this;
     }
-
+    public function setStyle(Style $style): static {
+        $this->style = $style;
+        return $this;
+    }
     // --------------------------------
     // Static predefined configurations
     // --------------------------------

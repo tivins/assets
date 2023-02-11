@@ -34,7 +34,7 @@ class Icon
         }
         $classes[] = 'fa-' . $this->icon;
         if ($this->margin != 'none') {
-            $classes[] = 'm' . substr($this->margin, 0, 1) . '-1';
+            $classes[] = 'm' . substr($this->margin, 0, 1) . '-2';
         }
         if ($this->mutedLevel) {
             $classes[] = 'op-05';
