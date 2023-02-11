@@ -8,6 +8,7 @@ use Tivins\Assets\Components\Icon;
 use Tivins\Assets\Fake;
 use Tivins\Assets\FieldButtons;
 use Tivins\Assets\FieldInput;
+use Tivins\Assets\HDirection;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\Size;
 use Tivins\Assets\Str;
@@ -44,41 +45,52 @@ $header->getConfigList()
         new ListItem('test','test','#','fa fa-check'),
     );
 
+
+function demo($info,$code,$html) {
+
+    return '<div class="b-bottom">'
+    . ($info ? '<div class="b-bottom p markdown-body ">'.\Tivins\Core\StrUtil::markdown($info).'</div>' : '')
+    . '<div class="d-flex-md">'
+    . '<div class="col-5 markdown-body"><pre>echo '.str_replace(')-', ')<br>  -', htmlentities($code.';')).'</pre></div>'
+    . '<div class="col-2 text-center py">'.$html.'</div>'
+    . '<div class="col-5 markdown-body"><pre class="h-100">'.htmlentities($html).'</pre></div>'
+    . '</div></div>';
+}
 function demoButtons()
 {
     return Components::div('p', '<h3>Buttons</h3>'
 
+        . Components::boxMessage(new \Tivins\Assets\HTMLStr(\Tivins\Core\StrUtil::markdown("The class `Button` implements `__toString()`")))
+        
         . '<h5>Buttons Types</h5>'
-        . '<div class="d-flex gutter-sm">'
-        . '<div class="col-6 markdown-body"><pre>echo Button::new()-&gt;setLabel(\'Button\');
-echo Button::newGhost()-&gt;setLabel(\'Button\');
-echo Button::newLink()-&gt;setLabel(\'Button\');</pre></div>'
-        . '<div class="col-6">'
-        .Button::new()->setLabel('Button')
-        .' '.Button::newGhost()->setLabel('Button')
-        .' '. Button::newLink()->setLabel('Button').'</div>'
-        . '</div>'
 
 
-        . '<h5>Buttons Styles | see enum Style</h5>'
-        . '<div class="d-flex gutter-sm">'
-        . '<div class="col-6 markdown-body"><pre>echo Button::new()<br>   -&gt;setLabel(\'Button\')<br>   -&gt;setStyle(Style::Info);</pre></div>'
-        . '<div class="col-6">'.Button::new()->setLabel('Button')->setStyle(Style::Info).'</div>'
-        . '</div>'
-
-        . '<div class="d-flex gutter-sm">'
-        . '<div class="col-6 markdown-body"><pre>'.htmlentities("
-echo Button::new()
-    ->setLabel('Button')
-    ->setStyle(Style::Success)
-    ->setIcon(new Icon('check'));").'</pre></div>'
-        . '<div class="col-6">'.
-            Button::new()
-                ->setLabel('Button')
-                ->setStyle(Style::Success)
-                ->setIcon(new Icon('check'))
-        .'</div>'
-        . '</div>'
+        . (new Box())->setTitle('Buttons')->addHTML(''
+            . '<div class="d-flex-md gutter-sm py-2 b-bottom">'
+            . '<div class="col-5 fw-bold text-center">PHP Code</div>'
+            . '<div class="col-2 fw-bold text-center">Render</div>'
+            . '<div class="col-5 fw-bold text-center">Generated HTML</div>'
+            . '</div>'
+        . demo('Basic button',"Button::new()->setLabel('Button')", Button::new()->setLabel('Button'))
+        . demo('',"Button::newGhost()->setLabel('Button')", Button::newGhost()->setLabel('Button'))
+        . demo('',"Button::newLink()->setLabel('Button')", Button::newLink()->setLabel('Button'))
+        . demo('Anchor vs Button (see [`Button::setUrl()`](#))',"Button::new()->setLabel('Button')->setUrl('#')", Button::new()->setLabel('Button')->setUrl('#'))
+        . demo('Title',"Button::new()->setLabel('Button')->setTitle('This will happen...')", Button::new()->setLabel('Button')->setTitle('This will happen...'))
+        . demo('Icon (see [`Icon` class](#))',"Button::new()->setLabel('Button')->setIcon(new Icon('check'))", Button::new()->setLabel('Button')->setIcon(new Icon('check')))
+        . demo('',"Button::new()->setIcon(Icon::newSingle('lemon','regular'))", Button::new()->setIcon(Icon::newSingle('lemon','regular')))
+        . demo('Styles (see [`Style` enum](#))',"Button::new()->setLabel('Button')->setStyle(Style::Info)", Button::new()->setLabel('Button')->setStyle(Style::Info))
+        . demo('',"Button::newGhost()->setLabel('Button')->setStyle(Style::Warning)", Button::newGhost()->setLabel('Button')->setStyle(Style::Warning))
+        . demo('States',"Button::newGhost()->setLabel('Button')->setStyle(Style::Danger)->setActive(true)", Button::newGhost()->setLabel('Button')->setStyle(Style::Danger)->setActive(true))
+        . demo('Size',"Button::new()->setLabel('Button')->setSize(Size::SM)", Button::new()->setLabel('Button')->setSize(Size::SM))
+        . demo('',
+                "Button::new()->setLabel('Button')->setStyle(Style::Danger)->setSize(Size::XS)",
+                Button::new()->setLabel('Button')->setStyle(Style::Danger)->setSize(Size::XS)
+            )
+        . demo('',
+                "Button::new()->setLabel('Button')->setStyle(Style::Success)->setSize(Size::LG)->setUrl('#'))",
+                Button::new()->setLabel('Button')->setStyle(Style::Success)->setSize(Size::LG)->setUrl('#'))
+        )
+        . '<hr>'
 
         . (new Box())->setTitleHTML('HTML button')->addBodyClasses('p')->addHTML(''
             . Components::div('my-2', ''
@@ -145,7 +157,10 @@ echo Button::new()
 }
 
 if (isset($_GET['buttons'])) {
-    $page->setContent(Components::div('', demoButtons()))->setTitle('Buttons');
+    $page->setContent(Components::div('', demoButtons()))
+        ->setTitle('Buttons')
+        ->setContainerWidth(Size::XL);
+    $page->getHeaderBar()->title = 'Button API';
 }
 elseif (isset($_GET['cookies'])) {
     $page->setContent(Components::div('cookie-list', ''));

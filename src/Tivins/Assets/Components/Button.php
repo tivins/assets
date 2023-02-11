@@ -3,6 +3,7 @@
 namespace Tivins\Assets\Components;
 
 use Tivins\Assets\HDirection;
+use Tivins\Assets\Size;
 use Tivins\Assets\Style;
 use Tivins\Assets\Str;
 use Tivins\Core\StrUtil;
@@ -23,6 +24,8 @@ class Button
     private array $dataAttrs = [];
     private HDirection $dropDown = HDirection::None;
     private Style $style = Style::Default;
+    private Size $size = Size::MD;
+    private bool $active = false;
 
     public function __toString(): string
     {
@@ -35,10 +38,21 @@ class Button
             $attrs .= ' title="' . StrUtil::html($this->title) . '"';
         }
         $classes = $this->classes;
+        if ($this->url) {
+            $classes[] = 'button';
+        }
         if ($this->style != Style::Default) {
             $classes[] = $this->style->value;
         }
-        $attrs .= ' class="' . join(' ', $classes) . '"';
+        if ($this->size != Size::MD) {
+            $classes[] = $this->size->value;
+        }
+        if ($this->active) {
+            $classes[] = 'active';
+        }
+        if (!empty($classes)) {
+            $attrs .= ' class="' . join(' ', $classes) . '"';
+        }
         foreach ($this->dataAttrs as $key => $value) {
             $attrs .= ' data-' . $key . '="' . StrUtil::html($value) . '"';
         }
@@ -104,6 +118,14 @@ class Button
         $this->style = $style;
         return $this;
     }
+    public function setSize(Size $size): static {
+        $this->size = $size;
+        return $this;
+    }
+    public function setActive(bool $active): static {
+        $this->active = $active;
+        return $this;
+    }
     // --------------------------------
     // Static predefined configurations
     // --------------------------------
@@ -112,9 +134,9 @@ class Button
         return (new static());
     }
     public static function newGhost(): static {
-        return (new static())->setClasses('button ghost');
+        return (new static())->setClasses('ghost');
     }
     public static function newLink(): static {
-        return (new static())->setClasses('button link');
+        return (new static())->setClasses('link');
     }
 }

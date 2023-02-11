@@ -108,12 +108,16 @@
 /* --- Ghost --- */
 .button.ghost:focus, button.ghost:focus,
 .button.ghost:hover, button.ghost:hover { background: none; color: var(--btn-ghost-fore-color);border-color: var(--btn-ghost-border-color);}
+.button.ghost.active.info, button.ghost.active.info,
 .button.ghost:focus.info, button.ghost:focus.info,
 .button.ghost:hover.info, button.ghost:hover.info { color: #669; border-color:#669; }
+.button.ghost.active.success, button.ghost.active.success,
 .button.ghost:focus.success, button.ghost:focus.success,
 .button.ghost:hover.success, button.ghost:hover.success { color: #696; border-color:#696; }
+.button.ghost.active.warning, button.ghost.active.warning,
 .button.ghost:focus.warning, button.ghost:focus.warning,
 .button.ghost:hover.warning, button.ghost:hover.warning { color: #c90; border-color:#c90; }
+.button.ghost.active.danger, button.ghost.active.danger,
 .button.ghost:focus.danger, button.ghost:focus.danger,
 .button.ghost:hover.danger, button.ghost:hover.danger { color: #f00; border-color:#f00; }
 

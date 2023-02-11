@@ -31,6 +31,7 @@ class Page
         $this->headerBar      = new HeaderBar($title);
     }
 
+
     public function setTitle(string $title): static
     {
         $this->title = $title;

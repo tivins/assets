@@ -47,4 +47,8 @@ class Icon
         $this->margin = $margin;
         return $this;
     }
+
+    public static function newSingle(string $icon, string $class = ''): static {
+        return (new static($icon, $class, margin: 'none', mutedLevel: 0));
+    }
 }
