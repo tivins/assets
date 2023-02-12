@@ -11,6 +11,8 @@ use Tivins\Assets\Demo;
 use Tivins\Assets\Field;
 use Tivins\Assets\FieldButtons;
 use Tivins\Assets\FieldInput;
+use Tivins\Assets\FieldSelect;
+use Tivins\Assets\FieldTextArea;
 use Tivins\Assets\HDirection;
 use Tivins\Assets\HTMLStr;
 use Tivins\Assets\ListItem;
@@ -50,6 +52,7 @@ $header->getConfigList()
         $header->getThemeItem(),
         Components::getCookieListItem('/?cookies'),
         new ListItem('Buttons','buttons Demo','/?demo=buttons','fa fa-stop'),
+        new ListItem('Box','box Demo','/?demo=box','fa fa-stop'),
         new ListItem('test','test','#','fa fa-check'),
     );
 //
@@ -61,6 +64,15 @@ $header->getConfigList()
 //}
 
 
+function demoBox(): string
+{
+    return(new Box())->setTitle('Box')->addHTML(''
+        . Demo::header()
+        . Demo::democb('Basic button', function () {
+            return (new Box())->setTitle('Title')->addHTML('Hello')->addFooter('footer');
+        })
+    );
+}
 function demoButtons(): string
 {
     $btns = [
@@ -273,7 +285,7 @@ function showMethods(ReflectionClass $class, array $methods): string {
                         . ')'
                         . ($returnType ? ': ' . $returnType : '')
                     )
-                    . Components::div('muted-2 text-right', substr(StrUtil::markdown($doc), 3, -4))
+                    . Components::div('muted-2 text-right', StrUtil::markdown($doc,true))
 
                 )
                 . $docSub
@@ -366,6 +378,9 @@ function pageDoc(string $className): string
 if (isset($_GET['api'])) {
 
     $allowed = [
+        'Inside'=>[
+            Str::class,
+        ],
         'Components' => [
             ' fa-tower-observation' => Button::class,
             ' fa-palette' => Icon::class,
@@ -377,12 +392,13 @@ if (isset($_GET['api'])) {
             ButtonType::class,
             ' fa-up-right-and-down-left-from-center' => Size::class,
             ' fa-arrows-up-down' => HDirection::class,
+            Style::class,
         ],
         'Form' => [
             Field::class,
             FieldInput::class,
-            \Tivins\Assets\FieldSelect::class,
-            \Tivins\Assets\FieldTextArea::class,
+            FieldSelect::class,
+            FieldTextArea::class,
             \Tivins\Assets\FieldButtons::class,
         ],
         'Structures' => [
@@ -394,7 +410,7 @@ if (isset($_GET['api'])) {
         ],
     ];
 
-    function getAllowedBoxlist(Size $size = Size::LG): string
+    function getAllowedBoxList(Size $size = Size::LG): string
     {
         global $allowed;
 
@@ -421,11 +437,11 @@ if (isset($_GET['api'])) {
 
     if (in_array($requestedClass, array_merge(...array_values($allowed)))) {
         $layout->setColumnContent(1, pageDoc($requestedClass));
-        $layout->setColumnContent(2, getAllowedBoxlist(Size::SM));
+        $layout->setColumnContent(2, getAllowedBoxList(Size::SM));
         $page->setTitle($requestedClass);
     }
     else{
-        $layout->setColumnContent(1, '<h2 class="box mt-0 p mb-2">API</h2>'.'<div class="d-flex flex-wrap mx--2">'.getAllowedBoxlist().'</div>');
+        $layout->setColumnContent(1, '<h2 class="box mt-0 p mb-2">API</h2>'.'<div class="d-flex flex-wrap mx--2">'.getAllowedBoxList().'</div>');
         $page->setTitle('API');
     }
     $page->setContent($layout);
@@ -443,6 +459,9 @@ elseif (isset($_GET['demo'])) {
 
     if ($requestedDemo == 'buttons') {
         $layout->setColumnContent(1, demoButtons());
+    }
+    elseif ($requestedDemo == 'box') {
+        $layout->setColumnContent(1, demoBox());
     }
     else {
         $layout->setColumnContent(1, 'list');
@@ -493,7 +512,7 @@ else {
             ->setRequired()
     );
     $form->addField(
-        (new \Tivins\Assets\FieldTextArea())
+        (new FieldTextArea())
             ->setName('text')
             ->setLabel('Text')
             ->setPlaceholder('What ever you want to write.')
@@ -501,7 +520,7 @@ else {
             ->setValue("test <html>")
     );
     $form->addField(
-        (new \Tivins\Assets\FieldSelect())
+        (new FieldSelect())
             ->setName('select_value')
             ->setLabel('Select option')
             ->setPlaceholder('Label 1')
