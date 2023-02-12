@@ -8,9 +8,9 @@ use Tivins\Core\StrUtil;
 
 class Box
 {
-    protected ?string $backURL = '';
-    protected string  $body    = '';
-    protected Str|string  $title   = '';
+    protected ?string    $backURL = '';
+    protected string     $body    = '';
+    protected Str|string $title   = '';
     /** @var string[] */
     protected array $leftLinks = [];
     /** @var string[] */
@@ -56,7 +56,8 @@ class Box
         return $this;
     }
 
-    public function getBody(): string {
+    public function getBody(): string
+    {
         return $this->body;
     }
 
@@ -71,6 +72,7 @@ class Box
         $this->title = StrUtil::html($title);
         return $this;
     }
+
     public function getTitle(): string
     {
         return $this->title;
@@ -106,9 +108,10 @@ class Box
         $this->bodyClasses = $classes;
         return $this;
     }
+
     public function addBodyClasses(string ...$classes): static
     {
-        $this->bodyClasses = array_merge($this->bodyClasses,$classes);
+        $this->bodyClasses = array_merge($this->bodyClasses, $classes);
         return $this;
     }
 
@@ -159,8 +162,8 @@ class Box
                 . '</div>';
         }
 
-        $boxClasses = array_merge(['box'], $this->boxClasses);
-        $bodyClasses = array_merge(['body'], $this->bodyClasses);
+        $boxClasses    = array_merge(['box'], $this->boxClasses);
+        $bodyClasses   = array_merge(['body'], $this->bodyClasses);
         $footerClasses = array_merge(['footer', 'fs-90'], $this->footerClasses);
         return Components::div(
             $boxClasses,

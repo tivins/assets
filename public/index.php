@@ -4,18 +4,22 @@ use PhpParser\ParserFactory;
 use Tivins\Assets\Assets;
 use Tivins\Assets\Box;
 use Tivins\Assets\Components;
+use Tivins\Assets\Components\BoxList;
 use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\Icon;
+use Tivins\Assets\Demo;
 use Tivins\Assets\Fake;
 use Tivins\Assets\FieldButtons;
 use Tivins\Assets\FieldInput;
-use Tivins\Assets\HDirection;
+use Tivins\Assets\HTMLStr;
 use Tivins\Assets\ListItem;
+use Tivins\Assets\MicroLayout;
 use Tivins\Assets\Size;
 use Tivins\Assets\Str;
 use Tivins\Assets\Structures\Page;
 use Tivins\Assets\Style;
 use Tivins\Assets\Website;
+use Tivins\Core\StrUtil;
 
 require '../vendor/autoload.php';
 
@@ -25,7 +29,7 @@ Website::setIcon(new Icon('lemon', true));
 Assets::compile(__dir__);
 
 $user = (object)[
-    'name'=>Fake::name(),
+    'name' => Fake::name(),
 ];
 
 $page = new Page('Home', Size::LG);
@@ -45,114 +49,71 @@ $header->getConfigList()
         new ListItem('Buttons','buttons','/?buttons','fa fa-stop'),
         new ListItem('test','test','#','fa fa-check'),
     );
-
-function unIndent(array $loc): array
-{
-    $maxIndex = [];
-    foreach ($loc as $line) {
-        preg_match('~^(\s*)~', $line, $matches);
-        $maxIndex[] = strlen($matches[1]);
-    }
-    $max = min($maxIndex);
-
-    return array_map(fn($s) => substr($s, $max), $loc);
-}
-function beautifyPHP($code):string {
-    $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-    $stmts = $parser->parse($code);
-    $prettyPrinter = new PhpParser\PrettyPrinter\Standard;
-    return $prettyPrinter->prettyPrintFile($stmts);
-}
-/**
- * @throws ReflectionException
- */
-function democb($info,callable $callback) {
-    $api = new ReflectionFunction($callback);
-    $lines = file($api->getFileName());
-    $len = $api->getEndLine() - $api->getStartLine();
-
-    $loc = array_splice($lines, $api->getStartLine(), $len -1);
-    $loc[0] = str_replace('return ','echo ', $loc[0]);
-    $code = beautifyPHP(join(unIndent($loc)));
-    return demo($info, $code, $callback());
-
-}
-function demo($info,$code,$html) {
-
-    $toHigh = '<'.'?' . 'php' . "\n\n" . $code;
-    // $code = (new \Tivins\Dev\PHPHighlight())->highlight($toHigh);
-    $code = '<pre class="h-100">'.htmlentities($code).'</pre>';
-
-    return '<div class="b-bottom">'
-    . ($info ? '<div class="b-bottom p markdown-body ">'.\Tivins\Core\StrUtil::markdown($info).'</div>' : '')
-    . '<div class="d-flex-md">'
-    . '<div class="col-5 markdown-body">'.$code.'</div>'
-    . '<div class="col-2 text-center py">'.$html.'</div>'
-    . '<div class="col-5 markdown-body "><pre class="h-100 max-w-100" style="max-width:100%;overflow:auto;">'.htmlentities($html).'</pre></div>'
-    . '</div></div>';
-}
+//
+//function beautifyPHP($code):string {
+//    $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+//    $stmts = $parser->parse($code);
+//    $prettyPrinter = new PhpParser\PrettyPrinter\Standard;
+//    return $prettyPrinter->prettyPrintFile($stmts);
+//}
 
 /**
  * @throws ReflectionException
  */
 function demoButtons(): string
 {
-    return  Components::boxMessage(new \Tivins\Assets\HTMLStr(\Tivins\Core\StrUtil::markdown("The class `Button` implements `__toString()`")))
+    return Components::boxMessage(new HTMLStr(StrUtil::markdown("The class `Button` implements `__toString()`")))
         . (new Box())->setTitle('Buttons')->addHTML(''
-            . '<div class="d-flex-md gutter-sm py-2 b-bottom">'
-            . '<div class="col-5 fw-bold text-center">PHP Code</div>'
-            . '<div class="col-2 fw-bold text-center">Render</div>'
-            . '<div class="col-5 fw-bold text-center">Generated HTML</div>'
-            . '</div>'
-        .democb('Basic button', function () {
-            return Button::new()->setLabel('Button');
-        })
-        .democb('', function () {
-            return Button::newGhost()->setLabel('Button');
-        })
-        .democb('', function () {
-            return Button::newLink()->setLabel('Button');
-        })
-        .democb('Anchor vs Button (see [`Button::setUrl()`](#))', function () {
-            return Button::new()
-                ->setLabel('Button')
-                ->setUrl('#');
-        })
-        .democb('Title',
-            function () {
+            . Demo::header()
+            . Demo::democb('Basic button', function () {
+                return Button::new()->setLabel('Button');
+            })
+            . Demo::democb('', function () {
+                return Button::newGhost()->setLabel('Button');
+            })
+            . Demo::democb('', function () {
+                return Button::newLink()->setLabel('Button');
+            })
+            . Demo::democb('Anchor vs Button (see [`Button::setUrl()`](#))', function () {
                 return Button::new()
                     ->setLabel('Button')
-                    ->setTitle('This will happen...');
-            }
-        )
-        .democb('Icon (see [`Icon` class](#))',
-            function () {
-                return Button::new()
-                    ->setLabel('Button')
-                    ->setIcon(new Icon('check'));
-            }
-        )
-        .democb('',
-            function () {
-                return Button::new()
-                    ->setIcon(Icon::newSingle('lemon','regular'));
-            }
-        )
-            .democb('Styles (see [`Style` enum](#))',
+                    ->setUrl('#');
+            })
+            . Demo::democb('Title',
+                function () {
+                    return Button::new()
+                        ->setLabel('Button')
+                        ->setTitle('This will happen...');
+                }
+            )
+            . Demo::democb('Icon (see [`Icon` class](#))',
+                function () {
+                    return Button::new()
+                        ->setLabel('Button')
+                        ->setIcon(new Icon('check'));
+                }
+            )
+            . Demo::democb('',
+                function () {
+                    return Button::new()
+                        ->setIcon(Icon::newSingle('lemon', 'regular'));
+                }
+            )
+            . Demo::democb('Styles (see [`Style` enum](#))',
                 function () {
                     return Button::new()
                         ->setLabel('Button')
                         ->setStyle(Style::Info);
                 }
             )
-            .democb('',
+            . Demo::democb('',
                 function () {
                     return Button::newGhost()
                         ->setLabel('Button')
                         ->setStyle(Style::Warning);
                 }
             )
-            .democb('States',
+            . Demo::democb('States',
                 function () {
                     return Button::newGhost()
                         ->setLabel('Button')
@@ -160,34 +121,24 @@ function demoButtons(): string
                         ->setActive(true);
                 }
             )
-        . democb('',function() {
+            . Demo::democb('', function () {
                 return Button::new()
                     ->setLabel('Button')
                     ->setStyle(Style::Danger)
                     ->setDisabled(true);
             })
-        . democb('', function() {
+            . Demo::democb('', function () {
                 return Button::new()
                     ->setUrl('#')
                     ->setLabel('Button')
                     ->setDisabled(true);
             })
-        . democb('Size',function() {
-            return Button::new()
-                ->setLabel('Button')
-                ->setSize(Size::SM);
+            . Demo::democb('Size', function () {
+                return Button::new()
+                    ->setLabel('Button')
+                    ->setSize(Size::SM);
             })
-//        . demo('',
-//                "Button::new()->setLabel('Button')->setStyle(Style::Danger)->setSize(Size::XS)",
-//                Button::new()->setLabel('Button')->setStyle(Style::Danger)->setSize(Size::XS)
-//            )
-//        . demo('',
-//                "Button::new()->setLabel('Button')->setStyle(Style::Success)->setSize(Size::LG)->setUrl('#'))",
-//                Button::new()->setLabel('Button')->setStyle(Style::Success)->setSize(Size::LG)->setUrl('#')
-//        )
         )
-
-        . '<hr>'
         . (new Box())->setTitleHTML('HTML button')->addBodyClasses('p')->addHTML(''
             . Components::div('my-2', ''
                 . Button::new()->setLabel('Default')->addClasses('mr-1')
@@ -245,39 +196,40 @@ function demoButtons(): string
             Button::new()->setLabel('Button XS')->addClasses('mr-1 xs')
             . Button::new()->setLabel('Button SM')->addClasses('mr-1 sm')
             . Button::new()->setLabel('Button')->addClasses('mr-1')
-            . Button::new()->setLabel('Button LG')->addClasses('mr-1','lg')
-            . Button::new()->setLabel('Button XL')->addClasses('mr-1','xl')
+            . Button::new()->setLabel('Button LG')->addClasses('mr-1', 'lg')
+            . Button::new()->setLabel('Button XL')->addClasses('mr-1', 'xl')
             . Button::new()->setLabel('Button XXL')->addClasses('mr-1', 'xxl')
-        )
-    ;
+        );
 }
 
 if (isset($_GET['buttons'])) {
     $page->setContent(
-        (new \Tivins\Assets\MicroLayout([2, 10]))
+        (new MicroLayout([2, 8, 2]))
             ->setGutterSize(Size::SM)
-            ->setColumnContent(1, demoButtons())
             ->setColumnContent(0,
-                (new Box())
+                (new BoxList(Size::SM))
+                    ->setTitle('Menu')
+                    ->push(new ListItem('Quick start', '', '#', 'fa fa-bolt'))
+                    ->push(new ListItem('Layout', 'How to deal with it', '#', 'fa fa-table-columns'))
+                    ->push(new ListItem('Components', 'How to deal with it', '#', 'fa fa-cube'))
+                    ->push(new ListItem('Structures', ' How to deal with it', '#', 'fa fa-cubes'))
+            )
+            ->setColumnContent(1, demoButtons())
+            ->setColumnContent(2, ''
+                . (new BoxList(Size::SM))
                     ->setTitle('Related')
-                    ->addHTML(
-                        (new \Tivins\Assets\LinkList())
-                            ->push(new ListItem('Icons', '', '#'))
-                            ->push(new ListItem('Styles', '', '#'))
-                    )
-                . (new Box())
+                    ->push(new ListItem('Icons', '', '#'))
+                    ->push(new ListItem('Styles', '', '#'))
+                . (new BoxList(Size::SM))
                     ->setTitle('Components')
-                    ->addHTML(
-                        (new \Tivins\Assets\LinkList())
-                            ->push(new ListItem('Lists', '', '#'))
-                    )
-                . (new Box())
+                    ->push(new ListItem('Lists', '', '#'))
+                    ->push(new ListItem('Icons', '', '#'))
+                    ->push(new ListItem('Drop-down', '', '#'))
+                    ->push(new ListItem('Form', '', '#'))
+                . (new BoxList(Size::SM))
                     ->setTitle('Enums')
-                    ->addHTML(
-                        (new \Tivins\Assets\LinkList())
-                            ->push(new ListItem('Style', '', '#'))
-                            ->push(new ListItem('Size', '', '#'))
-                    )
+                    ->push(new ListItem('Style', '', '#', 'fa fa-palette'))
+                    ->push(new ListItem('Size', '', '#', 'fa fa-up-right-and-down-left-from-center'))
             )
     )
         ->setTitle('Buttons')
@@ -290,7 +242,8 @@ elseif (isset($_GET['cookies'])) {
 else {
 
     if (!empty($_POST)) {
-        var_dump($_POST);die;
+        var_dump($_POST);
+        die;
     }
 
     $form = new \Tivins\Assets\Form();
@@ -306,7 +259,7 @@ else {
         (new FieldInput('password'))
             ->setName('password')
             ->setLabel('Password')
-            ->setLabelButton(Button::newLink()->setUrl('#')->setClasses('p-2 pr-0 fs-80')->setLabel(new Str('forgot password?')))
+            ->setLabelButton(Button::newLink()->setUrl('#')->addClasses('p-2 pr-0 fs-80')->setLabel(new Str('forgot password?')))
             ->setPlaceholder('Password')
             ->setRequired()
     );
@@ -326,7 +279,7 @@ else {
             ->setValue('val1')
             ->setOptions([
                 'val1' => new ListItem('Label 1'),
-                'val2' => new ListItem('Label 2',icon: 'fa fa-check'),
+                'val2' => new ListItem('Label 2', icon: 'fa fa-check'),
             ])
             ->setRequired()
     );
@@ -339,10 +292,10 @@ else {
             )
     );
 
-    $lay = new \Tivins\Assets\MicroLayout([6,6]);
+    $lay = new MicroLayout([6, 6]);
     $lay->setColumnContent(0, '');
     $lay->setColumnContent(1, $form);
-    $page->setContent("<p>Hi, {$user->name}.</p>".Fake::paragraph().$lay);
+    $page->setContent("<p>Hi, {$user->name}.</p>" . Fake::paragraph() . $lay);
 }
 
 

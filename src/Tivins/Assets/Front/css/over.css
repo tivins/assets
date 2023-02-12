@@ -593,6 +593,11 @@ input[type=checkbox]:checked + label:before {
 .op-05{opacity: .5;}
 
 .radius{border-radius: 3px;}
+.radius-bottom-left{border-bottom-left-radius: 3px;}
+.radius-bottom-right{border-bottom-right-radius: 3px;}
+.radius-top-left{border-top-left-radius: 3px;}
+.radius-top-right{border-top-right-radius: 3px;}
+
 .radius-sm{border-radius: 2px;}
 .radius-xl{border-radius: 5px;}
 .radius-xxl{border-radius: 8px;}
