@@ -1,6 +1,6 @@
 <?php
 
-namespace Tivins\Assets;
+namespace Tivins\Assets\Tools;
 
 class Fake
 {

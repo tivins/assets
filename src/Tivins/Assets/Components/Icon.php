@@ -6,10 +6,10 @@ class Icon
 {
     /**
      * @param string $icon Main part of the icon name (after 'fa-').
-     * @param string|bool $class bool: regular or not, or string: 'regular','brands'...
+     * @param string|bool $class If regular or not, or string: 'regular','brands'...
      * @param int $mutedLevel level
      * @param bool $fixedWidth
-     * @param string $margin
+     * @param string $margin 'none' or 'left','right','top','bottom'
      * @param array $classes
      */
     public function __construct(

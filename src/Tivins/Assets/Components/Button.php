@@ -9,6 +9,20 @@ use Tivins\Assets\Style;
 use Tivins\Assets\Str;
 use Tivins\Core\StrUtil;
 
+/**
+ * Button is a fluent class component used to build many buttons.
+ *
+ * ```php
+ * # Example
+ * echo Button::new()
+ *    ->setLabel('Button')
+ *    ->setType(ButtonType::Ghost)
+ *    ->setStyle(Style::Danger)
+ *    ->setActive(true)
+ *    ->setIcon(new Icon('lemon', 'regular'))
+ *    ->setDisabled(true);
+ * ```
+ */
 class Button
 {
     private string|Str $label = '';
@@ -27,6 +41,7 @@ class Button
     private Size $size = Size::MD;
     private bool $active = false;
     private bool $disabled = false;
+    private ButtonType $type = ButtonType::Default;
 
     public function __construct()
     {
@@ -44,6 +59,7 @@ class Button
             $attrs .= ' title="' . StrUtil::html($this->title) . '"';
         }
         $classes = clone $this->classes;
+        $classes->add($this->type->value);
         if ($this->url) {
             $classes->add('button');
         }
@@ -64,6 +80,7 @@ class Button
                 $attrs .= ' disabled';
             }
         }
+
         if (! $classes->empty()) {
             $attrs .= ' class="' . $classes . '"';
         }
@@ -87,7 +104,7 @@ class Button
     /**
      * Set title attribute
      */
-    public function setTitle(string $title): Button
+    public function setTitle(string $title): static
     {
         $this->title = $title;
         return $this;
@@ -108,22 +125,39 @@ class Button
     public function getClassList(): ClassList {
         return $this->classes;
     }
+
+    /**
+     * Replace the current ClassList by the given one.
+     */
     public function setClassList(ClassList $classList): static {
         $this->classes = $classList;
         return $this;
     }
+
+    /**
+     * Reset the current classList and fill with given ones.
+     */
     public function setClasses(string ...$classes): static
     {
         $this->classes->reset()->set(...$classes);
         return $this;
     }
 
+    /**
+     * Add given classes to the current classList.
+     */
     public function addClasses(string ...$classes): static
     {
         $this->classes->add(...$classes);
         return $this;
     }
 
+    /**
+     * Add a `data-` attribute in the HTML element.
+     * @param string $name The data-attribute name (eg: 'target' will make a 'data-target' attribute).
+     * @param string $value The value for the HTML attribute.
+     * @return $this
+     */
     public function setDataAttr(string $name, string $value): static
     {
         $this->dataAttrs[$name] = $value;
@@ -143,6 +177,10 @@ class Button
         $this->size = $size;
         return $this;
     }
+    public function setType(ButtonType $type): static {
+        $this->type = $type;
+        return $this;
+    }
     public function setActive(bool $active): static {
         $this->active = $active;
         return $this;
@@ -155,13 +193,16 @@ class Button
     // Static predefined configurations
     // --------------------------------
 
+    /** Create a new Button. */
     public static function new(): static {
         return (new static());
     }
+    /** Create a new Ghost Button. */
     public static function newGhost(): static {
-        return (new static())->setClasses('ghost');
+        return (new static())->setType(ButtonType::Ghost);
     }
+    /** Create a new Link Button. */
     public static function newLink(): static {
-        return (new static())->setClasses('link');
+        return (new static())->setType(ButtonType::Link);
     }
 }

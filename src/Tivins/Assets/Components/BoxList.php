@@ -22,6 +22,9 @@ class BoxList extends Box
         return $this;
     }
 
+    /**
+     * Override the default behavior to render the LinkList instance.
+     */
     public function getBody(): string
     {
         return $this->list;

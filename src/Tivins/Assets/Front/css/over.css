@@ -70,11 +70,13 @@ a:hover,a:focus { text-decoration: underline; color: var(--a-color-hover); }
 
 html {
     font-size: 16px;
+    font-family: var(--website-font, 'sans-serif');/*
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"
+    */
 }
 body
 {
     font-size: inherit;
-    font-family: var(--website-font), -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     cursor: default;
     background: var(--background-0);
     color:var(--fore-0);
@@ -82,7 +84,7 @@ body
 }
 pre,code,.ff-mono {
     font-size: 14px;
-    font-family: var(--website-font-mono), monospace;
+    font-family: var(--website-font-mono, 'monospace'), monospace;
 }
 pre {
     margin: 0;overflow: auto;
@@ -148,6 +150,12 @@ a.simi-link{color:inherit;text-decoration: none;}
     margin-right: 1rem;
 }
 
+
+.scroll-x {
+    overflow-x: scroll;
+    width: auto;
+    white-space: nowrap;
+}
 /* --- Borders --- */
 .text-danger{color:#900}
 
@@ -423,7 +431,8 @@ a.item-link .as-link{
     border-radius: 3px;
     overflow: hidden;
 }
-.table tr:nth-child(even) {background-color: rgb(0 0 0 / 5%)}
+.table.table-striped tr:nth-child(even) {background-color: rgb(0 0 0 / 5%)}
+
 .table caption {
     text-align: left;
     padding: .5rem;
@@ -459,13 +468,11 @@ a.item-link .as-link{
     background-color: var(--box-header-background);
     border-bottom:1px solid var(--box-border-color) ;
 }
-.table td, .table td {
-    padding: .8rem 1rem;
-}
-.table th, .table th {
-    padding: 1rem;
-    text-align: left;
-}
+.table td {padding: .8rem 1rem;}
+.table th {padding: 1rem;text-align: left;}
+.table.sm td, .table.sm th {padding: .4rem .8rem;}
+.table.xs td, .table.xs th {padding: .2rem .4rem;}
+
 /* --- FORM --- */
 #frame-viewer {
     margin:1rem auto;
@@ -605,14 +612,15 @@ input[type=checkbox]:checked + label:before {
 
 .position-absolute{position: absolute}
 .position-relative{position: relative}
-.d-flex{display: flex!important;}
 .d-block{display:block !important}
 /*
     ============ FLEX ============
 */
+.d-flex{display: flex!important;}
 .flex-grow{flex-grow: 1}
 .flex-wrap{flex-wrap: wrap}
 .flex-align{align-items: center}
+.flex-align-top{align-items: start}
 .flex-center{justify-content: center;}
 .flex-shrink-0{flex-shrink:0;}
 
@@ -647,12 +655,15 @@ input[type=checkbox]:checked + label:before {
 .fw-bold{font-weight: bolder}
 
 .text-left{text-align: left}
+
 .text-center{text-align: center}
 .text-right{text-align: right}
 .text-upper{text-transform: uppercase}
 .text-lower{text-transform: lowercase}
 .text-small-caps{font-variant: small-caps}
 /**@deprecated*/.small-caps{font-variant: small-caps}
+.text-italic{font-style: italic;}
+
 /* -- */
 .m-0{margin:0}
 .m-1{margin:.25rem}
@@ -682,6 +693,7 @@ input[type=checkbox]:checked + label:before {
 .mx-0{margin-left:0;margin-right:0;}
 .mx-1{margin-left:.25rem;margin-right:.25rem;}
 .mx-2{margin-left:.5rem;margin-right:.5rem;}
+.mx--2{margin-left:-.5rem;margin-right:-.5rem;}
 .mx,.mx-3{margin-left:1rem;margin-right:1rem;}
 .mx-4{margin-left:2rem;margin-right:2rem;}
 .my-0{margin-top:0;margin-bottom:0;}

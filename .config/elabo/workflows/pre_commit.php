@@ -6,7 +6,6 @@ use Tivins\Assets\Box;
 use Tivins\Assets\Components;
 use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\Icon;
-use Tivins\Assets\Fake;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\ListSeparator;
@@ -22,6 +21,7 @@ use Tivins\Assets\Structures\Page;
 use Tivins\Assets\Structures\UserLoginPage;
 use Tivins\Assets\Structures\UserRegisterPage;
 use Tivins\Assets\Template;
+use Tivins\Assets\Tools\Fake;
 use Tivins\Assets\Website;
 use Tivins\Core\System\File;
 

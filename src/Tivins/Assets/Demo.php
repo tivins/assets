@@ -20,18 +20,19 @@ class Demo
 
         return array_map(fn($s) => substr($s, $max), $loc);
     }
-    /**
-     * @throws ReflectionException
-     */
-    public static function democb(string $info, callable $callback) {
-        $api = new ReflectionFunction($callback);
+    public static function democb(string $info, callable $callback): Components\HTMLElement|false {
+        try {
+            $api = new ReflectionFunction($callback);
+        } catch (ReflectionException $e) {
+            return false;
+        }
         $lines = file($api->getFileName());
         $len = $api->getEndLine() - $api->getStartLine();
 
         $loc = array_splice($lines, $api->getStartLine(), $len -1);
         $loc[0] = str_replace('return ','echo ', $loc[0]);
         $code = (join(self::unIndent($loc)));
-        return self::demo($info, $code, $callback());
+        return self::toHTML($info, $code, $callback());
 
     }
     public static function header(): string
@@ -42,7 +43,7 @@ class Demo
             . '<div class="col-5 fw-bold text-center">Generated HTML</div>'
             . '</div>';
     }
-    public static function demo($info,$code,$html): Components\HTMLElement
+    public static function toHTML($info, $code, $html): Components\HTMLElement
     {
         // $code = (new \Tivins\Dev\PHPHighlight())->highlight('<' . '?' . 'php' . "\n\n" . $code);
         $code = '<pre class="h-100">' . htmlentities($code) . '</pre>';

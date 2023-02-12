@@ -29,7 +29,7 @@ class ClassList
 
     public function add(string ...$classes): static
     {
-        $this->classes = array_merge($this->classes, $classes);
+        $this->classes = array_filter(array_unique(array_merge($this->classes, $classes)));
         return $this;
     }
 

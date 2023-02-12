@@ -54,7 +54,9 @@ class MicroLayout
     {
         $html = '';
         foreach ($this->columnConfig as $key => $size) {
-            $html .= Components::div('col-' . $size . ' ' . join($this->columnClasses[$key] ?? []), $this->columnContent[$key]);
+            $html .= Components::div('col-' . $size . ' '
+                . join($this->columnClasses[$key] ?? []),
+                $this->columnContent[$key] ?? '');
         }
         $classes = [
             $this->screenSize->suffix('d-flex'),

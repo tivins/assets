@@ -134,6 +134,14 @@ MA.parseElements('cookie-list', elm =>
     ParseCookieRemovers();
 });
 
+MA.parseElements('toggle-view', elm => {
+    elm.addEventListener('click', event => {
+        event.preventDefault();
+        const target = elm.getAttribute('data-target');
+        const targetElm = document.querySelector(target);
+        targetElm.classList.toggle('hidden');
+    });
+});
 MA.parseElements('select-selector a', elm => {
     elm.addEventListener('click', event => {
         event.preventDefault();

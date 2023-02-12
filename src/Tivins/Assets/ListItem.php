@@ -22,6 +22,12 @@ class ListItem extends ListItemBase
     {
     }
 
+    /**
+     * Add HTML attributes to the item.
+     *
+     * @param array $attrs An associative array with attribute-name as key, and HTML value as value.
+     * @return $this
+     */
     public function addAttributes(array $attrs): static
     {
         $this->attrs = array_merge($this->attrs, $attrs);

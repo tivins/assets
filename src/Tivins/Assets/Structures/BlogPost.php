@@ -8,12 +8,12 @@ use Tivins\Assets\Components\Button;
 use Tivins\Assets\Components\CommentData;
 use Tivins\Assets\Components\Timeline;
 use Tivins\Assets\Components\TimelineItem;
-use Tivins\Assets\Fake;
 use Tivins\Assets\LinkList;
 use Tivins\Assets\ListItem;
 use Tivins\Assets\MicroLayout;
 use Tivins\Assets\Size;
 use Tivins\Assets\Str;
+use Tivins\Assets\Tools\Fake;
 
 class BlogPost
 {
