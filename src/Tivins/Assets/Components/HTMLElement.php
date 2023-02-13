@@ -2,6 +2,7 @@
 
 namespace Tivins\Assets\Components;
 
+use Tivins\Assets\ClassList;
 use Tivins\Assets\HTMLStr;
 use Tivins\Assets\Str;
 use Tivins\Core\StrUtil;
@@ -9,13 +10,14 @@ use Tivins\Core\StrUtil;
 class HTMLElement
 {
     protected string $nodeName;
-    protected array $classList = [];
+    protected ClassList $classList;
     protected array $attributes = [];
     protected Str $content;
     protected int $selfClosedType = 0; // 0: <b></b>, 1: '<hr>', 2: '<img />'
 
     public function __construct(string $nodeName)
     {
+        $this->classList = new ClassList();
         $this->content = new Str('');
         $this->nodeName = $nodeName;
     }
@@ -34,7 +36,7 @@ class HTMLElement
             }
         }
 
-        $tag .= ' class="' . join(' ', $this->classList) . '"';
+        $tag .= $this->classList->toHTMLString(' ');
         //foreach ($this->attributes as $key => $value) {
         //    $tag .= ' ' . $key . '="' . StrUtil::html($value) . '"';
         //}
@@ -59,12 +61,12 @@ class HTMLElement
 
     public function addClasses(string ...$classes): static
     {
-        $this->classList = array_merge($this->classList, $classes);
+        $this->classList->add(...$classes);
         return $this;
     }
     public function setClassList(string ...$classes): static
     {
-        $this->classList = $classes;
+        $this->classList->set(...$classes);
         return $this;
     }
 

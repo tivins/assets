@@ -39,6 +39,12 @@ class ClassList
         return $this;
     }
 
+    public function toHTMLString(string $prefix = ''): string
+    {
+        if ($this->empty()) return '';
+        return $prefix . 'class="' . $this . '"';
+    }
+
     public function __toString(): string
     {
         return join(' ', $this->classes);

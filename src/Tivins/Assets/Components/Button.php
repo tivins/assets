@@ -116,6 +116,9 @@ class Button
         return $this;
     }
 
+    /**
+     * Assign or remove the icon of this button.
+     */
     public function setIcon(?Icon $icon): static
     {
         $this->icon = $icon;
@@ -164,6 +167,10 @@ class Button
         return $this;
     }
 
+    /**
+     * Add a caret to the button.
+     * @param HDirection $direction To remove the caret, use HDirection::None.
+     */
     public function setDropDir(HDirection $direction): static
     {
         $this->dropDown = $direction;

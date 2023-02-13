@@ -4,7 +4,7 @@ namespace Tivins\Assets\Structures;
 
 use Tivins\Assets\Components;
 use Tivins\Assets\Components\Button;
-use Tivins\Assets\Components\HeaderBar;
+use Tivins\Assets\Components\HeaderBarMain;
 use Tivins\Assets\Components\Icon;
 use Tivins\Assets\Components\Message;
 use Tivins\Assets\HDirection;
@@ -20,15 +20,15 @@ class Page
 {
     protected string    $title          = 'Modal page';
     protected string    $content        = '';
-    protected Size      $containerWidth = Size::LG;
-    protected HeaderBar $headerBar;
-    protected array     $footerButtons  = [];
+    protected Size          $containerWidth = Size::LG;
+    protected HeaderBarMain $headerBar;
+    protected array         $footerButtons  = [];
 
     public function __construct(string $title = '', Size $containerWidth = Size::LG)
     {
         $this->title          = $title;
         $this->containerWidth = $containerWidth;
-        $this->headerBar      = new HeaderBar($title);
+        $this->headerBar      = new HeaderBarMain($title);
     }
 
 
@@ -159,7 +159,7 @@ class Page
         );
     }
 
-    public function getHeaderBar(): HeaderBar
+    public function getHeaderBar(): HeaderBarMain
     {
         return $this->headerBar;
     }
@@ -167,7 +167,7 @@ class Page
     /**
      * Replace the current header bar by the given one.
      */
-    public function setHeaderBar(HeaderBar $headerBar): static
+    public function setHeaderBar(HeaderBarMain $headerBar): static
     {
         $this->headerBar = $headerBar;
         return $this;

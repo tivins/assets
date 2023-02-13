@@ -64,14 +64,18 @@ $header->getConfigList()
 //}
 
 
-function demoBox(): string
+function demoBox(): Box
 {
-    return(new Box())->setTitle('Box')->addHTML(''
+    return (new Box())->setTitle('Box')->addHTML(''
         . Demo::header()
         . Demo::democb('Basic button', function () {
             return (new Box())->setTitle('Title')->addHTML('Hello')->addFooter('footer');
         })
     );
+}
+function getAPILink($class, $func=''): string
+{
+    return '/?api='.$class.($func?'#'.$func:'');
 }
 function demoButtons(): string
 {
@@ -96,7 +100,7 @@ function demoButtons(): string
     T3
  */
 
-    $bar = '<div class="d-flex">';
+    $bar = '';
     foreach (Style::cases() as $k => $style) {
         if ($k == 0) {
 
@@ -113,17 +117,39 @@ function demoButtons(): string
 
             $rows[] = '<div class="d-flex my-1">'
            //  . '<span class="p-btn w-5">'.$k.':</span>'
-            . (clone $btn)->setClasses('mr-1')->setLabel('Default')->setStyle($style)
+            . (clone $btn)->setClasses('mr-1')->setLabel('Button')->setStyle($style)
             . (clone $btn)->setClasses('mr-1')->setLabel('Disabled')->setDisabled(true)->setStyle($style)
             . (clone $btn)->setClasses()->setLabel('Active')->setActive(true)->setStyle($style)
             . '</div>';
         }
         $bar .= '<div class="p-1 flex-shrink-0 b-left"><div class="mb text-center">'.$style->name.'</div>'.join($rows).'</div>';
     }
-    $bar .= '</div>';
+    $bar = Components::div('d-flex', $bar);
 
 
-    return Components::boxMessage(new HTMLStr(StrUtil::markdown("The class `Button` implements `__toString()`")))
+    return  ''
+
+        . (new Components\HeaderBar())
+            ->setTitle(Str::plain('Button demo'))
+            ->setSubTitle(new Str(Button::class))
+            ->setButton(
+                Button::new()->setLabel('API')
+                    ->setSize(Size::LG)
+                    ->setIcon(new Icon('code'))
+                ->setUrl(getAPILink(Button::class))
+            )
+
+        . Components::boxMessage(new HTMLStr(StrUtil::markdown("The class `Button` implements `__toString()`",true)))
+
+        . (new Box())->setTitleHTML('Button states / Styles')->addBodyClasses('p scroll-x')->addHTML($bar)
+//        . (new Box())->setTitleHTML('Size')->addBodyClasses('p')->addHTML(
+//            Button::new()->setLabel('Button XS')->addClasses('mr-1 xs')
+//            . Button::new()->setLabel('Button SM')->addClasses('mr-1 sm')
+//            . Button::new()->setLabel('Button')->addClasses('mr-1')
+//            . Button::new()->setLabel('Button LG')->addClasses('mr-1', 'lg')
+//            . Button::new()->setLabel('Button XL')->addClasses('mr-1', 'xl')
+//            . Button::new()->setLabel('Button XXL')->addClasses('mr-1', 'xxl')
+//        )
         . (new Box())->setTitle('Buttons')->addHTML(''
             . Demo::header()
             . Demo::democb('Basic button', function () {
@@ -141,7 +167,7 @@ function demoButtons(): string
                     ->setType(ButtonType::Ghost)
                     ->setLabel('Button');
             })
-            . Demo::democb('Anchor vs Button (see [`Button::setUrl()`](#))', function () {
+            . Demo::democb('Anchor vs Button (see [`Button::setUrl()`]('.getAPILink(Button::class,'setUrl').')', function () {
                 return Button::new()
                     ->setLabel('Button')
                     ->setUrl('#');
@@ -166,7 +192,7 @@ function demoButtons(): string
                         ->setIcon(Icon::newSingle('lemon', 'regular'));
                 }
             )
-            . Demo::democb('Styles (see [`Style` enum](#))',
+            . Demo::democb('Styles (see [`Style` enum]('.getAPILink(Style::class).'))',
                 function () {
                     return Button::new()
                         ->setLabel('Button')
@@ -205,16 +231,13 @@ function demoButtons(): string
                     ->setLabel('Button')
                     ->setSize(Size::SM);
             })
+            . Demo::democb('Caret - See also [DropDown](#)', function () {
+                return Button::new()
+                    ->setLabel('Button')
+                    ->setDropDir(HDirection::Down);
+            })
         )
-        . (new Box())->setTitleHTML('Button states / Styles')->addBodyClasses('p scroll-x')->addHTML($bar)
-        . (new Box())->setTitleHTML('Size')->addBodyClasses('p')->addHTML(
-            Button::new()->setLabel('Button XS')->addClasses('mr-1 xs')
-            . Button::new()->setLabel('Button SM')->addClasses('mr-1 sm')
-            . Button::new()->setLabel('Button')->addClasses('mr-1')
-            . Button::new()->setLabel('Button LG')->addClasses('mr-1', 'lg')
-            . Button::new()->setLabel('Button XL')->addClasses('mr-1', 'xl')
-            . Button::new()->setLabel('Button XXL')->addClasses('mr-1', 'xxl')
-        );
+        ;
 }
 
 $menuMain = (new BoxList(Size::SM))
@@ -225,6 +248,7 @@ $menuMain = (new BoxList(Size::SM))
     ->push(new ListItem('Structures', ' How to deal with it', '#', 'fa fa-cubes'))
     ->push(new ListItem('API', 'How to deal with it', '/?api', 'fa-regular fa-file-lines'))
     ;
+
 
 /**
  * @param ReflectionClass $class
@@ -237,6 +261,7 @@ function showMethods(ReflectionClass $class, array $methods): string {
     }
     $html = '';
     foreach ($methods as $method) {
+        $slug = $method->name;
         $args = [];
         foreach ($method->getParameters() as $k => $p) {
             $args[] = '<span style="color:#669">' . $p->getType() . '</span> '.($p->isVariadic()?'...':'').'$' . $p->name;
@@ -271,7 +296,9 @@ function showMethods(ReflectionClass $class, array $methods): string {
 
         $html .=
             Components::div('d-flex p-1 b-bottom flex-align-top',
-            Components::div('py-2 px flex-grow',
+            Button::newLink()->setUrl('#'.$method->name)->setIcon(new Icon('hashtag muted-3', '', 1, false, 'none'))
+            .
+            Components::div('py-2 pr flex-grow',
                 Components::div('d-flex-md markdown-body',
                     Components::div('ff-mono flex-grow', ''
                         . ($inherit ? Icon::newSingle('arrow-up mr-2 muted-3') : '')
@@ -296,7 +323,7 @@ function showMethods(ReflectionClass $class, array $methods): string {
                     ->setDataAttr('target', '#d' . substr(sha1($method->name),0,7))
                 : ''
             )
-            )
+        )->addAttribute('id', $slug)
         ;
     }
     return $html;
@@ -327,7 +354,7 @@ function pageDoc(string $className): string
             ->setSize(Size::LG)
             ->setUrl('/?demo=buttons')
             ->setLabel('DEMO')
-        ->setIcon(new Icon('play'))
+            ->setIcon(new Icon('play'))
     );
 
     [$classDoc] = explode('* @', DocParser::clean($class->getDocComment()), 2);

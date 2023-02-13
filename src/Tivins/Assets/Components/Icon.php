@@ -26,6 +26,9 @@ class Icon
         }
     }
 
+    /**
+     * Returns a HTML representation of the element.
+     */
     public function __toString(): string
     {
         $classes[] = 'fa' . ($this->class ? '-' . $this->class : '');
@@ -48,6 +51,10 @@ class Icon
         return $this;
     }
 
+    /**
+     * Create a new non-muted Icon without margins.
+     * @see __construct()
+     */
     public static function newSingle(string $icon, string $class = ''): static {
         return (new static($icon, $class, margin: 'none', mutedLevel: 0));
     }

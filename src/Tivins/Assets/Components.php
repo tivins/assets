@@ -3,7 +3,7 @@
 namespace Tivins\Assets;
 
 use Tivins\Assets\Components\Button;
-use Tivins\Assets\Components\HeaderBar;
+use Tivins\Assets\Components\HeaderBarMain;
 use Tivins\Assets\Components\HTMLElement;
 use Tivins\Assets\Components\Icon;
 use Tivins\Core\StrUtil;
@@ -142,10 +142,10 @@ class Components
 
     /**
      * @deprecated
-     * @see HeaderBar
+     * @see HeaderBarMain
      */
     public static function getHeaderBar(string $title): string {
-        return new HeaderBar($title);
+        return new HeaderBarMain($title);
     }
 
     /**

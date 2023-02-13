@@ -569,7 +569,20 @@ input[type=checkbox]:checked + label:before {
     color: #696;
     content: "\f14a";
 }
-
+/*----------------------------------------------------------------------*/
+/* FLASH                                                                */
+/*----------------------------------------------------------------------*/
+@keyframes flash-anim {
+    from { background-color: #cde; }
+    to { background-color: inherit;}
+}
+.flash {
+    animation-name: flash-anim;
+    animation-duration: 5s;
+}
+/*----------------------------------------------------------------------*/
+/* CONTAINERS                                                           */
+/*----------------------------------------------------------------------*/
 .container-sm {
     max-width: 350px;
     margin-right:auto;

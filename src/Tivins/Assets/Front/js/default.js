@@ -154,3 +154,11 @@ MA.parseElements('select-selector a', elm => {
         document.querySelector(targetSelector).value = item.getAttribute('data-value');
     });
 })
+
+function showHashFlash() {
+    const hashTarget = document.querySelector(window.location.hash);
+    if (hashTarget) {
+        hashTarget.classList.add('flash');
+    }
+}
+if (window.location.hash) { showHashFlash() }

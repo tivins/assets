@@ -9,7 +9,8 @@
     }
   ],
   "require": {
-    "tivins/php-common": "dev-main"
+    "tivins/php-common": "dev-main",
+    "voku/portable-ascii": ">=2.0.1"
   },
   "require-dev": {
     "nikic/php-parser": "v4.15"
