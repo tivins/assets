@@ -657,6 +657,7 @@ input[type=checkbox]:checked + label:before {
 */
 .fs-80{font-size: 80%}
 .fs-90{font-size: 90%}
+.fs-100{font-size: 100%}
 .fs-120{font-size: 120%}
 .fs-150{font-size: 150%}
 .fs-200{font-size: 200%}
